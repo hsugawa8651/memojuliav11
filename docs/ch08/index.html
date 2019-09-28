@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>第8回： ▼ 総和・数値積分 · Memorandom on Julia Language v1.1</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>Memorandom on Julia Language v1.1</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../LICENSE/">MIT License</a></li><li><a class="toctext" href="../LICENSEja/">MIT License 参考和訳</a></li><li><a class="toctext" href="../ch00/">はじめに</a></li><li><a class="toctext" href="../ch01/">第1回：▼ 簡単なグラフを描く</a></li><li><a class="toctext" href="../ch02/">第2回：▼ 複数のグラフを描く</a></li><li><a class="toctext" href="../ch03/">第3回：▼ 連続な曲線を描く</a></li><li><a class="toctext" href="../ch04/">第4回：▼ 不連続な曲線を描く</a></li><li><a class="toctext" href="../ch05/">第5回：■ 条件式・■ 条件分岐</a></li><li><a class="toctext" href="../ch06/">第6回：■ 整数</a></li><li><a class="toctext" href="../ch07/">第7回：■ 浮動小数点数</a></li><li class="current"><a class="toctext" href>第8回： ▼ 総和・数値積分</a><ul class="internal"><li><a class="toctext" href="#級数和の公式（繰り返しで加算)-1">▼ 級数和の公式（繰り返しで加算)</a></li><li><a class="toctext" href="#ベクトルのインデックス-1">■ ベクトルのインデックス</a></li><li><a class="toctext" href="#ベクトルの生成-1">■ ベクトルの生成</a></li><li><a class="toctext" href="#内包表記-1">■ 内包表記</a></li><li><a class="toctext" href="#フーリエ級数の和（繰り返しで加算)-1">▼ フーリエ級数の和（繰り返しで加算)</a></li><li><a class="toctext" href="#方形波：フーリエ級数の有限和-1">▼ 方形波：フーリエ級数の有限和</a></li><li><a class="toctext" href="#三角波：フーリエ級数の有限和-1">▼ 三角波：フーリエ級数の有限和</a></li><li><a class="toctext" href="#練習：フーリエ級数の有限和-1">◀ 練習：フーリエ級数の有限和</a></li><li><a class="toctext" href="#数値積分-1">▼ 数値積分</a></li><li><a class="toctext" href="#Riemann和（繰り返しで加算)-1">▼ Riemann和（繰り返しで加算)</a></li><li><a class="toctext" href="#総和関数-sum-1">■ 総和関数 sum</a></li><li><a class="toctext" href="#級数和の公式（関数-sumを用いる)-1">▼ 級数和の公式（関数 sumを用いる)</a></li><li><a class="toctext" href="#Riemann和（関数-sumを用いる)-1">▼ Riemann和（関数 sumを用いる)</a></li><li><a class="toctext" href="#台形則（関数-sumを用いる)-1">▼ 台形則（関数 sumを用いる)</a></li><li><a class="toctext" href="#練習：Riemann和・台形則-1">◀ 練習：Riemann和・台形則</a></li><li><a class="toctext" href="#繰返し内部からの脱出-1">■ 繰返し内部からの脱出</a></li><li><a class="toctext" href="#練習：-条件が成り立つまで繰り返す：数値積分-1">◀● 練習： 条件が成り立つまで繰り返す：数値積分</a></li><li><a class="toctext" href="#今回のまとめ-1">今回のまとめ</a></li></ul></li><li><a class="toctext" href="../ch09/">第9回： ■ 配列要素の操作・▶常微分方程式の数値解法</a></li><li><a class="toctext" href="../ch10/">第10回：行列・線形代数</a></li><li><a class="toctext" href="../ch11/">第11回：ファイル入出力</a></li><li><a class="toctext" href="../ch12/">第12回：関数の定義と呼び出し</a></li><li><a class="toctext" href="../ch13/">第13回：複素数</a></li><li><a class="toctext" href="../ch14/">第14回：定期レポートへのコメント（その1）</a></li><li><a class="toctext" href="../ch15/">第15回：定期レポートへのコメント（その２）</a></li><li><a class="toctext" href="../porting/">Julia 0.6 から 1.x への移植</a></li><li><a class="toctext" href="../">toc</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href>第8回： ▼ 総和・数値積分</a></li></ul></nav><hr/><div id="topbar"><span>第8回： ▼ 総和・数値積分</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="ch08-1" href="#ch08-1">第8回： ▼ 総和・数値積分</a></h1><h2><a class="nav-anchor" id="級数和の公式（繰り返しで加算)-1" href="#級数和の公式（繰り返しで加算)-1">▼ 級数和の公式（繰り返しで加算)</a></h2><p>自然数の級数和の結果がいくつか知られている。 これらのグラフを描いて、結果を確認しよう。</p><div>\[\sum_{k=1}^{n} k = 1 + 2 + \cdots + k + \cdots + n^2 = \dfrac{n(n+1)}{2}\]</div><pre><code class="language-julia">using PyPlot
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>第8回： ▼ 総和・数値積分 · Memorandom on Julia Language v1.1</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>Memorandom on Julia Language v1.1</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../LICENSE/">MIT License</a></li><li><a class="toctext" href="../LICENSEja/">MIT License 参考和訳</a></li><li><a class="toctext" href="../ch00/">はじめに</a></li><li><a class="toctext" href="../ch01/">第1回：▼ 簡単なグラフを描く</a></li><li><a class="toctext" href="../ch02/">第2回：▼ 複数のグラフを描く</a></li><li><a class="toctext" href="../ch03/">第3回：▼ 連続な曲線を描く</a></li><li><a class="toctext" href="../ch04/">第4回：▼ 不連続な曲線を描く</a></li><li><a class="toctext" href="../ch05/">第5回：■ 条件式・■ 条件分岐</a></li><li><a class="toctext" href="../ch06/">第6回：■ 整数</a></li><li><a class="toctext" href="../ch07/">第7回：■ 浮動小数点数</a></li><li class="current"><a class="toctext" href>第8回： ▼ 総和・数値積分</a><ul class="internal"><li><a class="toctext" href="#級数和の公式（繰り返しで加算)-1">▼ 級数和の公式（繰り返しで加算)</a></li><li><a class="toctext" href="#ベクトルのインデックス-1">■ ベクトルのインデックス</a></li><li><a class="toctext" href="#ベクトルの生成-1">■ ベクトルの生成</a></li><li><a class="toctext" href="#内包表記-1">■ 内包表記</a></li><li><a class="toctext" href="#フーリエ級数の和（繰り返しで加算)-1">▼ フーリエ級数の和（繰り返しで加算)</a></li><li><a class="toctext" href="#方形波：フーリエ級数の有限和-1">▼ 方形波：フーリエ級数の有限和</a></li><li><a class="toctext" href="#三角波：フーリエ級数の有限和-1">▼ 三角波：フーリエ級数の有限和</a></li><li><a class="toctext" href="#練習：フーリエ級数の有限和-1">◀ 練習：フーリエ級数の有限和</a></li><li><a class="toctext" href="#数値積分-1">▼ 数値積分</a></li><li><a class="toctext" href="#Riemann和（繰り返しで加算)-1">▼ Riemann和（繰り返しで加算)</a></li><li><a class="toctext" href="#総和関数-sum-1">■ 総和関数 sum</a></li><li><a class="toctext" href="#級数和の公式（関数-sumを用いる)-1">▼ 級数和の公式（関数 sumを用いる)</a></li><li><a class="toctext" href="#Riemann和（関数-sumを用いる)-1">▼ Riemann和（関数 sumを用いる)</a></li><li><a class="toctext" href="#台形則（関数-sumを用いる)-1">▼ 台形則（関数 sumを用いる)</a></li><li><a class="toctext" href="#練習：Riemann和・台形則-1">◀ 練習：Riemann和・台形則</a></li><li><a class="toctext" href="#繰返し内部からの脱出-1">■ 繰返し内部からの脱出</a></li><li><a class="toctext" href="#練習：-条件が成り立つまで繰り返す：数値積分-1">◀● 練習： 条件が成り立つまで繰り返す：数値積分</a></li><li><a class="toctext" href="#今回のまとめ-1">今回のまとめ</a></li></ul></li><li><a class="toctext" href="../ch09/">第9回： ■ 配列要素の操作／▶常微分方程式の数値解法</a></li><li><a class="toctext" href="../ch10/">第10回：行列・線形代数</a></li><li><a class="toctext" href="../ch11/">第11回：ファイル入出力</a></li><li><a class="toctext" href="../ch12/">第12回：関数の定義と呼び出し</a></li><li><a class="toctext" href="../ch13/">第13回：複素数</a></li><li><a class="toctext" href="../ch14/">第14回：定期レポートへのコメント（その1）</a></li><li><a class="toctext" href="../ch15/">第15回：定期レポートへのコメント（その２）</a></li><li><a class="toctext" href="../porting/">Julia 0.6 から 1.x への移植</a></li><li><a class="toctext" href="../">toc</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href>第8回： ▼ 総和・数値積分</a></li></ul></nav><hr/><div id="topbar"><span>第8回： ▼ 総和・数値積分</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="ch08-1" href="#ch08-1">第8回： ▼ 総和・数値積分</a></h1><h2><a class="nav-anchor" id="級数和の公式（繰り返しで加算)-1" href="#級数和の公式（繰り返しで加算)-1">▼ 級数和の公式（繰り返しで加算)</a></h2><p>自然数の級数和の結果がいくつか知られている。 これらのグラフを描いて、結果を確認しよう。</p><div>\[\sum_{k=1}^{n} k = 1 + 2 + \cdots + k + \cdots + n^2 = \dfrac{n(n+1)}{2}\]</div><pre><code class="language-julia">using PyPlot
 nmax=25
 xs1=0:0.2:nmax
-plot(xs1, xs1.*(xs1 .+1)/2, label=&quot;sum i&quot;, &quot;b&quot;)
+plt.plot(xs1, xs1.*(xs1 .+1)/2, label=&quot;sum i&quot;, &quot;b&quot;)
 
 ns=0:nmax
 for n in ns
@@ -10,14 +10,14 @@ for n in ns
   for i in 1:n
     s1 += i
   end
-  plot(n,s1, &quot;bo&quot;)
+  plt.plot(n,s1, &quot;bo&quot;)
 end
 
-xlabel(&quot;n&quot;)
-ylabel(&quot;sum i up to n&quot;)</code></pre><p><img src="../ch08-sum1-plot.svg" alt/></p><div>\[\sum_{k=1}^{n} k^2 = 1^2 + 2^2 + \cdots + k^2 + \cdots + n^2 = \dfrac{n(n+1)(2n+1)}{6}\]</div><pre><code class="language-julia">using PyPlot
+plt.xlabel(&quot;n&quot;)
+plt.ylabel(&quot;sum i up to n&quot;)</code></pre><p><img src="../ch08-sum1-plot.svg" alt/></p><div>\[\sum_{k=1}^{n} k^2 = 1^2 + 2^2 + \cdots + k^2 + \cdots + n^2 = \dfrac{n(n+1)(2n+1)}{6}\]</div><pre><code class="language-julia">using PyPlot
 nmax=25
 xs1=0:0.2:nmax
-plot(xs1, xs1.*(xs1 .+1).*(2*xs1 .+1)/6, &quot;b&quot;)
+plt.plot(xs1, xs1.*(xs1 .+1).*(2*xs1 .+1)/6, &quot;b&quot;)
 
 ns=0:nmax
 for n in ns
@@ -25,10 +25,10 @@ for n in ns
   for i in 1:n
     s += i^2
   end
-  plot(n,s, &quot;bo&quot;)
+  plt.plot(n,s, &quot;bo&quot;)
 end
-xlabel(&quot;n&quot;)
-ylabel(&quot;sum i^2 up to n&quot;)</code></pre><p><img src="../ch08-sum2-plot.svg" alt/></p><h2><a class="nav-anchor" id="ベクトルのインデックス-1" href="#ベクトルのインデックス-1">■ ベクトルのインデックス</a></h2><ul><li><a href="https://docs.julialang.org/en/v1.1/base/collections/#Base.length"><code>Base.length</code> — Method</a></li></ul><p>参考 → <a href="../ch01/#ベクトル-1">■ ベクトル</a></p><p>ベクトル <code>a</code> の寸法は、関数 <code>length(a)</code> で得られる。</p><pre><code class="language-julia-repl">julia&gt; v=[11,21,31,41,51]
+plt.xlabel(&quot;n&quot;)
+plt.ylabel(&quot;sum i^2 up to n&quot;)</code></pre><p><img src="../ch08-sum2-plot.svg" alt/></p><h2><a class="nav-anchor" id="ベクトルのインデックス-1" href="#ベクトルのインデックス-1">■ ベクトルのインデックス</a></h2><ul><li><a href="https://docs.julialang.org/en/v1.1/base/collections/#Base.length"><code>Base.length</code> — Method</a></li></ul><p>参考 → <a href="../ch01/#ベクトル-1">■ ベクトル</a></p><p>ベクトル <code>a</code> の寸法は、関数 <code>length(a)</code> で得られる。</p><pre><code class="language-julia-repl">julia&gt; v=[11,21,31,41,51]
 5-element Array{Int64,1}:
  11
  21
@@ -37,7 +37,7 @@ ylabel(&quot;sum i^2 up to n&quot;)</code></pre><p><img src="../ch08-sum2-plot.s
  51
 
 julia&gt; length(v)
-5</code></pre><ul><li><a href="https://docs.julialang.org/en/v0.6/manual/arrays/#man-array-indexing-1">Indexing (section)</a></li></ul><p>ベクトル <code>a</code> 、整数 <code>i</code> に対して <code>a[i]</code> と書くと、 ベクトル <code>a</code>の <code>i</code>番目の要素の値が得られる。 要素の番号 (インデックス, indexという) <code>i</code>は 1から数える。 <code>end</code> というインデックスは、ベクトルの最後の要素を指す。</p><p>存在しないインデックスを指定すると、例外が発生する。</p><pre><code class="language-julia-repl">julia&gt; v[1]
+5</code></pre><ul><li><a href="https://docs.julialang.org/en/v0.6/manual/arrays/#man-array-indexing-1">Indexing (section)</a></li></ul><p>ベクトル <code>a</code> 、整数 <code>i</code> に対して <code>a[i]</code> と書くと、 ベクトル <code>a</code>の <code>i</code>番目の要素の値が得られる。 要素の番号 (インデックス, indexという) <code>i</code>は 1から数える。 <code>end</code> というインデックスは、ベクトルの最後の要素を指す。</p><pre><code class="language-julia-repl">julia&gt; v[1]
 11
 
 julia&gt; v[2]
@@ -47,10 +47,8 @@ julia&gt; v[end] # 末尾の要素
 51
 
 julia&gt; v[end-1] # 末尾の一つ前の要素
-41
-
-julia&gt; v[0] # =&gt; ERROR: BoundsError
-ERROR: BoundsError: attempt to access 5-element Array{Int64,1} at index [0]</code></pre><p>インデックスとして、整数 <code>i</code>の代わりに、Range(範囲)を指定すると、 その範囲のインデックスを持つベクトルが得られる。 (参考 <a href="../ch01/#Range型-1">■ Range型</a> )</p><pre><code class="language-julia-repl">julia&gt; v[2:3]
+41</code></pre><p>存在しないインデックスを指定すると、例外が発生する。</p><pre><code class="language-julia-repl">julia&gt; v[0] # =&gt; ERROR: BoundsError
+ERROR: BoundsError: attempt to access 5-element Array{Int64,1} at index [0]</code></pre><p>インデックスとして、整数 <code>i</code> の代わりに、Range(範囲)を指定すると、 その範囲のインデックスを持つベクトルが得られる。 (参考 <a href="../ch01/#Range型-1">■ Range型</a> )</p><pre><code class="language-julia-repl">julia&gt; v[2:3]
 2-element Array{Int64,1}:
  21
  31
@@ -63,7 +61,21 @@ julia&gt; v[1:end-1] # 最初から、末尾の一つ前の要素
  41
 
 julia&gt; v[4:6] # =&gt; ERROR: BoundsError
-ERROR: BoundsError: attempt to access 5-element Array{Int64,1} at index [4:6]</code></pre><h2><a class="nav-anchor" id="ベクトルの生成-1" href="#ベクトルの生成-1">■ ベクトルの生成</a></h2><p>ベクトルを作る方法は、いくつかある。</p><p>これまでに、以下の方法を紹介した。</p><ul><li>要素を列挙する方法 (<a href="../ch01/#ベクトル-1">■ ベクトル</a> )</li><li>Rangeを用いる方法 (<a href="../ch01/#Range型-1">■ Range型</a> )</li><li>関数 <code>linspace</code>を用いる方法。結果はRangeとなる。( <a href="../ch07/#等差数列-1">■ 等差数列</a> )</li></ul><h3><a class="nav-anchor" id="要素が-0のベクトルを作る-1" href="#要素が-0のベクトルを作る-1">■ 要素が 0のベクトルを作る</a></h3><ul><li><a href="https://docs.julialang.org/en/v1.1/base/arrays/#Base.zeros"><code>Base.zeros</code> — Function</a></li></ul><p>関数 <code>zeros</code>は、要素が零 <span>$0$</span> のベクトルを作る。</p><ul><li>関数 <code>zeros(n)</code> は、要素の型が浮動小数点で、寸法<code>n</code> のベクトルを作る。</li><li>関数 <code>zeros(T, n)</code> は、要素の型が <code>T</code> で、寸法<code>n</code> のベクトルを作る。</li></ul><pre><code class="language-julia-repl">julia&gt; zeros(5) # 要素は浮動小数点
+ERROR: BoundsError: attempt to access 5-element Array{Int64,1} at index [4:6]</code></pre><h2><a class="nav-anchor" id="ベクトルの生成-1" href="#ベクトルの生成-1">■ ベクトルの生成</a></h2><p>ベクトルを作る方法は、いくつかある。</p><p>これまでに、以下の方法を紹介した。</p><ul><li>要素を列挙する方法 (<a href="../ch01/#ベクトル-1">■ ベクトル</a> )</li><li>Range型を用いる方法 (<a href="../ch01/#Range型-1">■ Range型</a> )</li><li>関数 <code>range</code>を用いる方法。結果はRangeとなる。( <a href="../ch07/#等差数列-1">■ 等差数列</a> )</li></ul><h3><a class="nav-anchor" id="要素が-0のベクトルを作る-1" href="#要素が-0のベクトルを作る-1">■ 要素が 0のベクトルを作る</a></h3><ul><li><a href="https://docs.julialang.org/en/v1/base/numbers/#Base.zero"><code>Base.zero</code> — Function</a></li></ul><p>数 <code>x</code> に対して、関数 <code>zero(x)</code> は、<code>x</code> と同じ型の値 <code>1</code> を作る。</p><pre><code class="language-julia-repl">julia&gt; zero(0)
+0
+
+julia&gt; zero(1)
+0
+
+julia&gt; zero(0.0)
+0.0
+
+julia&gt; zero(1.0)
+0.0</code></pre><p>型を指定してもよい。</p><pre><code class="language-julia-repl">julia&gt; zero(Int64)
+0
+
+julia&gt; zero(Float64)
+0.0</code></pre><ul><li><a href="https://docs.julialang.org/en/v1.1/base/arrays/#Base.zeros"><code>Base.zeros</code> — Function</a></li></ul><p>関数 <code>zeros</code>は、要素が零 <span>$0$</span> のベクトルを作る。</p><ul><li>関数 <code>zeros(n)</code> は、要素の型が浮動小数点で、寸法<code>n</code> のベクトルを作る。</li><li>関数 <code>zeros(T, n)</code> は、要素の型が <code>T</code> で、寸法<code>n</code> のベクトルを作る。</li></ul><pre><code class="language-julia-repl">julia&gt; zeros(5) # 要素は浮動小数点
 5-element Array{Float64,1}:
  0.0
  0.0
@@ -85,7 +97,57 @@ julia&gt; zeros(Int64,5) # 要素は整数
  0
  0
  0
- 0</code></pre><p>★★★ここから、修正する</p><ul><li>ベクトル <code>v</code> に対して、関数 <code>zeros(v)</code> は、寸法がベクトル <code>v</code> と同じで、要素の型がベクトル <code>v</code> の要素と同じベクトルを作る。</li></ul><p>zeros(v)</p><p>★★★ここまで、修正する</p><h3><a class="nav-anchor" id="要素が-1-のベクトルを作る-1" href="#要素が-1-のベクトルを作る-1">■ 要素が 1 のベクトルを作る</a></h3><ul><li><a href="https://docs.julialang.org/en/v1.1/base/arrays/#Base.ones"><code>Base.ones</code> — Function</a></li></ul><p>関数 <code>ones</code>は、要素が <code>1</code> のベクトルを作る。 呼び出し方は、関数 <code>zeros()</code> と同じである。</p><pre><code class="language-julia-repl">julia&gt; ones(5) # 要素は浮動小数点
+ 0</code></pre><p>ベクトル <code>v</code> と同じ寸法の <code>0</code> ベクトルを作るには、</p><pre><code class="language-julia-repl">julia&gt; v=[1,2,3,4,5]
+5-element Array{Int64,1}:
+ 1
+ 2
+ 3
+ 4
+ 5
+
+julia&gt; zeros(length(v))
+5-element Array{Float64,1}:
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+
+julia&gt; zeros(Float64,length(v))
+5-element Array{Float64,1}:
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+ 0.0</code></pre><p>関数 <code>zero.()</code> を以下のように用いれば <code>v</code> の要素の型と同じ要素の型を持ち、<code>v</code>と寸法が等しい <code>0</code> ベクトルを作れる。</p><pre><code class="language-julia-repl">julia&gt; zero.([1,2,3,4,5])
+5-element Array{Int64,1}:
+ 0
+ 0
+ 0
+ 0
+ 0
+
+julia&gt; zero.(1.0:5.0)
+5-element Array{Float64,1}:
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+ 0.0</code></pre><div class="admonition note"><div class="admonition-title">Note</div><div class="admonition-text"><p>関数 <code>zeros</code> と <code>zero</code> とを混同しないように。</p></div></div><h3><a class="nav-anchor" id="要素が-1-のベクトルを作る-1" href="#要素が-1-のベクトルを作る-1">■ 要素が 1 のベクトルを作る</a></h3><ul><li><a href="https://docs.julialang.org/en/v1/base/numbers/#Base.one"><code>Base.one</code> — Function</a></li></ul><p>数 <code>x</code> に対して、関数 <code>one(x)</code> は、<code>x</code> と同じ型の値 <code>1</code> を作る。</p><pre><code class="language-julia-repl">julia&gt; one(0)
+1
+
+julia&gt; one(1)
+1
+
+julia&gt; one(0.0)
+1.0
+
+julia&gt; one(1.0)
+1.0</code></pre><p>型を指定してもよい。</p><pre><code class="language-julia-repl">julia&gt; one(Int64)
+1
+
+julia&gt; one(Float64)
+1.0</code></pre><ul><li><a href="https://docs.julialang.org/en/v1.1/base/arrays/#Base.ones"><code>Base.ones</code> — Function</a></li></ul><p>関数 <code>ones</code>は、要素が零 <span>$0$</span> のベクトルを作る。</p><ul><li>関数 <code>ones(n)</code> は、要素の型が浮動小数点で、寸法<code>n</code> のベクトルを作る。</li><li>関数 <code>ones(T, n)</code> は、要素の型が <code>T</code> で、寸法<code>n</code> のベクトルを作る。</li></ul><pre><code class="language-julia-repl">julia&gt; ones(5) # 要素は浮動小数点
 5-element Array{Float64,1}:
  1.0
  1.0
@@ -107,48 +169,84 @@ julia&gt; ones(Int64,5) # 要素は整数
  1
  1
  1
- 1</code></pre><p>★★★ここから、修正する</p><p>この用法はなくなった</p><p>ones(v)</p><p>★★★ここまで、修正する</p><h3><a class="nav-anchor" id="疑似乱数を要素とするベクトルを作る-1" href="#疑似乱数を要素とするベクトルを作る-1">■ 疑似乱数を要素とするベクトルを作る</a></h3><ul><li><a href="https://docs.julialang.org/en/v0.6/stdlib/numbers/#Base.Random.rand"><code>Base.Random.rand</code> — Function</a></li></ul><pre><code class="language-julia-repl">julia&gt; rand(10) # =&gt; 10-elements
+ 1</code></pre><p>ベクトル <code>v</code> と同じ寸法の <code>0</code> ベクトルを作るには、</p><pre><code class="language-julia-repl">julia&gt; v=[1,2,3,4,5]
+5-element Array{Int64,1}:
+ 1
+ 2
+ 3
+ 4
+ 5
+
+julia&gt; ones(length(v))
+5-element Array{Float64,1}:
+ 1.0
+ 1.0
+ 1.0
+ 1.0
+ 1.0
+
+julia&gt; ones(Float64,length(v))
+5-element Array{Float64,1}:
+ 1.0
+ 1.0
+ 1.0
+ 1.0
+ 1.0</code></pre><p>関数 <code>one.()</code> を以下のように用いれば 要素が <code>v</code> の要素と同じで、寸法が等しい <code>1</code> ベクトルを作れる。</p><pre><code class="language-julia-repl">julia&gt; one.([1,2,3,4,5])
+5-element Array{Int64,1}:
+ 1
+ 1
+ 1
+ 1
+ 1
+
+julia&gt; one.(1.0:5.0)
+5-element Array{Float64,1}:
+ 1.0
+ 1.0
+ 1.0
+ 1.0
+ 1.0</code></pre><div class="admonition note"><div class="admonition-title">Note</div><div class="admonition-text"><p>関数 <code>ones</code> と <code>one</code> とを混同しないように。</p></div></div><h3><a class="nav-anchor" id="疑似乱数を要素とするベクトルを作る-1" href="#疑似乱数を要素とするベクトルを作る-1">■ 疑似乱数を要素とするベクトルを作る</a></h3><ul><li><a href="https://docs.julialang.org/en/v0.6/stdlib/numbers/#Base.Random.rand"><code>Base.Random.rand</code> — Function</a></li></ul><pre><code class="language-julia-repl">julia&gt; rand(10) # =&gt; 10-elements
 10-element Array{Float64,1}:
- 0.8282468781317303
- 0.6765894015659437
- 0.6924723310491365
- 0.9283169011329488
- 0.3953142954092468
- 0.952009565897671
- 0.0036723596135985748
- 0.7970870500778247
- 0.9544806332314728
- 0.36368561702975133
+ 0.9319790722391457
+ 0.7318904010949832
+ 0.01610034531403537
+ 0.5096245649345783
+ 0.30048992323300716
+ 0.8683596129962698
+ 0.08500826397354189
+ 0.18524234491868263
+ 0.2621796816557467
+ 0.6148628512233756
 
 julia&gt; rand([1,2,3], 10) # [1,2,3]からランダムに10個選ぶ
 10-element Array{Int64,1}:
- 1
  3
+ 1
  2
  1
  2
+ 3
+ 3
  2
  3
- 1
- 3
- 3</code></pre><p>ヒストグラムを描く。分割数 10</p><pre><code class="language-julia">using PyPlot
+ 2</code></pre><p>ヒストグラムを描く。分割数 10</p><pre><code class="language-julia">using PyPlot
 xs=rand(1000)
 plt.hist(xs, bins=10)
-xlim(-0.2,1.2)</code></pre><p><img src="../ch08_hist1-plot.svg" alt/></p><h3><a class="nav-anchor" id="正規乱数を要素とするベクトルを作る-1" href="#正規乱数を要素とするベクトルを作る-1">■ 正規乱数を要素とするベクトルを作る</a></h3><ul><li><a href="https://docs.julialang.org/en/v0.6/stdlib/numbers/#Base.Random.randn"><code>Base.Random.randn</code> — Function</a></li></ul><p>平均 <span>$0$</span>、標準偏差 <span>$1$</span> の正規分布の疑似乱数を作る</p><pre><code class="language-julia-repl">julia&gt; randn(10) # =&gt; 10-elements
+plt.xlim(-0.2,1.2)</code></pre><p><img src="../ch08_hist1-plot.svg" alt/></p><h3><a class="nav-anchor" id="正規乱数を要素とするベクトルを作る-1" href="#正規乱数を要素とするベクトルを作る-1">■ 正規乱数を要素とするベクトルを作る</a></h3><ul><li><a href="https://docs.julialang.org/en/v0.6/stdlib/numbers/#Base.Random.randn"><code>Base.Random.randn</code> — Function</a></li></ul><p>平均 <span>$0$</span>、標準偏差 <span>$1$</span> の正規分布の疑似乱数を作る</p><pre><code class="language-julia-repl">julia&gt; randn(10) # =&gt; 10-elements
 10-element Array{Float64,1}:
-  1.2983390120171854
- -1.5344162501285854
- -0.5917665354116411
-  0.8724790924933197
- -0.6016683748443732
- -0.9184816572286457
- -0.7309857011025274
-  0.9845395177736408
- -0.7060977263375244
-  0.2640947658707419</code></pre><p>ヒストグラムを描く。分割数 50</p><pre><code class="language-julia">using PyPlot
+  1.0784673878276831
+  0.503308313293706
+ -1.9740206460481617
+ -0.0037431139287052075
+ -2.0319514855431997
+  0.4652558254654391
+  0.12624101554021694
+  0.33312499382871985
+ -1.1638563451768262
+  0.3846606620504293</code></pre><p>ヒストグラムを描く。分割数 50</p><pre><code class="language-julia">using PyPlot
 xs=randn(1000)
 plt.hist(xs, bins=50)
-xlim(-4,4)</code></pre><p><img src="../ch08_hist2-plot.svg" alt/></p><h2><a class="nav-anchor" id="内包表記-1" href="#内包表記-1">■ 内包表記</a></h2><pre><code class="language-julia-repl">julia&gt; [ x^2 for x in 0:10 ]
+plt.xlim(-4,4)</code></pre><p><img src="../ch08_hist2-plot.svg" alt/></p><h2><a class="nav-anchor" id="内包表記-1" href="#内包表記-1">■ 内包表記</a></h2><pre><code class="language-julia-repl">julia&gt; [ x^2 for x in 0:10 ]
 11-element Array{Int64,1}:
    0
    1
@@ -185,68 +283,73 @@ f(t) &amp; = a_0 \\
 &amp; + a_3 \cos 3\omega{t} + b_3 \sin 3\omega{t} + \cdots
 \end{align*}\]</div><p>ここで <span>$\omega$</span> は基本周波数である。</p><div>\[\omega=\dfrac{2\pi}{T}\]</div><p>以下の例では、既に知られているフーリエ級数和から、元の関数が近似される様子を観察するのに留める。</p><h2><a class="nav-anchor" id="方形波：フーリエ級数の有限和-1" href="#方形波：フーリエ級数の有限和-1">▼ 方形波：フーリエ級数の有限和</a></h2><p>方形波は、 <a href="../ch04/#方形波を描く-1">▶ 方形波を描く</a> で紹介した。</p><p>基本周波数 <span>$\omega=1$</span>、数 <span>$-1$</span>と<span>$1$</span>とを往復する方形波を描こう。</p><pre><code class="language-julia">using PyPlot
 ts=-3pi:pi/36:3pi
-plot(ts, sign.(sin.(ts)) )
-yticks( [-1,0,1], [ &quot;-1&quot;, &quot;0&quot;, &quot;1&quot;])
-xticks( [-3pi,-2pi,-pi,0, pi,2pi,3pi],
+plt.plot(ts, sign.(sin.(ts)) )
+plt.yticks( [-1,0,1], [ &quot;-1&quot;, &quot;0&quot;, &quot;1&quot;])
+plt.xticks( [-3pi,-2pi,-pi,0, pi,2pi,3pi],
         [L&quot;-3\pi&quot;, L&quot;-2\pi&quot;, L&quot;-\pi&quot;,&quot;0&quot;, L&quot;\pi&quot;, L&quot;2\pi&quot;, L&quot;3\pi&quot;])</code></pre><p><img src="../ch08_sq1-plot.svg" alt/></p><p>この方形波のフーリエ級数和は、以下のように与えられる。</p><div>\[f(t) = \frac{4}{\pi}\left\{\sin{t}+\frac{\sin{3t}}{3}+\frac{\sin{5t}}{5}+\cdots\right\}\]</div><p>この式の <span>$\sin t$</span>, <span>$\sin 3t$</span>, <span>$\sin 5t$</span> の３つを加えると、方形波に近くなることを観察する。</p><pre><code class="language-julia">using PyPlot
 ts=-3pi:pi/36:3pi
 ys=sin.(ts)*4/pi
-plot(ts, ys, label=&quot;n=1&quot;)
-yticks( [-1,0,1], [ &quot;-1&quot;, &quot;0&quot;, &quot;1&quot;])
-xticks( [-3pi,-2pi,-pi,0, pi,2pi,3pi],
+plt.plot(ts, ys, label=&quot;n=1&quot;)
+plt.yticks( [-1,0,1], [ &quot;-1&quot;, &quot;0&quot;, &quot;1&quot;])
+plt.xticks( [-3pi,-2pi,-pi,0, pi,2pi,3pi],
         [L&quot;-3\pi&quot;, L&quot;-2\pi&quot;, L&quot;-\pi&quot;,&quot;0&quot;, L&quot;\pi&quot;, L&quot;2\pi&quot;, L&quot;3\pi&quot;])
 ys += sin.(3ts)/3*4/pi
-plot(ts, ys, label=&quot;n=1,3&quot;)
+plt.plot(ts, ys, label=&quot;n=1,3&quot;)
 ys += sin.(5ts)/5*4/pi
-plot(ts, ys, label=&quot;n=1,3,5&quot;)
-legend()</code></pre><p><img src="../ch08-fo-sq2-plot.svg" alt/></p><p>今度は <span>$\sin 13t$</span> まで加えた結果を観察しよう。</p><pre><code class="language-julia">using PyPlot
+plt.plot(ts, ys, label=&quot;n=1,3,5&quot;)
+plt.legend()</code></pre><p><img src="../ch08-fo-sq2-plot.svg" alt/></p><p>今度は <span>$\sin 13t$</span> まで加えた結果を観察しよう。</p><pre><code class="language-julia">using PyPlot
 ts=-3pi:pi/36:3pi
 n=13
-ys=zeros(size(ts))
+ys=zero.(ts)
 for i in 1:2:n
   global ys
   ys += sin.(i*ts)/i*4/pi
 end
-plot(ts, ys)
-plot(ts, sign.(sin.(ts)), label=&quot;up to&quot;*string(n) )
+plt.plot(ts, ys)
+plt.plot(ts, sign.(sin.(ts)), label=&quot;up to&quot;*string(n) )
 
-yticks( [-1,0,1], [ &quot;-1&quot;, &quot;0&quot;, &quot;1&quot;])
-xticks( [-3pi,-2pi,-pi,0, pi,2pi,3pi],
+plt.yticks( [-1,0,1], [ &quot;-1&quot;, &quot;0&quot;, &quot;1&quot;])
+plt.xticks( [-3pi,-2pi,-pi,0, pi,2pi,3pi],
         [L&quot;-3\pi&quot;, L&quot;-2\pi&quot;, L&quot;-\pi&quot;,&quot;0&quot;, L&quot;\pi&quot;, L&quot;2\pi&quot;, L&quot;3\pi&quot;])</code></pre><p><img src="../ch08-fo-sq4-plot.svg" alt/></p><div class="admonition note"><div class="admonition-title">Note</div><div class="admonition-text"><p>上のフーリエ級数和が方形波を近似すると説明したが、なめらかな三角関数の級数和をいくら加えていっても、なめらかでない方形波に一致することはない。級数和が元の関数に近づくのは「各点収束」ではなく「一様収束」に相当する。</p></div></div><h2><a class="nav-anchor" id="三角波：フーリエ級数の有限和-1" href="#三角波：フーリエ級数の有限和-1">▼ 三角波：フーリエ級数の有限和</a></h2><p>一定の正の傾きで増加、一定の負の傾きで減少を繰り返す周期関数を、 三角波 (triangular wave)という。</p><p>傾き <span>$1$</span> と <span>$-1$</span>で、周期 <span>$2\pi$</span> の三角波を描こう。 この関数は、 絶対値関数 <code>abs</code> (参考: <a href="../ch04/#絶対値関数-1">▼ 絶対値関数</a> )と 関数 <code>mod2pi</code> (参考: <a href="../ch06/#2piで割った剰余-1">▶ 2piで割った剰余</a> ) とを組み合わせて定義できる。 参考→ <a href="../ch05/#関数の定義-(代入文形式)-1">■ 関数の定義 (代入文形式)</a></p><pre><code class="language-julia">triangular(t)=pi-abs.(mod2pi.(t)-pi)
 
 using PyPlot
+plt.axes().set_aspect(&quot;equal&quot;)
 ts=-3.5pi:pi/6:3.5pi
-plot(ts, triangular.(ts) )
-xlim(-pi*2.5,pi*2.5)
-ylim(-pi*0.1,pi*1.1)
-plt.axes().set_aspect(&quot;equal&quot;)</code></pre><p><img src="../ch08_fo_tri1-plot.svg" alt/></p><p>上の三角波のフーリエ級数展開は、以下の通りである。</p><div>\[f(t) = \dfrac{\pi}{2} - \dfrac{4}{\pi}\left\{ \cos t + \dfrac{\cos 3t}{3^2} + \dfrac{\cos 5t}{5^2} + \cdots\right\}\]</div><p>★★★ここから、修正する</p><p>ones(ts) はだめ</p><p>★★★ここまで、修正する</p><pre><code class="language-julia">using PyPlot
-ys=ones(size(ts))*(pi/2)
+plt.plot(ts, triangular.(ts) )
+plt.xlim(-pi*2.5,pi*2.5)
+plt.ylim(-pi*0.1,pi*1.1)</code></pre><p><img src="../ch08_fo_tri1-plot.svg" alt/></p><p>上の三角波のフーリエ級数展開は、以下の通りである。</p><div>\[f(t) = \dfrac{\pi}{2} - \dfrac{4}{\pi}\left\{ \cos t + \dfrac{\cos 3t}{3^2} + \dfrac{\cos 5t}{5^2} + \cdots\right\}\]</div><pre><code class="language-julia">using PyPlot
+plt.axes().set_aspect(&quot;equal&quot;)
+ts=-3.5pi:pi/6:3.5pi
+ys=one.(ts)*(pi/2)
 for n=1:2:5
   global ys
   ys -= cos.(n*ts)*(4/pi/n^2)
 end
-plot(ts, ys, &quot;o&quot;)
-plot(ts,triangular.(ts))
-ylim(-pi*0.1,pi*1.1)
-plt.axes().set_aspect(&quot;equal&quot;)</code></pre><p><img src="../ch08-fo-tri3-plot.svg" alt/></p><p>勾配が不連続に変化する点(キンク, kink)を拡大して描画しよう。</p><pre><code class="language-julia">using PyPlot
+plt.plot(ts, ys, &quot;o&quot;)
+plt.plot(ts,triangular.(ts))
+plt.ylim(-pi*0.1,pi*1.1)</code></pre><p><img src="../ch08-fo-tri3-plot.svg" alt/></p><p>勾配が不連続に変化する点(キンク, kink)を拡大して描画しよう。</p><pre><code class="language-julia">using PyPlot
+plt.axes().set_aspect(&quot;equal&quot;)
+ts=-3.5pi:pi/6:3.5pi
 for nmax=3:2:11
-  ys=ones(size(ts))*(pi/2)
+  ys=one.(ts)*(pi/2)
   for n=1:2:nmax
     ys -= cos.(n*ts)*(4/n^2/pi)
   end
-  plot(ts, ys, label=nmax)
+  plt.plot(ts, ys, label=nmax)
 end
-xlim(-pi*0.1,pi*2.1)
-ylim(-pi*0.1,pi*1.1)
-plt.axes().set_aspect(&quot;equal&quot;)
-legend()</code></pre><p><img src="../ch08-fo-tri4-plot.svg" alt/></p><pre><code class="language-julia">using PyPlot
+plt.xlim(-pi*0.1,pi*2.1)
+plt.ylim(-pi*0.1,pi*1.1)
+plt.legend()</code></pre><p><img src="../ch08-fo-tri4-plot.svg" alt/></p><pre><code class="language-julia">using PyPlot
+fig, axes = plt.subplots(6,1)
+ts=-3.5pi:pi/6:3.5pi
 for j=1:6
   nmax=1+2*j
-  ys=ones(size(ts))*(pi/2)
+  ys=one.(ts)*(pi/2)
   for n=1:2:nmax
     ys -= cos.(n*ts)*(4/n^2/pi)
   end
-  ax=plt.subplot(610+j)
+  ax=axes[j]
+  # ax=plt.subplt.plot(610+j)
   ax.plot(ts,triangular.(ts))
   ax.plot(ts, ys, &quot;o&quot;)
   ax.set_ylim(-pi*0.1,pi*1.1)
@@ -255,26 +358,26 @@ xmin=0
 xmax=1
 m=6
 n=2^m
-xs=LinRange(xmin,xmax,n+1)
+xs=range(xmin,xmax,length=n+1)
 g(x)=1/(1+x)
-plot(xs, g.(xs), &quot;b&quot;)
-ylim(0,1.2)</code></pre><p><img src="../ch08-rie0-plot.svg" alt/></p><p>定積分の値は、</p><div>\[\int_{0}^{1}\dfrac{1}{1+x}\;dx = \left[\log\left\vert{1+x}\right\vert\right]_{x=0}^{x=1} = \log{2}\]</div><p>である。</p><h2><a class="nav-anchor" id="Riemann和（繰り返しで加算)-1" href="#Riemann和（繰り返しで加算)-1">▼ Riemann和（繰り返しで加算)</a></h2><p>積分すべき関数を、等間隔の短冊に区切り、短冊の面積の総和をとろう。</p><p>短冊の幅を <span>$d$</span>とすると、</p><div>\[s_{1} = \sum_{i=1}^{n} g(x_{i})\cdot{d}\]</div><p>という、総和 (Riemann和)をとることになる。</p><p>以下のグラフは、8枚の短冊に分けた様子を示す。 ここで、短冊の高さは、各短冊の左端の関数の値をとった。</p><pre><code class="language-julia">using PyPlot
+plt.plot(xs, g.(xs), &quot;b&quot;)
+plt.ylim(0,1.2)</code></pre><p><img src="../ch08-rie0-plot.svg" alt/></p><p>定積分の値は、</p><div>\[\int_{0}^{1}\dfrac{1}{1+x}\;dx = \left[\log\left\vert{1+x}\right\vert\right]_{x=0}^{x=1} = \log{2}\]</div><p>である。</p><h2><a class="nav-anchor" id="Riemann和（繰り返しで加算)-1" href="#Riemann和（繰り返しで加算)-1">▼ Riemann和（繰り返しで加算)</a></h2><p>積分すべき関数を、等間隔の短冊に区切り、短冊の面積の総和をとろう。</p><p>短冊の幅を <span>$d$</span>とすると、</p><div>\[s_{1} = \sum_{i=1}^{n} g(x_{i})\cdot{d}\]</div><p>という、総和 (Riemann和)をとることになる。</p><p>以下のグラフは、8枚の短冊に分けた様子を示す。 ここで、短冊の高さは、各短冊の左端の関数の値をとった。</p><pre><code class="language-julia">using PyPlot
 xmin=0
 xmax=1
 m=3
 n=2^m
-xs=LinRange(xmin,xmax,n+1)  # n個の短冊に分割する
+xs=range(xmin,xmax,length=n+1)  # n個の短冊に分割する
 d=(xmax-xmin)/n  # 短冊の刻み
 g(x)=1/(1+x)
-plot(xs, g.(xs), &quot;b&quot;)
-ylim(0,1.2)
+plt.plot(xs, g.(xs), &quot;b&quot;)
+plt.ylim(0,1.2)
 
 for x in xs[1:end-1]
-  plot([x, x, x+d, x+d], [0, g(x), g(x), 0], &quot;k&quot;, lw=0.5)
+  plt.plot([x, x, x+d, x+d], [0, g(x), g(x), 0], &quot;k&quot;, lw=0.5)
 end</code></pre><p><img src="../ch08-rie1-plot.svg" alt/></p><p>では、短冊を <span>$2^4 = 16$</span> 枚に分けて、短冊の面積の総和をとろう。</p><pre><code class="language-julia">se=log(2)
 m=4
 n=2^m
-xs=LinRange(xmin,xmax,n+1)
+xs=range(xmin,xmax,length=n+1)
 d=(xmax-xmin)/n
 s1=0
 for i in 1:n
@@ -289,67 +392,67 @@ end
 se=log(2)
 for m in 0:12
   n=2^m
-  xs=LinRange(xmin,xmax,n+1)
+  xs=range(xmin,xmax,length=n+1)
   d=(xmax-xmin)/n
   s1=0
   for i in 1:n
     x=xs[i]
     s1 += g(x)*d
   end
-  plot(n, abs(s1 - se) , &quot;.&quot;, color=&quot;b&quot;)
+  plt.plot(n, abs(s1 - se) , &quot;.&quot;, color=&quot;b&quot;)
 end
-xscale(&quot;log&quot;)
-xlabel(&quot;n&quot;)
-ylabel(&quot;absolute error&quot;)</code></pre><p><img src="../ch08-rie2-plot.svg" alt/></p><p>今度は、相対誤差を、両対数グラフで描く。</p><pre><code class="language-julia">using PyPlot
+plt.xscale(&quot;log&quot;)
+plt.xlabel(&quot;n&quot;)
+plt.ylabel(&quot;absolute error&quot;)</code></pre><p><img src="../ch08-rie2-plot.svg" alt/></p><p>今度は、相対誤差を、両対数グラフで描く。</p><pre><code class="language-julia">using PyPlot
 for m in 0:12
   n=2^m
-  xs=LinRange(xmin,xmax,n+1)
+  xs=range(xmin,xmax,length=n+1)
   d=(xmax-xmin)/n
   s1=0
   for i in 1:n
     x=xs[i]
     s1 += g(x)*d
   end
-  plot(n, abs(s1 - se) / se, &quot;.&quot;, color=&quot;g&quot;)
+  plt.plot(n, abs(s1 - se) / se, &quot;.&quot;, color=&quot;g&quot;)
 end
-xlabel(&quot;n&quot;)
-ylabel(&quot;relative error (absolute value)&quot;)
-xscale(&quot;log&quot;)
-yscale(&quot;log&quot;)</code></pre><p><img src="../ch08-rie3-plot.svg" alt/></p><h2><a class="nav-anchor" id="総和関数-sum-1" href="#総和関数-sum-1">■ 総和関数 sum</a></h2><ul><li><a href="https://docs.julialang.org/en/v1.1/base/collections/#Base.sum"><code>Base.sum</code> — Function</a></li></ul><p>関数 <code>sum(xs)</code> は、数のコレクション <span>$v$</span>　を引数にとり、<span>$v$</span> の全ての要素の総和を求める。</p><pre><code class="language-julia-repl">julia&gt; sum([1,2,3,4,5])
+plt.xlabel(&quot;n&quot;)
+plt.ylabel(&quot;relative error (absolute value)&quot;)
+plt.xscale(&quot;log&quot;)
+plt.yscale(&quot;log&quot;)</code></pre><p><img src="../ch08-rie3-plot.svg" alt/></p><h2><a class="nav-anchor" id="総和関数-sum-1" href="#総和関数-sum-1">■ 総和関数 sum</a></h2><ul><li><a href="https://docs.julialang.org/en/v1.1/base/collections/#Base.sum"><code>Base.sum</code> — Function</a></li></ul><p>関数 <code>sum(xs)</code> は、数のコレクション <span>$v$</span>　を引数にとり、<span>$v$</span> の全ての要素の総和を求める。</p><pre><code class="language-julia-repl">julia&gt; sum([1,2,3,4,5])
 15
 
 julia&gt; sum(1:5)
 15</code></pre><h2><a class="nav-anchor" id="級数和の公式（関数-sumを用いる)-1" href="#級数和の公式（関数-sumを用いる)-1">▼ 級数和の公式（関数 sumを用いる)</a></h2><div>\[\sum_{k=1}^{n} k = 1 + 2 + \cdots + k + \cdots + n^2 = \dfrac{n(n+1)}{2}\]</div><pre><code class="language-julia">using PyPlot
 nmax=25
 xs1=0:0.2:nmax
-plot(xs1, xs1.*(xs1 .+1)/2, label=&quot;sum i&quot;, &quot;b&quot;)
+plt.plot(xs1, xs1.*(xs1 .+1)/2, label=&quot;sum i&quot;, &quot;b&quot;)
 
 ns=0:nmax
 for n in ns
   xs=1:n
   s1=sum(xs)
-  plot(n,s1, &quot;bo&quot;)
+  plt.plot(n,s1, &quot;bo&quot;)
 end
 
-xlabel(&quot;n&quot;)
-ylabel(&quot;sum i up to n&quot;)</code></pre><p><img src="../ch08-sum3-plot.svg" alt/></p><div>\[\sum_{k=1}^{n} k^2 = 1^2 + 2^2 + \cdots + k^2 + \cdots + n^2 = \dfrac{n(n+1)(2n+1)}{6}\]</div><pre><code class="language-julia">using PyPlot
+plt.xlabel(&quot;n&quot;)
+plt.ylabel(&quot;sum i up to n&quot;)</code></pre><p><img src="../ch08-sum3-plot.svg" alt/></p><div>\[\sum_{k=1}^{n} k^2 = 1^2 + 2^2 + \cdots + k^2 + \cdots + n^2 = \dfrac{n(n+1)(2n+1)}{6}\]</div><pre><code class="language-julia">using PyPlot
 nmax=25
 xs1=0:0.2:nmax
-plot(xs1, xs1.*(xs1 .+1).*(2*xs1 .+1)/6, &quot;b&quot;)
+plt.plot(xs1, xs1.*(xs1 .+1).*(2*xs1 .+1)/6, &quot;b&quot;)
 
 ns=0:nmax
 for n in ns
   # 各要素を二乗
   xs=(1:n).^2
   s=sum(xs)
-  plot(n,s, &quot;bo&quot;)
+  plt.plot(n,s, &quot;bo&quot;)
 end
-xlabel(&quot;n&quot;)
-ylabel(&quot;sum i^2 up to n&quot;)</code></pre><p><img src="../ch08-sum4-plot.svg" alt/></p><h2><a class="nav-anchor" id="Riemann和（関数-sumを用いる)-1" href="#Riemann和（関数-sumを用いる)-1">▼ Riemann和（関数 sumを用いる)</a></h2><p>Riemann和において、 刻み幅 <span>$d$</span> は全ての短冊に共通であるから、<span>$d$</span> をくくりだして</p><div>\[s_{1} = \sum_{i=1}^{n} g(x_{i})\cdot{d} = d\cdot\sum_{i=1}^{n} g( x_{i})\]</div><p>のようにまとめることができる。すなわち、関数の値の和 <span>$\sum_{i=1}^{n} g( x_{i})$</span> をとってから <span>$d$</span>倍すればよい。関数の値の和を取るのに、関数 <code>sum</code> を使うことができる。</p><p>下のプログラムで <code>g.(xs[1:end-1])</code> は、ベクトル <code>xs[1:end-1]</code> の各要素に関数 <code>g()</code> を適用したベクトルである。</p><p>ループで和を計算した場合と、関数 <code>sum</code> を用いる場合との両方で、 相対誤差をプロットする。 計算結果が一致していることが見える。 (参考: 結果が一致することを確かめるグラフの描画   → <a href="../ch04/#周期関数を確認する-1">●▼ 周期関数を確認する</a></p><pre><code class="language-julia">using PyPlot
+plt.xlabel(&quot;n&quot;)
+plt.ylabel(&quot;sum i^2 up to n&quot;)</code></pre><p><img src="../ch08-sum4-plot.svg" alt/></p><h2><a class="nav-anchor" id="Riemann和（関数-sumを用いる)-1" href="#Riemann和（関数-sumを用いる)-1">▼ Riemann和（関数 sumを用いる)</a></h2><p>Riemann和において、 刻み幅 <span>$d$</span> は全ての短冊に共通であるから、<span>$d$</span> をくくりだして</p><div>\[s_{1} = \sum_{i=1}^{n} g(x_{i})\cdot{d} = d\cdot\sum_{i=1}^{n} g( x_{i})\]</div><p>のようにまとめることができる。すなわち、関数の値の和 <span>$\sum_{i=1}^{n} g( x_{i})$</span> をとってから <span>$d$</span>倍すればよい。関数の値の和を取るのに、関数 <code>sum</code> を使うことができる。</p><p>下のプログラムで <code>g.(xs[1:end-1])</code> は、ベクトル <code>xs[1:end-1]</code> の各要素に関数 <code>g()</code> を適用したベクトルである。</p><p>ループで和を計算した場合と、関数 <code>sum</code> を用いる場合との両方で、 相対誤差をプロットする。 計算結果が一致していることが見える。 (参考: 結果が一致することを確かめるグラフの描画   → <a href="../ch04/#周期関数を確認する-1">●▼ 周期関数を確認する</a></p><pre><code class="language-julia">using PyPlot
 se=log(2)
 for m in 0:12
   n=2^m
-  xs=LinRange(xmin,xmax,n+1)
+  xs=range(xmin,xmax,length=n+1)
   d=(xmax-xmin)/n
 
   # 和を取る
@@ -358,30 +461,30 @@ for m in 0:12
     x=xs[i]
     s1 += g(x)*d
   end
-  plot(n, abs(s1 - se)/se , &quot;ro&quot;, color=&quot;b&quot;)
+  plt.plot(n, abs(s1 - se)/se , &quot;ro&quot;, color=&quot;b&quot;)
 
   # sum を使う
   s2=sum( g.(xs[1:end-1]))*d
-  plot(n, abs(s2 - se)/se , &quot;b.&quot;, color=&quot;r&quot;)
+  plt.plot(n, abs(s2 - se)/se , &quot;b.&quot;, color=&quot;r&quot;)
 end
-xscale(&quot;log&quot;)
-yscale(&quot;log&quot;)
-xlabel(&quot;n&quot;)
-ylabel(&quot;absolute error&quot;)</code></pre><p><img src="../ch08-rie4-plot.svg" alt/></p><h2><a class="nav-anchor" id="台形則（関数-sumを用いる)-1" href="#台形則（関数-sumを用いる)-1">▼ 台形則（関数 sumを用いる)</a></h2><p>今度は、短冊を台形として計算してみる。</p><pre><code class="language-julia">using PyPlot
+plt.xscale(&quot;log&quot;)
+plt.yscale(&quot;log&quot;)
+plt.xlabel(&quot;n&quot;)
+plt.ylabel(&quot;absolute error&quot;)</code></pre><p><img src="../ch08-rie4-plot.svg" alt/></p><h2><a class="nav-anchor" id="台形則（関数-sumを用いる)-1" href="#台形則（関数-sumを用いる)-1">▼ 台形則（関数 sumを用いる)</a></h2><p>今度は、短冊を台形として計算してみる。</p><pre><code class="language-julia">using PyPlot
 m=2
 n=2^m
 xmin=0
 xmax=1
-xs=LinRange(xmin,xmax,n+1)
+xs=range(xmin,xmax,length=n+1)
 d=(xmax-xmin)/n
 
 g(x)=1/(1+x)
-plot(xs, g.(xs), &quot;b&quot;)
-ylim(0,1.2)
+plt.plot(xs, g.(xs), &quot;b&quot;)
+plt.ylim(0,1.2)
 
 for i in 1:n
   x=xs[i]
-  plot([x, x, x+d, x+d], [0, g(x), g(x+d), 0], &quot;k&quot;, lw=0.5)
+  plt.plot([x, x, x+d, x+d], [0, g(x), g(x+d), 0], &quot;k&quot;, lw=0.5)
 end</code></pre><p><img src="../ch08-tra1-plot.svg" alt/></p><p>総和をとるとき、隣り合う台形の面積をまとめることができることに注目しよう。</p><div>\[s_{t} = \sum_{i=1}^{n} \dfrac{g(x_i)+g(x_{i+1}) }{2}\cdot{d} = d\cdot\left[ \dfrac{g(x_1)}{2} + \sum_{i=2}^{n-1} g(x_i)  + \dfrac{g(x_{n})}{2} \right]\]</div><p>先の Riemann和と台形則の値を両方計算してみよう。</p><pre><code class="language-julia">se=log(2)
 
 # Riemann和
@@ -406,7 +509,7 @@ st *= d
 @show (st-se)/se;</code></pre><pre><code class="language-none">0.005592793381533408</code></pre><p>関数 <code>sum</code>を使って簡潔に書こう。</p><pre><code class="language-julia">se=log(2)
 m=4
 n=2^m
-xs=LinRange(xmin,xmax,n+1)
+xs=range(xmin,xmax,length=n+1)
 d=(xmax-xmin)/n
 s1=sum( g.(xs[1:end-1]))*d
 
@@ -422,7 +525,7 @@ st *= d
 se=log(2)
 for m in 0:12
   n=2^m
-  xs=LinRange(xmin,xmax,n+1)
+  xs=range(xmin,xmax,length=n+1)
   d=(xmax-xmin)/n
 
   s1=sum( g.(xs[1:end-1]))*d
@@ -431,14 +534,14 @@ for m in 0:12
   st += sum( g.(xs[2:end-1]))
   st *= d
 
-  plot(n, abs(s1 - se) / se, &quot;.&quot;, color=&quot;g&quot;)
-  plot(n, abs(st - se) / se , &quot;.&quot;, color=&quot;r&quot;)
+  plt.plot(n, abs(s1 - se) / se, &quot;.&quot;, color=&quot;g&quot;)
+  plt.plot(n, abs(st - se) / se , &quot;.&quot;, color=&quot;r&quot;)
 end
 
-xlabel(&quot;n&quot;)
-ylabel(&quot;relative error (absolute value)&quot;)
-xscale(&quot;log&quot;)
-yscale(&quot;log&quot;)</code></pre><p><img src="../ch08-tra3-plot.svg" alt/></p><h2><a class="nav-anchor" id="練習：Riemann和・台形則-1" href="#練習：Riemann和・台形則-1">◀ 練習：Riemann和・台形則</a></h2><p>以下の定積分の近似値を、Riemann和と台形則でそれぞれ評価してみよ。 (注記されていない)定積分の理論値は各自計算せよ。</p><div>\[\begin{gather*}
+plt.xlabel(&quot;n&quot;)
+plt.ylabel(&quot;relative error (absolute value)&quot;)
+plt.xscale(&quot;log&quot;)
+plt.yscale(&quot;log&quot;)</code></pre><p><img src="../ch08-tra3-plot.svg" alt/></p><h2><a class="nav-anchor" id="練習：Riemann和・台形則-1" href="#練習：Riemann和・台形則-1">◀ 練習：Riemann和・台形則</a></h2><p>以下の定積分の近似値を、Riemann和と台形則でそれぞれ評価してみよ。 (注記されていない)定積分の理論値は各自計算せよ。</p><div>\[\begin{gather*}
 \int^{1}_{0} 3x^2\;dx\;, \\
 \int^{1}_{0} 3 \left(x+1 \right)^2\;dx\;, \\
 \int^{1}_{0} \exp{x}\;dx\;, \\
@@ -461,16 +564,7 @@ yscale(&quot;log&quot;)</code></pre><p><img src="../ch08-tra3-plot.svg" alt/></p
   if r &gt; 0.8
     break
   end
-end</code></pre><pre><code class="language-none">0.17232755166119818
-0.6278340592390663
-0.34670957051499496
-0.7890634688610885
-0.4283626876540241
-0.4897712179961553
-0.4598719731510903
-0.27418268104725785
-0.37323786678248494
-0.6242614087509992</code></pre><p>二重ループ、内側のループからの脱出</p><pre><code class="language-julia-repl">julia&gt; for j in 1:3
+end</code></pre><pre><code class="language-none">0.9103330143510182</code></pre><p>二重ループ、内側のループからの脱出</p><pre><code class="language-julia-repl">julia&gt; for j in 1:3
          for i in 1:5
            println(&quot;i=&quot;*string(i)*&quot; j=&quot;*string(j))
            if i &gt;= 3
@@ -502,4 +596,4 @@ i=3 j=1</code></pre><p><code>for</code>ブロックの内部で、<code>continue
        end
 3
 6
-9</code></pre><h2><a class="nav-anchor" id="練習：-条件が成り立つまで繰り返す：数値積分-1" href="#練習：-条件が成り立つまで繰り返す：数値積分-1">◀● 練習： 条件が成り立つまで繰り返す：数値積分</a></h2><p>(少し難しいので、後回しにしてもよい)</p><p>分割数 <span>$n$</span>を <span>$2^{20}$</span>まで、2の冪乗で増やしていけ、 ただし、相対誤差が <span>$10^{-4}$</span> 以下になったら、そこで終了せよ。</p><p><a href="#Riemann和（関数-sumを用いる)-1">▼ Riemann和（関数 sumを用いる)</a> 、または、 <a href="#台形則（関数-sumを用いる)-1">▼ 台形則（関数 sumを用いる)</a> の、どちらを用いてもよい。</p><h2><a class="nav-anchor" id="今回のまとめ-1" href="#今回のまとめ-1">今回のまとめ</a></h2><ul><li>ベクトルのインデックス</li><li>要素が <code>0</code>または<code>1</code>のベクトルの生成</li><li>ベクトルの総和 <code>sum</code></li><li>級数和</li><li>フーリエ級数の和</li><li>数値積分：Riemann和</li><li>数値積分：台形則</li><li>繰返し内部からの脱出</li></ul><footer><hr/><a class="previous" href="../ch07/"><span class="direction">Previous</span><span class="title">第7回：■ 浮動小数点数</span></a><a class="next" href="../ch09/"><span class="direction">Next</span><span class="title">第9回： ■ 配列要素の操作・▶常微分方程式の数値解法</span></a></footer></article></body></html>
+9</code></pre><h2><a class="nav-anchor" id="練習：-条件が成り立つまで繰り返す：数値積分-1" href="#練習：-条件が成り立つまで繰り返す：数値積分-1">◀● 練習： 条件が成り立つまで繰り返す：数値積分</a></h2><p>(少し難しいので、後回しにしてもよい)</p><p>分割数 <span>$n$</span>を <span>$2^{20}$</span>まで、2の冪乗で増やしていけ、 ただし、相対誤差が <span>$10^{-4}$</span> 以下になったら、そこで終了せよ。</p><p><a href="#Riemann和（関数-sumを用いる)-1">▼ Riemann和（関数 sumを用いる)</a> 、または、 <a href="#台形則（関数-sumを用いる)-1">▼ 台形則（関数 sumを用いる)</a> の、どちらを用いてもよい。</p><h2><a class="nav-anchor" id="今回のまとめ-1" href="#今回のまとめ-1">今回のまとめ</a></h2><ul><li>ベクトルのインデックス</li><li>要素が <code>0</code>または<code>1</code>のベクトルの生成</li><li>ベクトルの総和 <code>sum</code></li><li>級数和</li><li>フーリエ級数の和</li><li>数値積分：Riemann和</li><li>数値積分：台形則</li><li>繰返し内部からの脱出</li></ul><footer><hr/><a class="previous" href="../ch07/"><span class="direction">Previous</span><span class="title">第7回：■ 浮動小数点数</span></a><a class="next" href="../ch09/"><span class="direction">Next</span><span class="title">第9回： ■ 配列要素の操作／▶常微分方程式の数値解法</span></a></footer></article></body></html>

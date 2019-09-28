@@ -1,5 +1,44 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>第2回：▼ 複数のグラフを描く · Memorandom on Julia Language v1.1</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>Memorandom on Julia Language v1.1</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../LICENSE/">MIT License</a></li><li><a class="toctext" href="../LICENSEja/">MIT License 参考和訳</a></li><li><a class="toctext" href="../ch00/">はじめに</a></li><li><a class="toctext" href="../ch01/">第1回：▼ 簡単なグラフを描く</a></li><li class="current"><a class="toctext" href>第2回：▼ 複数のグラフを描く</a><ul class="internal"><li><a class="toctext" href="#リテラル-1">■ リテラル</a></li><li><a class="toctext" href="#文字列-1">■ 文字列</a></li><li><a class="toctext" href="#for文-1">■ for文</a></li><li><a class="toctext" href="#グラフに凡例を加える-1">▼ グラフに凡例を加える</a></li><li><a class="toctext" href="#冪乗関数を描く-1">▼ 冪乗関数を描く</a></li><li><a class="toctext" href="#ローレンツ関数を描く-1">▼ ローレンツ関数を描く</a></li><li><a class="toctext" href="#更新演算子-1">■ 更新演算子</a></li><li><a class="toctext" href="#練習-1">▲ 練習</a></li><li><a class="toctext" href="#今回のまとめ-1">★ 今回のまとめ</a></li></ul></li><li><a class="toctext" href="../ch03/">第3回：▼ 連続な曲線を描く</a></li><li><a class="toctext" href="../ch04/">第4回：▼ 不連続な曲線を描く</a></li><li><a class="toctext" href="../ch05/">第5回：■ 条件式・■ 条件分岐</a></li><li><a class="toctext" href="../ch06/">第6回：■ 整数</a></li><li><a class="toctext" href="../ch07/">第7回：■ 浮動小数点数</a></li><li><a class="toctext" href="../ch08/">第8回： ▼ 総和・数値積分</a></li><li><a class="toctext" href="../ch09/">第9回： ■ 配列要素の操作・▶常微分方程式の数値解法</a></li><li><a class="toctext" href="../ch10/">第10回：行列・線形代数</a></li><li><a class="toctext" href="../ch11/">第11回：ファイル入出力</a></li><li><a class="toctext" href="../ch12/">第12回：関数の定義と呼び出し</a></li><li><a class="toctext" href="../ch13/">第13回：複素数</a></li><li><a class="toctext" href="../ch14/">第14回：定期レポートへのコメント（その1）</a></li><li><a class="toctext" href="../ch15/">第15回：定期レポートへのコメント（その２）</a></li><li><a class="toctext" href="../porting/">Julia 0.6 から 1.x への移植</a></li><li><a class="toctext" href="../">toc</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href>第2回：▼ 複数のグラフを描く</a></li></ul></nav><hr/><div id="topbar"><span>第2回：▼ 複数のグラフを描く</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="ch02-1" href="#ch02-1">第2回：▼ 複数のグラフを描く</a></h1><h2><a class="nav-anchor" id="リテラル-1" href="#リテラル-1">■ リテラル</a></h2><p>リテラル (literal) とは、 「文字の並び」の通りに解釈される量をいう。</p><p><code>1</code> や <code>1.1</code> はリテラルである。 それぞれ、整数 <code>1</code>,　小数<code>1.1</code> という値として評価されるからである。</p><h2><a class="nav-anchor" id="文字列-1" href="#文字列-1">■ 文字列</a></h2><p>「文字の並び」として表される量が、文字列である。 文字列のリテラルは、ダブルクォート <code>&quot;</code> で囲まれた文字の並びである。</p><pre><code class="language-julia-repl">julia&gt; &quot;Hello world&quot;
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>第2回：▼ 複数のグラフを描く · Memorandom on Julia Language v1.1</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>Memorandom on Julia Language v1.1</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../LICENSE/">MIT License</a></li><li><a class="toctext" href="../LICENSEja/">MIT License 参考和訳</a></li><li><a class="toctext" href="../ch00/">はじめに</a></li><li><a class="toctext" href="../ch01/">第1回：▼ 簡単なグラフを描く</a></li><li class="current"><a class="toctext" href>第2回：▼ 複数のグラフを描く</a><ul class="internal"><li><a class="toctext" href="#ベクトルの要素の加減算-1">■ ベクトルの要素の加減算</a></li><li><a class="toctext" href="#ベクトルとRange型との加減算-1">■ ベクトルとRange型との加減算</a></li><li><a class="toctext" href="#リテラル-1">■ リテラル</a></li><li><a class="toctext" href="#文字列-1">■ 文字列</a></li><li><a class="toctext" href="#for文-1">■ for文</a></li><li><a class="toctext" href="#グラフに凡例を加える-1">▼ グラフに凡例を加える</a></li><li><a class="toctext" href="#グラフに、水平線・垂直線を加える-1">▼ グラフに、水平線・垂直線を加える</a></li><li><a class="toctext" href="#グラフの描画範囲を指定する-1">▼ グラフの描画範囲を指定する</a></li><li><a class="toctext" href="#グラフの描画範囲を指定する-2">▼ グラフの描画範囲を指定する</a></li><li><a class="toctext" href="#冪乗関数を描く-1">▼ 冪乗関数を描く</a></li><li><a class="toctext" href="#ローレンツ関数を描く-1">▼ ローレンツ関数を描く</a></li><li><a class="toctext" href="#更新演算子-1">■ 更新演算子</a></li><li><a class="toctext" href="#練習-1">▲ 練習</a></li><li><a class="toctext" href="#今回のまとめ-1">★ 今回のまとめ</a></li></ul></li><li><a class="toctext" href="../ch03/">第3回：▼ 連続な曲線を描く</a></li><li><a class="toctext" href="../ch04/">第4回：▼ 不連続な曲線を描く</a></li><li><a class="toctext" href="../ch05/">第5回：■ 条件式・■ 条件分岐</a></li><li><a class="toctext" href="../ch06/">第6回：■ 整数</a></li><li><a class="toctext" href="../ch07/">第7回：■ 浮動小数点数</a></li><li><a class="toctext" href="../ch08/">第8回： ▼ 総和・数値積分</a></li><li><a class="toctext" href="../ch09/">第9回： ■ 配列要素の操作／▶常微分方程式の数値解法</a></li><li><a class="toctext" href="../ch10/">第10回：行列・線形代数</a></li><li><a class="toctext" href="../ch11/">第11回：ファイル入出力</a></li><li><a class="toctext" href="../ch12/">第12回：関数の定義と呼び出し</a></li><li><a class="toctext" href="../ch13/">第13回：複素数</a></li><li><a class="toctext" href="../ch14/">第14回：定期レポートへのコメント（その1）</a></li><li><a class="toctext" href="../ch15/">第15回：定期レポートへのコメント（その２）</a></li><li><a class="toctext" href="../porting/">Julia 0.6 から 1.x への移植</a></li><li><a class="toctext" href="../">toc</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href>第2回：▼ 複数のグラフを描く</a></li></ul></nav><hr/><div id="topbar"><span>第2回：▼ 複数のグラフを描く</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="ch02-1" href="#ch02-1">第2回：▼ 複数のグラフを描く</a></h1><h2><a class="nav-anchor" id="ベクトルの要素の加減算-1" href="#ベクトルの要素の加減算-1">■ ベクトルの要素の加減算</a></h2><p>ベクトルとベクトルとに演算子 <code>.+</code> や <code>.-</code> を作用させると、 対応する要素同士を加減算した要素を持つベクトルが得られる。</p><pre><code class="language-julia-repl">
+
+julia&gt; xs .+ ys
+4-element Array{Int64,1}:
+ 2
+ 3
+ 5
+ 2
+
+julia&gt; xs .- ys
+4-element Array{Int64,1}:
+  0
+  1
+ -1
+  0</code></pre><h2><a class="nav-anchor" id="ベクトルとRange型との加減算-1" href="#ベクトルとRange型との加減算-1">■ ベクトルとRange型との加減算</a></h2><p>Range型とベクトルとに演算子 <code>.+</code> や <code>.-</code> を作用させると、 Range型とベクトルとの寸法 (要素の数)が等しいなら、 対応する要素同士を加減算した要素を持つベクトルが得られる。 ベクトルとRange型に演算子 <code>.+</code> や <code>.-</code> を作用させても同様である。 要素の数が異なると、例外 (exception, エラー)となる。</p><pre><code class="language-julia-repl">julia&gt; xs = 1:1:5
+1:1:5
+
+julia&gt; ys = [11, 13, 15, 17, 19]
+5-element Array{Int64,1}:
+ 11
+ 13
+ 15
+ 17
+ 19
+
+julia&gt; xs .+ ys
+5-element Array{Int64,1}:
+ 12
+ 15
+ 18
+ 21
+ 24
+
+julia&gt; ys .- xs
+5-element Array{Int64,1}:
+ 10
+ 11
+ 12
+ 13
+ 14</code></pre><div class="admonition note"><div class="admonition-title">Note</div><div class="admonition-text"><p>Range型をベクトルに変換してしまうと、元が等差数列であるという情報が欠落する。どうしても、ベクトルでないと困る場合だけ、ベクトルに変換しよう。</p></div></div><h2><a class="nav-anchor" id="リテラル-1" href="#リテラル-1">■ リテラル</a></h2><p>リテラル (literal) とは、 「文字の並び」の通りに解釈される量をいう。</p><p><code>1</code> や <code>1.1</code> はリテラルである。 それぞれ、整数 <code>1</code>,　小数<code>1.1</code> という値として評価されるからである。</p><h2><a class="nav-anchor" id="文字列-1" href="#文字列-1">■ 文字列</a></h2><p>「文字の並び」として表される量が、文字列である。 文字列のリテラルは、ダブルクォート <code>&quot;</code> で囲まれた文字の並びである。</p><pre><code class="language-julia-repl">julia&gt; &quot;Hello world&quot;
 &quot;Hello world&quot;</code></pre><p>文字列を連結するには、演算子 <code>*</code> を用いる。</p><pre><code class="language-julia-repl">julia&gt; h=&quot;Hello&quot;
 &quot;Hello&quot;
 
@@ -10,7 +49,7 @@ julia&gt; h*w
 &quot;Helloworld&quot;
 
 julia&gt; h*&quot; &quot;*w
-&quot;Hello world&quot;</code></pre><p>数字を表す文字列を作るには、<code>string</code>関数を用いる。</p><pre><code class="language-julia-repl">julia&gt; string(0)
+&quot;Hello world&quot;</code></pre><div class="admonition note"><div class="admonition-title">Note</div><div class="admonition-text"><p>演算子 <code>*</code> は、数同士に対して用いると乗算の意味になる。文字列同士に用いると文字列の連結の意味になる。このように、同じ演算子 <code>*</code> に対して、複数の意味があり、作用する値の方に応じて、適切な意味が選ばれて、計算される。</p></div></div><p>数字を表す文字列を作るには、<code>string</code>関数を用いる。</p><pre><code class="language-julia-repl">julia&gt; string(0)
 &quot;0&quot;
 
 julia&gt; string(1)
@@ -29,63 +68,119 @@ i = 2</code></pre><p><code>@show i</code> は、式 <code>i</code> の値を表�
 2
 3
 4
-5</code></pre><p><code>string</code>関数の結果を表示する。 <code>println</code> 関数は、印字してから、改行する命令である。</p><h2><a class="nav-anchor" id="グラフに凡例を加える-1" href="#グラフに凡例を加える-1">▼ グラフに凡例を加える</a></h2><p>グラフの凡例(lengend)は、グラフに描かれた曲線を区別するための説明である。 PyPlotパッケージで書かれたグラフに凡例を追加するには、以下のようにする。</p><p>まず、<code>plot</code>関数に <code>label=文字列</code> の形式で、 その曲線に付与する文字列を指定する。 全ての曲線を描いた後に、<code>legend</code>関数を付与する。</p><p>★★★ここから、修正する</p><p>今度は変数を使わない</p><p>★★★ここまで、修正する</p><pre><code class="language-julia">using PyPlot
+5</code></pre><p><code>string</code>関数の結果を表示する。 <code>println</code> 関数は、印字してから、改行する命令である。</p><h2><a class="nav-anchor" id="グラフに凡例を加える-1" href="#グラフに凡例を加える-1">▼ グラフに凡例を加える</a></h2><p>グラフの凡例(lengend)は、グラフに描かれた曲線を区別するための説明である。 PyPlotパッケージで書かれたグラフに凡例を追加するには、以下のようにする。</p><p>まず、<code>plot</code>関数に <code>label=文字列</code> の形式で、 その曲線に付与する文字列を指定する。 全ての曲線を描いた後に、<code>legend</code>関数を実行すると、グラフに凡例が追加される。</p><pre><code class="language-julia">using PyPlot
 xs=-1:0.1:1
-plot(xs,-1*xs,  label=&quot;y=-x&quot;)
-plot(xs,2*xs.-1, label=&quot;y=2x-1&quot;)
-legend()</code></pre><p><img src="../ch02-leg1-plot.svg" alt/></p><p>比例関係 <span>$y = ax$</span> (<span>$a=1,2,3,4,5$</span>)のグラフを描こう。</p><pre><code class="language-julia">using PyPlot
+plt.plot(xs,-1*xs,  label=&quot;y=-x&quot;)
+plt.plot(xs,2*xs.-1, label=&quot;y=2x-1&quot;)
+plt.legend()</code></pre><p><img src="../ch02-leg1-plot.svg" alt/></p><p>比例関係 <span>$y = ax$</span> (<span>$a=1,2,3,4,5$</span>)のグラフを描こう。</p><pre><code class="language-julia">using PyPlot
 xs=-1:0.1:1
-plot(xs,   xs, label=&quot;y= x&quot; )
-plot(xs, 2*xs, label=&quot;y=2x&quot; )
-plot(xs, 3*xs, label=&quot;y=3x&quot; )
-plot(xs, 4*xs, label=&quot;y=4x&quot; )
-plot(xs, 5*xs, label=&quot;y=5x&quot; )
-legend()</code></pre><p><img src="../ch02-leg2a-plot.svg" alt/></p><p>上のプログラムを、for文を用いて繰り返しで書き直してみよう。</p><pre><code class="language-julia">using PyPlot
+plt.plot(xs,   xs, label=&quot;y= x&quot; )
+plt.plot(xs, 2*xs, label=&quot;y=2x&quot; )
+plt.plot(xs, 3*xs, label=&quot;y=3x&quot; )
+plt.plot(xs, 4*xs, label=&quot;y=4x&quot; )
+plt.plot(xs, 5*xs, label=&quot;y=5x&quot; )
+plt.legend()</code></pre><p><img src="../ch02-leg2a-plot.svg" alt/></p><p>上のプログラムを、for文を用いて繰り返しで書き直してみよう。</p><p>次の例の <code>for</code>文では、 ループ変数 <code>a</code>に、1, 2, 3, 4, 5 の値が順番に入って、<code>end</code> までの文が実行される。 すなわち、直前のプログラムと同等である。</p><pre><code class="language-julia">using PyPlot
 xs=-1:0.1:1
 for a in 1:5
-  plot(xs, a*xs, label=&quot;y=&quot;*string(a)*&quot;x&quot; )
+  plt.plot(xs, a*xs, label=&quot;y=&quot;*string(a)*&quot;x&quot; )
 end
-legend()</code></pre><p><img src="../ch02-leg2b-plot.svg" alt/></p><h2><a class="nav-anchor" id="冪乗関数を描く-1" href="#冪乗関数を描く-1">▼ 冪乗関数を描く</a></h2><p><a href="https://docs.julialang.org/en/v1/base/math/#Base.:^-Tuple{Number,Number}"><code>Base.:^</code> - Method</a></p><p><code>x^y</code> は、冪（べき, power）ないし冪乗（べきじょう）<span>$x^y$</span>を表す。 <span>$x$</span>を底 (base)、<span>$y$</span>を冪指数 (exponent)という。</p><pre><code class="language-julia-repl">julia&gt; 2^2
+plt.legend()</code></pre><p><img src="../ch02-leg2b-plot.svg" alt/></p><h2><a class="nav-anchor" id="グラフに、水平線・垂直線を加える-1" href="#グラフに、水平線・垂直線を加える-1">▼ グラフに、水平線・垂直線を加える</a></h2><div>\[y=ax\]</div><p>は全て原点 <span>$(0,0)$</span> を通る。 水平線や垂直線の補助線を引いて、これを見やすくする。</p><p>PyPlotパッケージに用意された関数 <code>axhline(y)</code> は、 縦座標 <span>$y$</span> で水平線(horizontal line)を描く。 最初の引数には、水平線を引く <span>$y$</span> 座標を指定する。 キーワード引数 <code>color=&quot;k&quot;</code> は、黒色(black)で描くことを指定し、<code>lw=0.5</code>は線幅(linewidth)を指定する。</p><p>また、関数 <code>axvline(x)</code> は、横座標 <span>$x$</span> で垂直線 (vertical line)を描く。 最初の引数には、垂直線を引く <span>$x$</span> 座標を指定する。</p><pre><code class="language-julia">using PyPlot
+xs=-1:0.1:1
+for a in 1:5
+  plt.plot(xs, a*xs, label=&quot;y=&quot;*string(a)*&quot;x&quot; )
+end
+plt.legend()
+# 水平線 y=0
+plt.axhline(0, color=&quot;k&quot;, lw=0.5)
+# 垂直線 x=0
+plt.axvline(0, color=&quot;k&quot;, lw=0.5)</code></pre><p><img src="../ch02-leg2c-plot.svg" alt/></p><h2><a class="nav-anchor" id="グラフの描画範囲を指定する-1" href="#グラフの描画範囲を指定する-1">▼ グラフの描画範囲を指定する</a></h2><p><code>plot</code>命令は、全ての点を表示しようとする。 グラフの描画範囲を調整するには、関数 <code>xlim</code> と <code>ylim</code> を用いる。</p><ul><li>関数 <code>xlim(a,b)</code> は、x軸の描画を a から b の範囲に限定する。</li><li>関数 <code>ylim(a,b)</code> は、y軸の描画を a から b の範囲に限定する。</li></ul><pre><code class="language-julia">using PyPlot
+xs=-10:0.5:10
+for a in 1:5
+  plt.plot(xs, a*xs, label=&quot;y=&quot;*string(a)*&quot;x&quot; )
+end
+plt.legend()
+plt.axhline(0, color=&quot;k&quot;, lw=0.5)
+plt.axvline(0, color=&quot;k&quot;, lw=0.5)
+# 描画範囲
+plt.xlim(-3,3)
+plt.ylim(-3,3)</code></pre><p><img src="../ch02-leg2-e1-plot.svg" alt/></p><p>別の描画範囲を指定してみる。</p><pre><code class="language-julia">using PyPlot
+xs=-10:0.5:10
+for a in 1:5
+  plt.plot(xs, a*xs, label=&quot;y=&quot;*string(a)*&quot;x&quot; )
+end
+plt.legend()
+plt.axhline(0, color=&quot;k&quot;, lw=0.5)
+plt.axvline(0, color=&quot;k&quot;, lw=0.5)
+# 描画範囲
+plt.xlim(-20,20)
+plt.ylim(-40,40)</code></pre><p><img src="../ch02-leg2-e2-plot.svg" alt/></p><h2><a class="nav-anchor" id="グラフの描画範囲を指定する-2" href="#グラフの描画範囲を指定する-2">▼ グラフの描画範囲を指定する</a></h2><p>グラフの縦横の長さの比をアスペクト比という。</p><p>関数 <code>plt.axes().set_aspect()</code> は、アスペクト比を指定する命令である。</p><p>何も指定しない場合は、<code>plt.axes().set_aspect(&quot;auto&quot;)</code> であり、 アスペクト比を適当に調整する。</p><p>関数 <code>plt.axes().set_aspect(&quot;equal&quot;)</code> は、アスペクト比を等しくする命令である。 通常は、前項の描画範囲の指定と同時に用いる。</p><pre><code class="language-julia">using PyPlot
+xs=-1:0.2:1
+plt.plot(xs, xs)
+plt.xlim(-1,1)
+plt.ylim(-1,1)</code></pre><p><img src="../ch02-leg2-e3-plot.svg" alt/></p><h2><a class="nav-anchor" id="冪乗関数を描く-1" href="#冪乗関数を描く-1">▼ 冪乗関数を描く</a></h2><p><a href="https://docs.julialang.org/en/v1/base/math/#Base.:^-Tuple{Number,Number}"><code>Base.:^</code> - Method</a></p><p><code>x^y</code> は、冪（べき, power）ないし冪乗（べきじょう）<span>$x^y$</span>を表す。 <span>$x$</span> を底 (base)、<span>$y$</span> を冪指数 (exponent)という。</p><pre><code class="language-julia-repl">julia&gt; 2^2
 4
 
 julia&gt; 2^3
 8
 
 julia&gt; 2^4
-16</code></pre><p>冪指数が負の整数のとき、冪の計算は失敗する (<code>DomainError</code> : 定義域外の例外)。 代わりに、負の小数を指定する。</p><pre><code class="language-julia-repl">julia&gt; 2^-2 # DomainError
-0.25
-
-julia&gt; 2^-2.0
-0.25</code></pre><p>ベクトルや等差級数の各要素に対して 冪乗を計算するには　演算子 <code>^</code>の前にピリオド<code>.</code> を加える。</p><p>★★★ここから、修正する</p><p>2.^[2,3,4] はだめ</p><p>★★★ここまで、修正する</p><pre><code class="language-julia-repl">julia&gt; 2.0.^[2,3,4]
+16</code></pre><p>スカラーとベクトルとに演算子 <code>.^</code> を適用すると、 各々の冪指数に対して冪乗を計算したベクトルが得られる。</p><p>底が整数の場合は <code>.^</code> の前に空白を入れる。</p><pre><code class="language-julia-repl">julia&gt; 2 .^[2,3,4]
+3-element Array{Int64,1}:
+  4
+  8
+ 16</code></pre><div class="admonition note"><div class="admonition-title">Note</div><div class="admonition-text"><p>整数(底)の直後に <code>.^</code> と書くと例外が出るので注意しよう。</p></div></div><pre><code class="language-">julia&gt; 2.^[2,3,4]
+ERROR: syntax: invalid syntax &quot;2.^&quot;; add space(s) to clarify</code></pre><p>底が小数の場合は、その直後に <code>.^</code> と書いてよい。</p><pre><code class="language-julia-repl">julia&gt; 2.0.^[2,3,4]
 3-element Array{Float64,1}:
   4.0
   8.0
- 16.0
+ 16.0</code></pre><p>ベクトルとスカラーとに演算子 <code>.^</code> を適用すると、 各々の底に対して、冪乗を計算したベクトルが得られる。</p><pre><code class="language-julia-repl">julia&gt; [2,3,4].^2
+3-element Array{Int64,1}:
+  4
+  9
+ 16
 
-julia&gt; (2:4).^2
+julia&gt; [2,3,4].^2
+3-element Array{Int64,1}:
+  4
+  9
+ 16</code></pre><p>Range型とスカラーとに演算子 <code>.^</code> を適用すると、 各々の底に対して、冪乗を計算したベクトルが得られる。</p><pre><code class="language-julia-repl">julia&gt; (2:4).^2
 3-element Array{Int64,1}:
   4
   9
  16
 
 julia&gt; 2:4 .^2    # `^`は `:` よりも優先度が高い
-2:16</code></pre><p>冪乗 <span>$y=x^a, (a=2,3,4,5)$</span> のグラフを描こう。</p><p><code>plt.axes().set_aspect(&quot;equal&quot;)</code> は、 グラフの縦横比 (アスペクト比 aspect ratio) を等しくする命令である。</p><pre><code class="language-julia">using PyPlot
+2:16</code></pre><p>区間 <span>$x= [0,1]$</span> で、冪乗 <span>$y=x^a, (a=2,3,4,5)$</span> のグラフを描こう。</p><p><code>plt.axes().set_aspect(&quot;equal&quot;)</code> は、 グラフの縦横比 (アスペクト比 aspect ratio) を等しくする命令である。</p><pre><code class="language-julia">using PyPlot
+plt.axes().set_aspect(&quot;equal&quot;)
 xs=0:0.1:1
-plot(xs, xs.^2 )
-plot(xs, xs.^3 )
-plot(xs, xs.^4 )
-plot(xs, xs.^5 )
-plt.axes().set_aspect(&quot;equal&quot;)</code></pre><p><img src="../ch02-po1-plot.svg" alt/></p><p>for文を使って、繰り返しの処理をまとめる。</p><p>さらに、凡例を追加する。</p><pre><code class="language-julia">using PyPlot
+plt.plot(xs, xs.^2 )
+plt.plot(xs, xs.^3 )
+plt.plot(xs, xs.^4 )
+plt.plot(xs, xs.^5 )</code></pre><p><img src="../ch02-po1-plot.svg" alt/></p><p>for文を使って、繰り返しの処理をまとめる。 区間を <span>$x= [0,2]$</span> に拡大して、凡例を追加しよう。</p><pre><code class="language-julia">using PyPlot
+plt.axes().set_aspect(&quot;equal&quot;)
+xs=0:0.05:2
+for a in 2:5
+  plt.plot(xs, xs.^a , label=&quot;y=x^&quot;*string(a) )
+end
+plt.legend()
+# 描画範囲を設定
+plt.xlim(-0.05,2)
+plt.ylim(-0.05,2)</code></pre><p><img src="../ch02-po2-plot.svg" alt/></p><p>冪乗 <span>$y=x^a, (a=2,3,4,5)$</span> は全て、点 <span>$(1,1)$</span> を通る。<span>$x=1$</span>と <span>$y=1$</span> の線を付与して、これを見やすくしよう。</p><pre><code class="language-julia">using PyPlot
+plt.axes().set_aspect(&quot;equal&quot;)
 # 間隔を狭めた
 xs=0:0.05:2
 for a in 2:5
-  plot(xs, xs.^a , label=&quot;y=x^&quot;*string(a) )
+  plt.plot(xs, xs.^a , label=&quot;y=x^&quot;*string(a) )
 end
-legend()
+plt.legend()
 # 描画範囲を設定
-xlim(-0.05,2)
-ylim(-0.05,2)
-plt.axes().set_aspect(&quot;equal&quot;)</code></pre><p><img src="../ch02-po2-plot.svg" alt/></p><p><code>plot</code>命令は、全ての点を表示しようとする。 グラフの描画範囲を調整するには、関数 <code>xlim</code> と <code>ylim</code> を用いる。</p><p>関数 <code>xlim(a,b)</code> は、x軸の描画を a から b の範囲に限定する命令である。</p><p>関数 <code>ylim(a,b)</code> は、y軸の描画を a から b の範囲に限定する命令である。</p><h2><a class="nav-anchor" id="ローレンツ関数を描く-1" href="#ローレンツ関数を描く-1">▼ ローレンツ関数を描く</a></h2><p><a href="http://mathworld.wolfram.com/LorentzianFunction.html">Lorentzian Function</a></p><p>以下の曲線を、 ローレンツ関数 (Lorentzian function)という。</p><div>\[y = \frac{\frac{\gamma}{2}}{(x-x_0)^2+\left(\frac{\gamma}{2}\right)^2}\]</div><div>\[\gamma &gt; 0\]</div><p>パラメータを <span>$x_0 = 0, \gamma = 2$</span> のように選ぶと、 以下のように簡単な形となる。</p><div>\[y = \frac{1}{x^2+1}\]</div><p>まず、この曲線を描いてみる。 各要素に対して除算を行うため、<code>/</code>の前にも、ピリオド<code>.</code>を付与する。</p><pre><code class="language-julia-repl">julia&gt; xs=-3:0.5:3
+plt.xlim(-0.05,2)
+plt.ylim(-0.05,2)
+# 水平線 y=1
+plt.axhline(1, color=&quot;k&quot;, lw=0.5)
+# 垂直線 x=1
+plt.axvline(1, color=&quot;k&quot;, lw=0.5)
+#</code></pre><p><img src="../ch02-po3-plot.svg" alt/></p><h2><a class="nav-anchor" id="ローレンツ関数を描く-1" href="#ローレンツ関数を描く-1">▼ ローレンツ関数を描く</a></h2><p><a href="http://mathworld.wolfram.com/LorentzianFunction.html">Lorentzian Function</a></p><p>以下の曲線を、 ローレンツ関数 (Lorentzian function)という。</p><div>\[y = \frac{\frac{\gamma}{2}}{(x-x_0)^2+\left(\frac{\gamma}{2}\right)^2}\]</div><div>\[\gamma &gt; 0\]</div><p>パラメータを <span>$x_0 = 0, \gamma = 2$</span> のように選ぶと、 以下のように簡単な形となる。</p><div>\[y = \frac{1}{x^2+1}\]</div><p>まず、この曲線を描いてみる。</p><p>Range型の各要素に対して加算や除算を行うため、<code>1 / (xs.^2 +1)</code> では駄目である。<code>/</code> と <code>+</code> のの前にピリオド <code>.</code> を付与する。</p><pre><code class="language-julia-repl">julia&gt; xs=-3:0.5:3
 -3.0:0.5:3.0
 
 julia&gt; 1 ./ (xs.^2 .+1)
@@ -102,32 +197,30 @@ julia&gt; 1 ./ (xs.^2 .+1)
  0.3076923076923077
  0.2
  0.13793103448275862
- 0.1</code></pre><p>★★★ここから、修正する</p><p>xs.^2.+1 と書いてはいけない</p><p>★★★ここまで、修正する</p><p>上のグラフを描こう。</p><pre><code class="language-julia">using PyPlot
+ 0.1</code></pre><p>上のグラフを描こう。</p><pre><code class="language-julia">using PyPlot
 xs=-3:0.1:3
-plot(xs, 1 ./ (xs.^2 .+1) )</code></pre><p><img src="../ch02-lo1-plot.svg" alt/></p><p>以下のように、パラメータ <span>$\gamma$</span> を導入する。</p><div>\[y = \frac{\frac{\gamma}{2}}{x^2+\left(\frac{\gamma}{2}\right)^2}\]</div><p>三つのパラメータ <span>$\gamma=0.5,1,2$</span> について、この曲線を描く。</p><pre><code class="language-julia">using PyPlot
+plt.plot(xs, 1 ./ (xs.^2 .+1) )</code></pre><p><img src="../ch02-lo1-plot.svg" alt/></p><p>以下のように、パラメータ <span>$\gamma$</span> を追加する。</p><div>\[y = \frac{\frac{\gamma}{2}}{x^2+\left(\frac{\gamma}{2}\right)^2}\]</div><p>三つのパラメータ <span>$\gamma=0.5,1,2$</span> について、この曲線を描く。</p><pre><code class="language-julia">using PyPlot
 xs=-3:0.05:3
 gamma=0.5
-plot(xs, (gamma/2) ./ (xs.^2 .+(gamma/2)^2), label=gamma )
+plt.plot(xs, (gamma/2) ./ (xs.^2 .+(gamma/2)^2), label=gamma )
 gamma=1.0
-plot(xs, (gamma/2) ./ (xs.^2 .+(gamma/2)^2), label=gamma )
+plt.plot(xs, (gamma/2) ./ (xs.^2 .+(gamma/2)^2), label=gamma )
 gamma=2.0
-plot(xs, (gamma/2) ./ (xs.^2 .+(gamma/2)^2), label=gamma )
-legend()
-plt.axes().set_aspect(&quot;equal&quot;)</code></pre><p><img src="../ch02-lo2-plot.svg" alt/></p><p>gammaの値が変わっても、それぞれの曲線を描く命令は変わらない。 for文を用いて、gammaの値を変えてみよう。（結果のグラフは同じである)</p><pre><code class="language-julia">using PyPlot
+plt.plot(xs, (gamma/2) ./ (xs.^2 .+(gamma/2)^2), label=gamma )
+plt.legend()</code></pre><p><img src="../ch02-lo2-plot.svg" alt/></p><p>gammaの値が変わっても、それぞれの曲線を描くための命令は変わらない。 for文を用いて、gammaの値を変えてみよう（結果のグラフは変わらないので、省略する)。</p><pre><code class="language-julia">using PyPlot
 xs=-3:0.05:3
 for gamma in [0.5,1.0,2.0]
-  plot(xs, (gamma/2) ./ (xs.^2 .+(gamma/2)^2), label=gamma )
+  plt.plot(xs, (gamma/2) ./ (xs.^2 .+(gamma/2)^2), label=gamma )
 end
-legend()
-plt.axes().set_aspect(&quot;equal&quot;)</code></pre><p>ローレンツ関数には、次の性質がある。</p><ul><li>点 <span>$x=0$</span> で 最大値 <span>$y = \frac{2}{\gamma}$</span></li><li>点 <span>$x=\pm\frac{\gamma}{2}$</span> で、<span>$y = \frac{1}{2}\frac{2}{\gamma}$</span> となること。</li></ul><p>２つ目の性質を観察するため、最大値に対する比を描いてみる。</p><p>PyPlotパッケージに用意された関数 <code>axhline()</code> は、 水平線(horizontal line)を描く。 引数 <code>color=&quot;k&quot;</code> は、黒色(black)で描くことを指定し、<code>lw=0.5</code>は線幅(linewidth)を指定する。</p><pre><code class="language-julia">using PyPlot
+plt.legend()</code></pre><p>ローレンツ関数には、次の性質がある。</p><ul><li>点 <span>$x=0$</span> で 最大値 <span>$y = \frac{2}{\gamma}$</span></li><li>点 <span>$x=\pm\frac{\gamma}{2}$</span> で、<span>$y = \frac{1}{2}\frac{2}{\gamma}$</span> となること。</li></ul><p>２つ目の性質を観察するため、最大値に対する比を描いてみる。</p><pre><code class="language-julia">using PyPlot
 xs=-3:0.05:3
 for gamma in [0.5,1.0,2.0]
-  plot(xs,
+  plt.plot(xs,
     (gamma/2) ./ (xs.^2 .+(gamma/2)^2) / (2/gamma),
     label=gamma )
 end
-legend()
-axhline(1/2, color=&quot;k&quot;, lw=0.5)</code></pre><p><img src="../ch02-lo4-plot.svg" alt/></p><div class="admonition note"><div class="admonition-title">Note</div><div class="admonition-text"><p><code>plot</code>関数の文は、複数の行に渡って記述しているが、行が更に続くことを示す記法は、特に用意されていない。構文が行末で終わらなければ、次の行まで読みに行くことになっている。</p></div></div><p>パラメータ <span>$\gamma$</span>は、半値全幅 (Full Width of Half Maximum, FWHM)と呼ばれる。 <span>$\gamma$</span>を非常に小さくすると、 Diracのデルタ関数 (Dirac delta function)の近似(の一つ)となる。</p><h2><a class="nav-anchor" id="更新演算子-1" href="#更新演算子-1">■ 更新演算子</a></h2><p><a href="https://docs.julialang.org/en/v1.1/manual/mathematical-operations/#Updating-operators-1">Updating operators (section)</a></p><p>変数に四則演算などを行って、元の変数に再代入する場合には、 更新演算子を用いるとよい。 演算子の直後に <code>=</code> の文字が入る。</p><pre><code class="language-julia-repl">julia&gt; x=1
+plt.legend()
+plt.axhline(1/2, color=&quot;k&quot;, lw=0.5)</code></pre><p><img src="../ch02-lo4-plot.svg" alt/></p><div class="admonition note"><div class="admonition-title">Note</div><div class="admonition-text"><p><code>plot</code>関数の文は、複数の行に渡って記述しているが、行が更に続くことを示す記法は、特に用意されていない。構文が行末で終わらなければ、次の行まで読みに行くことになっている。</p></div></div><p>パラメータ <span>$\gamma$</span>は、半値全幅 (Full Width of Half Maximum, FWHM)と呼ばれる。 <span>$\gamma$</span>を非常に小さくすると、 Diracのデルタ関数 (Dirac delta function)の近似(の一つ)となる。</p><h2><a class="nav-anchor" id="更新演算子-1" href="#更新演算子-1">■ 更新演算子</a></h2><p><a href="https://docs.julialang.org/en/v1.1/manual/mathematical-operations/#Updating-operators-1">Updating operators (section)</a></p><p>変数に四則演算などを行って、元の変数に再代入する場合には、 更新演算子を用いるとよい。 演算子の直後に <code>=</code> の文字が入る。</p><pre><code class="language-julia-repl">julia&gt; x=1
 1
 
 julia&gt; # 再代入
@@ -140,21 +233,26 @@ julia&gt; # 更新演算子
 2
 
 julia&gt; for i=1:5
+         global gamma
          gamma /= 2
          @show gamma
        end
-ERROR: UndefVarError: gamma not defined</code></pre><p>更新演算子 <code>/=</code> を利用して、ローレンツ関数のパラメータ <code>gamma</code> を変えてみる。</p><pre><code class="language-julia">using PyPlot
+gamma = 1.0
+gamma = 0.5
+gamma = 0.25
+gamma = 0.125
+gamma = 0.0625</code></pre><p>更新演算子 <code>/=</code> を利用して、ローレンツ関数のパラメータ <code>gamma</code> を変えてみる。</p><p><code>for</code>文の次の <code>global gamma</code> に注目してほしい。 対話型で実行する場合、<code>for</code>文の外側で定義された変数の値を変更することは、 安全のために通常禁止されている。これを可能とするのが <code>global</code> 文である。</p><pre><code class="language-julia">using PyPlot
 xs=-3:0.05:3
 gamma=2
 for i in 1:5
   global gamma
-  plot(xs,
+  plt.plot(xs,
     (gamma/2) ./ (xs.^2 .+(gamma/2)^2) / (2/gamma),
     label=gamma )
   gamma /= 2
 end
-legend()
-axhline(1/2, color=&quot;k&quot;, lw=0.5)</code></pre><p><img src="../ch02-lo5-plot.svg" alt/></p><p>★★★ここから、修正する global gamma が必要な件 ★★★ここまで、修正する</p><p>更新演算子は、ベクトルのスカラー倍や、定数の加減にも適用できる。</p><pre><code class="language-julia-repl">julia&gt; xs = [1,2,2,1]
+plt.legend()
+axhline(1/2, color=&quot;k&quot;, lw=0.5)</code></pre><p><img src="../ch02-lo5-plot.svg" alt/></p><p>ベクトルをスカラー倍して更新するには、更新演算子 <code>*=</code> を用いる。 ベクトルにスカラーを加減して更新するには、更新演算子 <code>.+=</code>または <code>.-=</code> を用いる。</p><pre><code class="language-julia-repl">julia&gt; xs = [1,2,2,1]
 4-element Array{Int64,1}:
  1
  2
@@ -168,25 +266,20 @@ julia&gt; xs .+=1
  3
  2
 
-julia&gt; xs .+=1
+julia&gt; xs *= 2
 4-element Array{Int64,1}:
- 3
  4
- 4
- 3
-
-julia&gt; xs *=1
-4-element Array{Int64,1}:
- 3
- 4
- 4
- 3</code></pre><p>★★★ここから、修正する</p><p>xs .+=1 は、つかえなくなった ★★★ここまで、修正する</p><p>前節の三角形を描く例題で、更新演算子 <code>+=</code>を用いて、図形を繰り返し並行移動してみよう。</p><pre><code class="language-julia">using PyPlot
+ 6
+ 6
+ 4</code></pre><p>前節の三角形を描く例題で、更新演算子 <code>.+=</code> を用いて、図形を繰り返し並行移動してみよう。</p><p><code>for</code> 文の中で、変数 <code>xs</code> と <code>ys</code> を更新するので、<code>global xs, ys</code> の文が必要である。</p><pre><code class="language-julia">using PyPlot
+plt.axes().set_aspect(&quot;equal&quot;)
 xs = [1.0,2.0,2.0,1.0 ]
 ys = [1.0,1.0,3.0,1.0 ]
 for i=1:5
   global xs, ys
-  plot(xs,ys)
+  plt.plot(xs,ys)
   xs .+= 0.5
   ys .+= 0.5
 end
-plt.axes().set_aspect(&quot;equal&quot;)</code></pre><p><img src="../ch02-tri-shift-plot.svg" alt/></p><p>★★★ここから、修正する global xs, ys ★★★ここまで、修正する</p><h2><a class="nav-anchor" id="練習-1" href="#練習-1">▲ 練習</a></h2><p>ローレンツ関数において、パラメータ <span>$x_0$</span> を変えたグラフを作成せよ。 for文を使う方法、更新演算子を使う方法の、二つで描いてみよ。</p><h2><a class="nav-anchor" id="今回のまとめ-1" href="#今回のまとめ-1">★ 今回のまとめ</a></h2><ul><li>文字列</li><li>for文</li><li>グラフに凡例を加える</li><li>冪乗関数</li><li>ローレンツ関数</li><li>更新演算子</li></ul><footer><hr/><a class="previous" href="../ch01/"><span class="direction">Previous</span><span class="title">第1回：▼ 簡単なグラフを描く</span></a><a class="next" href="../ch03/"><span class="direction">Next</span><span class="title">第3回：▼ 連続な曲線を描く</span></a></footer></article></body></html>
+plt.xlim(0,6)
+plt.ylim(0,6)</code></pre><p><img src="../ch02-tri-shift-plot.svg" alt/></p><h2><a class="nav-anchor" id="練習-1" href="#練習-1">▲ 練習</a></h2><p>ローレンツ関数において、パラメータ <span>$x_0$</span> を変えたグラフを作成せよ。 for文を使う方法、更新演算子を使う方法の、二つで描いてみよ。</p><h2><a class="nav-anchor" id="今回のまとめ-1" href="#今回のまとめ-1">★ 今回のまとめ</a></h2><ul><li>文字列</li><li>for文</li><li>グラフに凡例を加える</li><li>冪乗関数</li><li>ローレンツ関数</li><li>更新演算子</li></ul><footer><hr/><a class="previous" href="../ch01/"><span class="direction">Previous</span><span class="title">第1回：▼ 簡単なグラフを描く</span></a><a class="next" href="../ch03/"><span class="direction">Next</span><span class="title">第3回：▼ 連続な曲線を描く</span></a></footer></article></body></html>
