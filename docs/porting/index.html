@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Julia 0.6 から 1.x への移植 · Memorandom on Julia Language v1.1</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>Memorandom on Julia Language v1.1</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../LICENSE/">MIT License</a></li><li><a class="toctext" href="../LICENSEja/">MIT License 参考和訳</a></li><li><a class="toctext" href="../ch00/">はじめに</a></li><li><a class="toctext" href="../ch01/">第1回：▼ 簡単なグラフを描く</a></li><li><a class="toctext" href="../ch02/">第2回：▼ 複数のグラフを描く</a></li><li><a class="toctext" href="../ch03/">第3回：▼ 連続な曲線を描く</a></li><li><a class="toctext" href="../ch04/">第4回：▼ 不連続な曲線を描く</a></li><li><a class="toctext" href="../ch05/">第5回：■ 条件式・■ 条件分岐</a></li><li><a class="toctext" href="../ch06/">第6回：■ 整数</a></li><li><a class="toctext" href="../ch07/">第7回：■ 浮動小数点数</a></li><li><a class="toctext" href="../ch08/">第8回： ▼ 総和・数値積分</a></li><li><a class="toctext" href="../ch09/">第9回： ■ 配列要素の操作・▶常微分方程式の数値解法</a></li><li><a class="toctext" href="../ch10/">第10回：行列・線形代数</a></li><li><a class="toctext" href="../ch11/">第11回：ファイル入出力</a></li><li><a class="toctext" href="../ch12/">第12回：関数の定義と呼び出し</a></li><li><a class="toctext" href="../ch13/">第13回：複素数</a></li><li><a class="toctext" href="../ch14/">第14回：定期レポートへのコメント（その1）</a></li><li><a class="toctext" href="../ch15/">第15回：定期レポートへのコメント（その２）</a></li><li class="current"><a class="toctext" href>Julia 0.6 から 1.x への移植</a><ul class="internal"><li><a class="toctext" href="#整数の直後に.-と書かない-1">整数の直後に<code>.^</code> と書かない</a></li><li><a class="toctext" href="#配列とスカラーの加減算は-.,-.-を用いる-1">配列とスカラーの加減算は <code>.+</code>, <code>.-</code> を用いる</a></li><li><a class="toctext" href="#配列とスカラーの加減算による更新は-.,-.-を用いる-1">配列とスカラーの加減算による更新は <code>.+=</code>, <code>.-=</code> を用いる</a></li><li><a class="toctext" href="#zeros(a)-は廃止。zero(a)を用いる-1"><code>zeros(a)</code> は廃止。<code>zero(a)</code>を用いる</a></li><li><a class="toctext" href="#ones(a)-は廃止。one(a)を用いる-1"><code>ones(a)</code> は廃止。<code>one(a)</code>を用いる</a></li><li><a class="toctext" href="#realmax(t),-realmin(t)-は廃止。floatmax(t),-floatmin(t)-を用いる-1"><code>realmax(t), realmin(t)</code> は廃止。<code>floatmax(t)</code>, <code>floatmin(t)</code> を用いる</a></li><li><a class="toctext" href="#PyPlot-パッケージでは-o.m-の形式が推奨される-1"><code>PyPlot</code> パッケージでは <code>o.m</code> の形式が推奨される</a></li><li><a class="toctext" href="#linspaceは廃止。LinSpace-を用いる-1"><code>linspace</code>は廃止。<code>LinSpace</code> を用いる</a></li><li><a class="toctext" href="#logspaceは廃止。exp10.(LinRange(a,b,n))-などを用いる-1"><code>logspace</code>は廃止。<code>exp10.(LinRange(a,b,n))</code> などを用いる</a></li><li><a class="toctext" href="#srand(n)-は廃止。Random.seed!(n)-を用いる-1"><code>srand(n)</code> は廃止。<code>Random.seed!(n)</code> を用いる</a></li></ul></li><li><a class="toctext" href="../">toc</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href>Julia 0.6 から 1.x への移植</a></li></ul></nav><hr/><div id="topbar"><span>Julia 0.6 から 1.x への移植</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Julia-0.6-から-1.x-への移植-1" href="#Julia-0.6-から-1.x-への移植-1">Julia 0.6 から 1.x への移植</a></h1><h2><a class="nav-anchor" id="整数の直後に.-と書かない-1" href="#整数の直後に.-と書かない-1">整数の直後に<code>.^</code> と書かない</a></h2><p>例えば、<code>2.^3</code> のように、整数の直後に <code>.^</code> を置く式は、意図が不明瞭なので禁止された。 <code>.^</code> の前が整数であることを明示するには、<code>.^</code> の前に空白を書く。 <code>.^</code> の前が浮動小数点数あることを明示するには、ピリオドのあとに数字を書く。</p><pre><code class="language-julia-repl"></code></pre><h2><a class="nav-anchor" id="配列とスカラーの加減算は-.,-.-を用いる-1" href="#配列とスカラーの加減算は-.,-.-を用いる-1">配列とスカラーの加減算は <code>.+</code>, <code>.-</code> を用いる</a></h2><p>v0.6.4 では、 配列 <code>v</code> にスカラー <code>a</code> を加減する (<code>v+a</code> または <code>v-a</code>) ことができたが、 v1.x ではできなくなった。 代わりに、<code>v.+a</code> または　<code>v.-a</code> とする。 あるいは、式の前に <code>@.</code> を置いて、<code>@. v+a</code> または <code>@. v-a</code> と書いてもよい。</p><p>1次元配列 (ベクトル)の場合</p><pre><code class="language-julia-repl">julia&gt; v=[ 1, 2, 3, 4]
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Julia 0.6 から 1.x への移植 · Memorandom on Julia Language v1.1</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>Memorandom on Julia Language v1.1</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../LICENSE/">MIT License</a></li><li><a class="toctext" href="../LICENSEja/">MIT License 参考和訳</a></li><li><a class="toctext" href="../ch00/">はじめに</a></li><li><a class="toctext" href="../ch01/">第1回：▼ 簡単なグラフを描く</a></li><li><a class="toctext" href="../ch02/">第2回：▼ 複数のグラフを描く</a></li><li><a class="toctext" href="../ch03/">第3回：▼ 連続な曲線を描く</a></li><li><a class="toctext" href="../ch04/">第4回：▼ 不連続な曲線を描く</a></li><li><a class="toctext" href="../ch05/">第5回：■ 条件式・■ 条件分岐</a></li><li><a class="toctext" href="../ch06/">第6回：■ 整数</a></li><li><a class="toctext" href="../ch07/">第7回：■ 浮動小数点数</a></li><li><a class="toctext" href="../ch08/">第8回： ▼ 総和・数値積分</a></li><li><a class="toctext" href="../ch09/">第9回： ■ 配列要素の操作／▶常微分方程式の数値解法</a></li><li><a class="toctext" href="../ch10/">第10回：行列・線形代数</a></li><li><a class="toctext" href="../ch11/">第11回：ファイル入出力</a></li><li><a class="toctext" href="../ch12/">第12回：関数の定義と呼び出し</a></li><li><a class="toctext" href="../ch13/">第13回：複素数</a></li><li><a class="toctext" href="../ch14/">第14回：2018年度・定期レポートへのコメント（その1）</a></li><li><a class="toctext" href="../ch15/">第15回：2018年度・定期レポートへのコメント（その２）</a></li><li class="current"><a class="toctext" href>Julia 0.6 から 1.x への移植</a><ul class="internal"><li><a class="toctext" href="#整数の直後に.-と書かない-1">整数の直後に<code>.^</code> と書かない</a></li><li><a class="toctext" href="#配列とスカラーの加減算は-.,-.-を用いる-1">配列とスカラーの加減算は <code>.+</code>, <code>.-</code> を用いる</a></li><li><a class="toctext" href="#配列とスカラーの加減算による更新は-.,-.-を用いる-1">配列とスカラーの加減算による更新は <code>.+=</code>, <code>.-=</code> を用いる</a></li><li><a class="toctext" href="#zeros(a)-は廃止。zero.(a)を用いる-1"><code>zeros(a)</code> は廃止。<code>zero.(a)</code>を用いる</a></li><li><a class="toctext" href="#ones(a)-は廃止。one(a)を用いる-1"><code>ones(a)</code> は廃止。<code>one(a)</code>を用いる</a></li><li><a class="toctext" href="#realmax(t),-realmin(t)-は廃止。floatmax(t),-floatmin(t)-を用いる-1"><code>realmax(t), realmin(t)</code> は廃止。<code>floatmax(t)</code>, <code>floatmin(t)</code> を用いる</a></li><li><a class="toctext" href="#bits-は廃止。bitstringを用いる。-1"><code>bits</code> は廃止。<code>bitstring</code>を用いる。</a></li><li><a class="toctext" href="#PyPlot-パッケージでは-o.m-の形式が推奨される-1"><code>PyPlot</code> パッケージでは <code>o.m</code> の形式が推奨される</a></li><li><a class="toctext" href="#linspaceは廃止。LinSpace-を用いる-1"><code>linspace</code>は廃止。<code>LinSpace</code> を用いる</a></li><li><a class="toctext" href="#logspaceは廃止。exp10.(LinRange(a,b,n))-などを用いる-1"><code>logspace</code>は廃止。<code>exp10.(LinRange(a,b,n))</code> などを用いる</a></li><li><a class="toctext" href="#srand(n)-は廃止。Random.seed!(n)-を用いる-1"><code>srand(n)</code> は廃止。<code>Random.seed!(n)</code> を用いる</a></li></ul></li><li><a class="toctext" href="../">toc</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href>Julia 0.6 から 1.x への移植</a></li></ul></nav><hr/><div id="topbar"><span>Julia 0.6 から 1.x への移植</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Julia-0.6-から-1.x-への移植-1" href="#Julia-0.6-から-1.x-への移植-1">Julia 0.6 から 1.x への移植</a></h1><h2><a class="nav-anchor" id="整数の直後に.-と書かない-1" href="#整数の直後に.-と書かない-1">整数の直後に<code>.^</code> と書かない</a></h2><p>例えば、<code>2.^3</code> のように、整数の直後に <code>.^</code> を置く式は、意図が不明瞭なので禁止された。 <code>.^</code> の前が整数であることを明示するには、<code>.^</code> の前に空白を書く。 <code>.^</code> の前が浮動小数点数あることを明示するには、ピリオドのあとに数字を書く。</p><pre><code class="language-julia-repl"></code></pre><h2><a class="nav-anchor" id="配列とスカラーの加減算は-.,-.-を用いる-1" href="#配列とスカラーの加減算は-.,-.-を用いる-1">配列とスカラーの加減算は <code>.+</code>, <code>.-</code> を用いる</a></h2><p>v0.6.4 では、 配列 <code>v</code> にスカラー <code>a</code> を加減する (<code>v+a</code> または <code>v-a</code>) ことができたが、 v1.x ではできなくなった。 代わりに、<code>v.+a</code> または　<code>v.-a</code> とする。 あるいは、式の前に <code>@.</code> を置いて、<code>@. v+a</code> または <code>@. v-a</code> と書いてもよい。</p><p>1次元配列 (ベクトル)の場合</p><pre><code class="language-julia-repl">julia&gt; v=[ 1, 2, 3, 4]
 4-element Array{Int64,1}:
  1
  2
@@ -194,7 +194,7 @@ julia&gt; v/=2
  1.0
  2.0
  3.0
- 4.0</code></pre><h2><a class="nav-anchor" id="zeros(a)-は廃止。zero(a)を用いる-1" href="#zeros(a)-は廃止。zero(a)を用いる-1"><code>zeros(a)</code> は廃止。<code>zero(a)</code>を用いる</a></h2><p>v0.6.4 では、配列 <code>a</code> に対して <code>zeros(a)</code> というメソッドがあったが、廃止された。 v1.x では、代わりに <code>zero(a)</code>　を用いる。</p><p>このメソッドは、<code>a</code> の要素と同じ要素の型で、<code>a</code> と同じ寸法の配列を作り、 要素の値を全て <code>0</code> にする命令である。</p><pre><code class="language-julia-repl">julia&gt; a=[1 2; 3 4]
+ 4.0</code></pre><h2><a class="nav-anchor" id="zeros(a)-は廃止。zero.(a)を用いる-1" href="#zeros(a)-は廃止。zero.(a)を用いる-1"><code>zeros(a)</code> は廃止。<code>zero.(a)</code>を用いる</a></h2><p>v0.6.4 では、配列 <code>a</code> に対して <code>zeros(a)</code> というメソッドがあったが、廃止された。 v1.x では、代わりに <code>zero.(a)</code>　を用いる。</p><p>このメソッドは、<code>a</code> の要素と同じ要素の型で、<code>a</code> と同じ寸法の配列を作り、 要素の値を全て <code>0</code> にする命令である。</p><pre><code class="language-julia-repl">julia&gt; a=[1 2; 3 4]
 2×2 Array{Int64,2}:
  1  2
  3  4
@@ -203,8 +203,8 @@ julia&gt; zeros(a) # エラー
 ERROR: MethodError: no method matching zeros(::Array{Int64,2})
 Closest candidates are:
   zeros(!Matched::Union{Integer, AbstractUnitRange}...) at array.jl:448
-  zeros(!Matched::Type{T}, !Matched::Union{Integer, AbstractUnitRange}...) where T at array.jl:449
-  zeros(!Matched::Tuple{Vararg{Union{Integer, AbstractUnitRange},N} where N}) at array.jl:450
+  zeros(!Matched::Type{StaticArrays.SArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/SVector.jl:29
+  zeros(!Matched::Type{StaticArrays.MArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/MVector.jl:27
   ...
 
 julia&gt; zero(a)
@@ -221,8 +221,8 @@ julia&gt; zeros(a)
 ERROR: MethodError: no method matching zeros(::Array{Float64,2})
 Closest candidates are:
   zeros(!Matched::Union{Integer, AbstractUnitRange}...) at array.jl:448
-  zeros(!Matched::Type{T}, !Matched::Union{Integer, AbstractUnitRange}...) where T at array.jl:449
-  zeros(!Matched::Tuple{Vararg{Union{Integer, AbstractUnitRange},N} where N}) at array.jl:450
+  zeros(!Matched::Type{StaticArrays.SArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/SVector.jl:29
+  zeros(!Matched::Type{StaticArrays.MArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/MVector.jl:27
   ...</code></pre><h2><a class="nav-anchor" id="ones(a)-は廃止。one(a)を用いる-1" href="#ones(a)-は廃止。one(a)を用いる-1"><code>ones(a)</code> は廃止。<code>one(a)</code>を用いる</a></h2><p>v0.6.4 では、配列 <code>a</code> に対して <code>zeros(a)</code> というメソッドがあったが、廃止された。 v1.1 では、代わりに <code>zero(a)</code>　を用いる。</p><p>このメソッドは、<code>a</code> の要素と同じ要素の型で、<code>a</code> と同じ寸法の配列を作り、 要素の値を全て <code>1</code> にする命令である。</p><pre><code class="language-julia-repl">julia&gt; a=[1 2; 3 4]
 2×2 Array{Int64,2}:
  1  2
@@ -232,8 +232,8 @@ julia&gt; ones(a) # エラー
 ERROR: MethodError: no method matching ones(::Array{Int64,2})
 Closest candidates are:
   ones(!Matched::Union{Integer, AbstractUnitRange}...) at array.jl:448
-  ones(!Matched::Type{T}, !Matched::Union{Integer, AbstractUnitRange}...) where T at array.jl:449
-  ones(!Matched::Tuple{Vararg{Union{Integer, AbstractUnitRange},N} where N}) at array.jl:450
+  ones(!Matched::Type{StaticArrays.SArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/SVector.jl:30
+  ones(!Matched::Type{StaticArrays.MArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/MVector.jl:28
   ...
 
 julia&gt; one(a)
@@ -249,49 +249,21 @@ julia&gt; a *= 1.0
 julia&gt; one(a)
 2×2 Array{Float64,2}:
  1.0  0.0
- 0.0  1.0</code></pre><h2><a class="nav-anchor" id="realmax(t),-realmin(t)-は廃止。floatmax(t),-floatmin(t)-を用いる-1" href="#realmax(t),-realmin(t)-は廃止。floatmax(t),-floatmin(t)-を用いる-1"><code>realmax(t), realmin(t)</code> は廃止。<code>floatmax(t)</code>, <code>floatmin(t)</code> を用いる</a></h2><p>v0.6.4 の、型 <code>t</code> に対する関数 <code>realmax(a)</code>, <code>realmin</code> は廃止となった。 代わりに、 v0.6.4 の、型 <code>t</code> に対する関数 <code>floatmax(a)</code>, <code>floatmin</code> を用いる。</p><p>これらは各々、型 <code>t</code> で表される最大の数、最小の数を返す。</p><h2><a class="nav-anchor" id="PyPlot-パッケージでは-o.m-の形式が推奨される-1" href="#PyPlot-パッケージでは-o.m-の形式が推奨される-1"><code>PyPlot</code> パッケージでは <code>o.m</code> の形式が推奨される</a></h2><p>v0.6.4 では、PyPlot パッケージで <code>o[:s]</code>　の形で、 オブジェクト <code>o</code> のシンボル <code>s</code> を読むが、推奨されなくなった。 代わりに、<code>o.s</code> の形を使うことが推奨される。</p><ul><li><code>plt[:figure]</code> は <code>plt.figure</code> とする。</li><li><code>ax1[:plot]</code> は <code>ax1.plot</code> とする。</li></ul><pre><code class="language-julia-repl">julia&gt; using PyPlot
-
-julia&gt; fig=plt.figure()
-PyPlot.Figure(PyObject &lt;Figure size 640x480 with 0 Axes&gt;)
-
-julia&gt; ax1=fig.add_subplot(121)
-PyObject &lt;matplotlib.axes._subplots.AxesSubplot object at 0x13bc458d0&gt;
-
-julia&gt; ax1.plot([3,2,1])
-1-element Array{PyCall.PyObject,1}:
- PyObject &lt;matplotlib.lines.Line2D object at 0x13b874c88&gt;
-
-julia&gt; ax2=fig.add_subplot(122)
-PyObject &lt;matplotlib.axes._subplots.AxesSubplot object at 0x13b874dd8&gt;
-
-julia&gt; ax2.plot([2,3,1])
-1-element Array{PyCall.PyObject,1}:
- PyObject &lt;matplotlib.lines.Line2D object at 0x13b0cf588&gt;</code></pre><p>アスペクト比 (縦横の寸法の比) を等しくするのに、 <code>plt[:axes]()[:set_aspect](&quot;equal&quot;)</code> と書いていたが、 <code>plt.axes().set_aspect(&quot;equal&quot;)</code> とする。</p><pre><code class="language-julia-repl">julia&gt; using PyPlot
-
-julia&gt; plt.clf()
-
-julia&gt; xs=-1:0.1:1
--1.0:0.1:1.0
-
-julia&gt; ys=xs.^2;
-
-julia&gt; zs=xs.^3;
-
-julia&gt; plot(xs,ys);
-
-julia&gt; plot(xs,zs);
-
-julia&gt; plt.axes().set_aspect(&quot;equal&quot;)</code></pre><h2><a class="nav-anchor" id="linspaceは廃止。LinSpace-を用いる-1" href="#linspaceは廃止。LinSpace-を用いる-1"><code>linspace</code>は廃止。<code>LinSpace</code> を用いる</a></h2><p>v0.6.4で等差数列を作る <code>linspace</code> 関数は、v1.x で廃止された。</p><p>関数 <code>LinRange</code> または <code>range</code> を用いる。</p><p>v0.6.4 では</p><ul><li><code>linspace(a,b)</code> は、初項 <code>a</code>、最終項 <code>b</code>, 長さ 50 の等差数列を作る。</li><li><code>linspace(a,b,n)</code> は、初項 <code>a</code>、最終項 <code>b</code>, 長さ <code>n</code> の等差数列を作る。</li></ul><p>v1.1で、上の２つに対応するのは、関数 <code>LinRange(a,b,n)</code> である。 <code>LinRange</code> は３番目の引数を省略できない。</p><pre><code class="language-julia-repl">julia&gt; linspace(-1,1) # エラー
-ERROR: UndefVarError: linspace not defined
-
-julia&gt; LinRange(-1,1) # エラー
-ERROR: MethodError: no method matching LinRange(::Int64, ::Int64)
-Closest candidates are:
-  LinRange(::Any, ::Any, !Matched::Integer) at range.jl:385
-
-julia&gt; LinRange(-1,1,50)
-50-element LinRange{Float64}:
- -1.0,-0.959184,-0.918367,-0.877551,-0.836735,…,0.877551,0.918367,0.959184,1.0</code></pre><p>より柔軟に等差数列を作るには、<code>range</code> 関数を用いる。</p><p>関数 <code>range</code> は、引数として、初項を必ず指定する必要がある。 関数 <code>range</code> に、２つの数字を引数に指定すると、２つ目の引数は最終項である。 最終項目は キーワードパラメータ <code>stop</code> で指定することもできる。 さらに、キーワード引数として、数列の長さ <code>length</code>、等差 <code>step</code> を指定できる。 <code>step</code> の既定値は <code>1</code> である。</p><pre><code class="language-julia-repl">julia&gt; range(1,10) # エラー
+ 0.0  1.0</code></pre><h2><a class="nav-anchor" id="realmax(t),-realmin(t)-は廃止。floatmax(t),-floatmin(t)-を用いる-1" href="#realmax(t),-realmin(t)-は廃止。floatmax(t),-floatmin(t)-を用いる-1"><code>realmax(t), realmin(t)</code> は廃止。<code>floatmax(t)</code>, <code>floatmin(t)</code> を用いる</a></h2><p>v0.6.4 の、型 <code>t</code> に対する関数 <code>realmax(a)</code>, <code>realmin</code> は廃止となった。 代わりに、 v0.6.4 の、型 <code>t</code> に対する関数 <code>floatmax(a)</code>, <code>floatmin</code> を用いる。</p><p>これらは各々、型 <code>t</code> で表される最大の数、最小の数を返す。</p><h2><a class="nav-anchor" id="bits-は廃止。bitstringを用いる。-1" href="#bits-は廃止。bitstringを用いる。-1"><code>bits</code> は廃止。<code>bitstring</code>を用いる。</a></h2><h2><a class="nav-anchor" id="PyPlot-パッケージでは-o.m-の形式が推奨される-1" href="#PyPlot-パッケージでは-o.m-の形式が推奨される-1"><code>PyPlot</code> パッケージでは <code>o.m</code> の形式が推奨される</a></h2><p>v0.6.4 では、PyPlot パッケージで <code>o[:s]</code>　の形で、 オブジェクト <code>o</code> のシンボル <code>s</code> を読むが、推奨されなくなった。 代わりに、<code>o.s</code> の形を使うことが推奨される。</p><ul><li><code>plt[:figure]</code> は <code>plt.figure</code> とする。</li><li><code>ax1[:plot]</code> は <code>ax1.plot</code> とする。</li></ul><p>更に、グラフ描画パッケージ <code>PyPlot.jl</code> が依存する グラフィクス・ライブラリ Matplotlab の呼び出し形式が変更されたために、 修正が必要となる。</p><p>アスペクト比 (縦横の寸法の比) を等しくするのに、従来は、 <code>plt[:axes]()[:set_aspect](&quot;equal&quot;)</code> と書いていた。 現行は、<code>plt.subplots()</code> 関数を用いて、軸オブジェクト <code>ax</code> を取得してから、 <code>ax.set_aspect(&quot;equal&quot;)</code> とする。以下の例を見よ、</p><pre><code class="language-julia">using PyPlot
+fig, ax1 = plt.subplots()
+xs=-1:0.1:1
+ys=xs.^2;
+zs=xs.^3;
+ax1.plot(xs,ys)
+ax1.plot(xs,zs)
+ax1.set_aspect(&quot;equal&quot;)</code></pre><p><img src="../porting-plot2.svg" alt/></p><p>描画範囲を分割するに従来用いてきた <code>plt.add_subplot()</code> の形式は将来廃止される予定である。 現行では、<code>plt.subfigures()</code> 関数を用いて、描画前に分割する。</p><pre><code class="language-julia">using PyPlot
+# fig=plt.figure()
+# fig, axes = plt.subplots(nrows=1,ncols=2) # 縦に 1つ、横に 2つ
+fig, axes = plt.subplots(1,2)
+ax1=axes[1]
+ax1.plot([3,2,1])
+ax2=axes[2]
+ax2.plot([2,3,1])</code></pre><p><img src="../porting-plot1.svg" alt/></p><h2><a class="nav-anchor" id="linspaceは廃止。LinSpace-を用いる-1" href="#linspaceは廃止。LinSpace-を用いる-1"><code>linspace</code>は廃止。<code>LinSpace</code> を用いる</a></h2><p>v0.6.4 では</p><ul><li><code>linspace(a,b)</code> は、初項 <code>a</code>、最終項 <code>b</code>, 長さ 50 の等差数列を作る。</li><li><code>linspace(a,b,n)</code> は、初項 <code>a</code>、最終項 <code>b</code>, 長さ <code>n</code> の等差数列を作る。</li></ul><p><code>linspace</code> 関数は、v1.x で廃止された。</p><p>代わりに、関数 <code>range</code> を用いる。</p><p>関数 <code>range</code> は、引数として、初項を必ず指定する必要がある。 関数 <code>range</code> に、２つの数字を引数に指定すると、２つ目の引数は最終項である。 要素の数は、キーワード引数 <code>length</code> で指定する。 最終項目は、キーワード引数 <code>stop</code> で指定することもできる。 さらに、キーワード引数として、数列の長さ <code>length</code>、等差 <code>step</code> を指定できる。 <code>step</code> の既定値は <code>1</code> である。</p><pre><code class="language-julia-repl">julia&gt; range(1,10) # エラー
 ┌ Warning: `range(start, stop)` (with neither `length` nor `step` given) is deprecated, use `range(start, stop=stop)` instead.
 │   caller = top-level scope at none:0
 └ @ Core none:0
@@ -311,7 +283,7 @@ julia&gt; collect(ans)
  3
  5
  7
- 9</code></pre><p>なお、 最終項 <code>stop</code>と長さ <code>length</code> が指定され、等差 <code>step</code> が指定されない場合には、<code>step</code> は、計算される。 したがって、v0.6.4 の <code>linspace(-1,1)</code> に対応する、もう一つの書き方は <code>range(-1,1,length=50)</code>　である。</p><pre><code class="language-julia-repl">julia&gt; r1=LinRange(-1,1,50)
+ 9</code></pre><p>なお、 最終項 <code>stop</code>と長さ <code>length</code> が指定され、等差 <code>step</code> が指定されない場合には、<code>step</code> は、計算される。 したがって、v0.6.4 の <code>linspace(-1,1)</code> に対応する、 もう一つの書き方は　<code>range(-1,1,length=50)</code>　である。</p><pre><code class="language-julia-repl">julia&gt; r1=LinRange(-1,1,50)
 50-element LinRange{Float64}:
  -1.0,-0.959184,-0.918367,-0.877551,-0.836735,…,0.877551,0.918367,0.959184,1.0
 
@@ -352,4 +324,4 @@ ERROR: UndefVarError: srand not defined
 julia&gt; using Random # Random パッケージを読み込む
 
 julia&gt; Random.seed!(1234)
-Random.MersenneTwister(UInt32[0x000004d2], Random.DSFMT.DSFMT_state(Int32[-1393240018, 1073611148, 45497681, 1072875908, 436273599, 1073674613, -2043716458, 1073445557, -254908435, 1072827086  …  -599655111, 1073144102, 367655457, 1072985259, -1278750689, 1018350124, -597141475, 249849711, 382, 0]), [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0  …  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], UInt128[0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000  …  0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000], 1002, 0)</code></pre><footer><hr/><a class="previous" href="../ch15/"><span class="direction">Previous</span><span class="title">第15回：定期レポートへのコメント（その２）</span></a><a class="next" href="../"><span class="direction">Next</span><span class="title">toc</span></a></footer></article></body></html>
+Random.MersenneTwister(UInt32[0x000004d2], Random.DSFMT.DSFMT_state(Int32[-1393240018, 1073611148, 45497681, 1072875908, 436273599, 1073674613, -2043716458, 1073445557, -254908435, 1072827086  …  -599655111, 1073144102, 367655457, 1072985259, -1278750689, 1018350124, -597141475, 249849711, 382, 0]), [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0  …  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], UInt128[0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000  …  0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000], 1002, 0)</code></pre><footer><hr/><a class="previous" href="../ch15/"><span class="direction">Previous</span><span class="title">第15回：2018年度・定期レポートへのコメント（その２）</span></a><a class="next" href="../"><span class="direction">Next</span><span class="title">toc</span></a></footer></article></body></html>
