@@ -203,8 +203,8 @@ julia&gt; zeros(a) # エラー
 ERROR: MethodError: no method matching zeros(::Array{Int64,2})
 Closest candidates are:
   zeros(!Matched::Union{Integer, AbstractUnitRange}...) at array.jl:448
-  zeros(!Matched::Type{StaticArrays.SArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/SVector.jl:29
-  zeros(!Matched::Type{StaticArrays.MArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/MVector.jl:27
+  zeros(!Matched::Type{StaticArrays.SArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/DBECI/src/SVector.jl:29
+  zeros(!Matched::Type{StaticArrays.MArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/DBECI/src/MVector.jl:27
   ...
 
 julia&gt; zero(a)
@@ -221,8 +221,8 @@ julia&gt; zeros(a)
 ERROR: MethodError: no method matching zeros(::Array{Float64,2})
 Closest candidates are:
   zeros(!Matched::Union{Integer, AbstractUnitRange}...) at array.jl:448
-  zeros(!Matched::Type{StaticArrays.SArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/SVector.jl:29
-  zeros(!Matched::Type{StaticArrays.MArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/MVector.jl:27
+  zeros(!Matched::Type{StaticArrays.SArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/DBECI/src/SVector.jl:29
+  zeros(!Matched::Type{StaticArrays.MArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/DBECI/src/MVector.jl:27
   ...</code></pre><h2><a class="nav-anchor" id="ones(a)-は廃止。one(a)を用いる-1" href="#ones(a)-は廃止。one(a)を用いる-1"><code>ones(a)</code> は廃止。<code>one(a)</code>を用いる</a></h2><p>v0.6.4 では、配列 <code>a</code> に対して <code>zeros(a)</code> というメソッドがあったが、廃止された。 v1.1 では、代わりに <code>zero(a)</code>　を用いる。</p><p>このメソッドは、<code>a</code> の要素と同じ要素の型で、<code>a</code> と同じ寸法の配列を作り、 要素の値を全て <code>1</code> にする命令である。</p><pre><code class="language-julia-repl">julia&gt; a=[1 2; 3 4]
 2×2 Array{Int64,2}:
  1  2
@@ -232,8 +232,8 @@ julia&gt; ones(a) # エラー
 ERROR: MethodError: no method matching ones(::Array{Int64,2})
 Closest candidates are:
   ones(!Matched::Union{Integer, AbstractUnitRange}...) at array.jl:448
-  ones(!Matched::Type{StaticArrays.SArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/SVector.jl:30
-  ones(!Matched::Type{StaticArrays.MArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/3KEjZ/src/MVector.jl:28
+  ones(!Matched::Type{StaticArrays.SArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/DBECI/src/SVector.jl:30
+  ones(!Matched::Type{StaticArrays.MArray{Tuple{N},T,1,N} where T}) where N at /Users/hs/.julia/packages/StaticArrays/DBECI/src/MVector.jl:28
   ...
 
 julia&gt; one(a)
