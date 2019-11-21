@@ -86,7 +86,7 @@ plt.plot(xs, tand.(xs), label=&quot;tand&quot;)
 plt.plot(xs, cotd.(xs), label=&quot;cotd&quot;)
 plt.xlabel(&quot;degree&quot;)
 plt.ylim(-1e1, 1e1)
-plt.legend()</code></pre><p><img src="../ch04-tan2-plot.svg" alt/></p><h2><a class="nav-anchor" id="周期関数-1" href="#周期関数-1">▼ 周期関数</a></h2><div>\[f(t+T) = f(t)\]</div><p>上式のように、横軸を<span>$T$</span>だけ平行移動しても、 元の形に重なる関数を周期関数 (periodic function)という。 <span>$T$</span> は、周期 (period) と呼ばれる。</p><h2><a class="nav-anchor" id="周期関数を確認する-1" href="#周期関数を確認する-1">●▼ 周期関数を確認する</a></h2><p>ラジアン単位の正接関数 <code>tan</code> は、周期 <span>$\pi$</span>である。 平行移動して重なることを、図示してみよう。</p><p>比較の基準となる曲線は <code>fmt=&quot;bo&quot;</code> (blue, circle, 青い円) で描いた。</p><p>比較される曲線は <code>fmt=&quot;r.&quot;</code> (red, point, 赤い点) で描いた。</p><p>青い円の真ん中に、赤い点が描かれ、同じ位置にプロットされていることが分かる。</p><pre><code class="language-julia">using PyPlot
+plt.legend()</code></pre><p><img src="../ch04-tan2-plot.svg" alt/></p><h2><a class="nav-anchor" id="周期関数-1" href="#周期関数-1">▼ 周期関数</a></h2><div>\[f(t+T) = f(t)\]</div><p>上式のように、横軸を<span>$T$</span>だけ平行移動しても、 元の形に重なる関数を周期関数 (periodic function)という。 <span>$T$</span> は、周期 (period) と呼ばれる。</p><h2><a class="nav-anchor" id="周期関数を確認する-1" href="#周期関数を確認する-1">●▼ 周期関数を確認する</a></h2><p>ラジアン単位の正接関数 <code>tan</code> は、周期 <span>$2\pi$</span>である。 平行移動して重なることを、図示してみよう。</p><p>比較の基準となる曲線は <code>fmt=&quot;bo&quot;</code> (blue, circle, 青い円) で描いた。</p><p>比較される曲線は <code>fmt=&quot;r.&quot;</code> (red, point, 赤い点) で描いた。</p><p>青い円の真ん中に、赤い点が描かれ、同じ位置にプロットされていることが分かる。</p><pre><code class="language-julia">using PyPlot
 xs=-2pi:pi/18:2pi
 plt.plot(xs, tan.(xs),      &quot;bo&quot;, label=&quot;tan&quot;)
 plt.plot(xs, tan.(xs .+ 2*pi), &quot;r.&quot;, label=&quot;tan, shifted by 2pi&quot;)
