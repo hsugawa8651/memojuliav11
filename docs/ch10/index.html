@@ -439,8 +439,13 @@ julia&gt; one.(a)
 3×4 Array{Int64,2}:
  1  1  1  1
  1  1  1  1
- 1  1  1  1</code></pre><h3><a class="nav-anchor" id="対角要素を指定して、正方行列をつくる-1" href="#対角要素を指定して、正方行列をつくる-1">■ 対角要素を指定して、正方行列をつくる</a></h3><pre><code class="language-julia-repl">julia&gt; diagm([1,2,3])
-ERROR: UndefVarError: diagm not defined</code></pre><h3><a class="nav-anchor" id="疑似乱数を要素とする行列を作る-1" href="#疑似乱数を要素とする行列を作る-1">■ 疑似乱数を要素とする行列を作る</a></h3><pre><code class="language-julia-repl">julia&gt; rand(3,3)
+ 1  1  1  1</code></pre><h3><a class="nav-anchor" id="対角要素を指定して、正方行列をつくる-1" href="#対角要素を指定して、正方行列をつくる-1">■ 対角要素を指定して、正方行列をつくる</a></h3><pre><code class="language-julia-repl">julia&gt; using LinearAlgebra
+
+julia&gt; Diagonal([1,2,3])
+3×3 LinearAlgebra.Diagonal{Int64,Array{Int64,1}}:
+ 1  ⋅  ⋅
+ ⋅  2  ⋅
+ ⋅  ⋅  3</code></pre><h3><a class="nav-anchor" id="疑似乱数を要素とする行列を作る-1" href="#疑似乱数を要素とする行列を作る-1">■ 疑似乱数を要素とする行列を作る</a></h3><pre><code class="language-julia-repl">julia&gt; rand(3,3)
 3×3 Array{Float64,2}:
  0.543012  0.694242  0.624157
  0.516897  0.811704  0.554505
@@ -546,7 +551,7 @@ julia&gt; a\b
 
 julia&gt; # 行列式
        det(a)
-ERROR: UndefVarError: det not defined
+-1.0
 
 julia&gt; # 逆行列
        inv(a)
@@ -574,7 +579,7 @@ end</code></pre><p><img src="../ch10-rot7-plot.svg" alt/></p><p>行列式が 0 �
  2  4
 
 julia&gt; det(a)
-ERROR: UndefVarError: det not defined
+0.0
 
 julia&gt; v=[1, 1]
 2-element Array{Int64,1}:
