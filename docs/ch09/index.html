@@ -245,16 +245,11 @@ julia&gt; primes(100)
  79
  83
  89
- 97</code></pre><h2 id="常微分方程式の初期値問題-1"><a class="docs-heading-anchor" href="#常微分方程式の初期値問題-1">▶ 常微分方程式の初期値問題</a><a class="docs-heading-anchor-permalink" href="#常微分方程式の初期値問題-1" title="Permalink"></a></h2><h3 id="常微分方程式の初期値問題:Euler法-1"><a class="docs-heading-anchor" href="#常微分方程式の初期値問題:Euler法-1">▶ 常微分方程式の初期値問題:Euler法</a><a class="docs-heading-anchor-permalink" href="#常微分方程式の初期値問題:Euler法-1" title="Permalink"></a></h3><p>問題</p><div>\[\begin{align*}
-\dfrac{dx}{dt} &amp; = 1-x^2, \\
-x(0) &amp; = 0, \\
-&amp; 0 \leq t \leq 1.6
-\end{align*}\]</div><p>Euler 法による数値解法。</p><p>ただし、<span>$t_1, t_2, \ldots$</span> は、一定間隔 <span>$h$</span> とする。</p><div>\[\begin{align*}
-\dfrac{dx}{dt} &amp; =f(x,t), \\
-t &amp; = t_1, t_2, \ldots \\
-\dfrac{x_{n+1}-x_{n}}{h} &amp; = f(x_n,t_n) \\
-x_{n+1} &amp; = x_{n} + h f(x_n,t)
-\end{align*}\]</div><h4 id="まずは解いてみる-1"><a class="docs-heading-anchor" href="#まずは解いてみる-1">まずは解いてみる</a><a class="docs-heading-anchor-permalink" href="#まずは解いてみる-1" title="Permalink"></a></h4><pre><code class="language-julia">f(x,t)=1-x^2
+ 97</code></pre><h2 id="常微分方程式の初期値問題-1"><a class="docs-heading-anchor" href="#常微分方程式の初期値問題-1">▶ 常微分方程式の初期値問題</a><a class="docs-heading-anchor-permalink" href="#常微分方程式の初期値問題-1" title="Permalink"></a></h2><h3 id="常微分方程式の初期値問題:Euler法-1"><a class="docs-heading-anchor" href="#常微分方程式の初期値問題:Euler法-1">▶ 常微分方程式の初期値問題:Euler法</a><a class="docs-heading-anchor-permalink" href="#常微分方程式の初期値問題:Euler法-1" title="Permalink"></a></h3><p>問題</p><div>\[\dfrac{dx}{dt} = 1-x^2, \\
+x(0) = 0, \\
+ 0 \leq t \leq 1.6\]</div><p>Euler 法による数値解法。</p><div>\[\dfrac{dx}{dt} =f(x,t),\]</div><div>\[t_1, t_2, \ldots\]</div><p>を一定間隔 <span>$h$</span> とする。 上の式を、以下のように離散化する。</p><div>\[t = t_1, t_2, \ldots \\
+\dfrac{x_{n+1}-x_{n}}{h} = f(x_n,t_n) \\
+x_{n+1} = x_{n} + h f(x_n,t)\]</div><h4 id="まずは解いてみる-1"><a class="docs-heading-anchor" href="#まずは解いてみる-1">まずは解いてみる</a><a class="docs-heading-anchor-permalink" href="#まずは解いてみる-1" title="Permalink"></a></h4><pre><code class="language-julia">f(x,t)=1-x^2
 #
 tmin=0
 tmax=1.6
@@ -364,13 +359,10 @@ plt.ylim(1e-4,1e-1)</code></pre><pre><code class="language-none">(h, e) = (0.4, 
 (h, e) = (0.2, 0.00931239766406314)
 (h, e) = (0.1, 0.0033516722128539393)
 (h, e) = (0.05, 0.0011971170296258557)
-(h, e) = (0.025, 0.00042554173573778107)</code></pre><p><img src="../ch09-euler4-plot.svg" alt/></p><h3 id="常微分方程式の初期値問題:修正Euler法-1"><a class="docs-heading-anchor" href="#常微分方程式の初期値問題:修正Euler法-1">▶ 常微分方程式の初期値問題:修正Euler法</a><a class="docs-heading-anchor-permalink" href="#常微分方程式の初期値問題:修正Euler法-1" title="Permalink"></a></h3><p>修正Euler 法</p><div>\[\begin{align*}
-\dfrac{dx}{dt} &amp; =f(x,t), \\
-f_{n} &amp; = f(x_{n}, t_{n}), \\
-\overline{x}_{n+1} &amp; = x_{n} + h f(x_n,t), \\
-\overline{f}_{n+1} &amp; = f(\overline{x}_{n+1}, t_{n+1}) \\
-x_{n+1} &amp; = x_{n} + \dfrac{h}{2} \left(f_{n} + \overline{f}_{n+1}\right)
-\end{align*}\]</div><h4 id="解いてみる-1"><a class="docs-heading-anchor" href="#解いてみる-1">解いてみる</a><a class="docs-heading-anchor-permalink" href="#解いてみる-1" title="Permalink"></a></h4><pre><code class="language-julia">#
+(h, e) = (0.025, 0.00042554173573778107)</code></pre><p><img src="../ch09-euler4-plot.svg" alt/></p><h3 id="常微分方程式の初期値問題:修正Euler法-1"><a class="docs-heading-anchor" href="#常微分方程式の初期値問題:修正Euler法-1">▶ 常微分方程式の初期値問題:修正Euler法</a><a class="docs-heading-anchor-permalink" href="#常微分方程式の初期値問題:修正Euler法-1" title="Permalink"></a></h3><p>修正Euler 法</p><div>\[\dfrac{dx}{dt} =f(x,t), \\
+f_{n} = f(x_{n}, t_{n})\]</div><p>上の式を、次のように離散化する。</p><div>\[\overline{x}_{n+1} = x_{n} + h f(x_n,t), \\
+\overline{f}_{n+1} = f(\overline{x}_{n+1}, t_{n+1}) \\
+x_{n+1} = x_{n} + \dfrac{h}{2} \left(f_{n} + \overline{f}_{n+1}\right)\]</div><h4 id="解いてみる-1"><a class="docs-heading-anchor" href="#解いてみる-1">解いてみる</a><a class="docs-heading-anchor-permalink" href="#解いてみる-1" title="Permalink"></a></h4><pre><code class="language-julia">#
 tmin=0
 tmax=1.6
 h=0.4
@@ -470,8 +462,6 @@ plt.xlim(1e-2,1)
 plt.ylim(1e-5,1e-1)</code></pre><pre><code class="language-none">(h, e) = (0.4, 0.009617170659253816)
 (h, e) = (0.2, 0.0014834495065850586)
 (h, e) = (0.1, 0.0002473556951669918)
-(h, e) = (0.05, 4.2568795767175844e-5)</code></pre><p><img src="../ch09-meuler4-plot.svg" alt/></p><h3 id="練習：常微分方程式の数値解の誤差-1"><a class="docs-heading-anchor" href="#練習：常微分方程式の数値解の誤差-1">◀● 練習：常微分方程式の数値解の誤差</a><a class="docs-heading-anchor-permalink" href="#練習：常微分方程式の数値解の誤差-1" title="Permalink"></a></h3><p>上の常微分方程式の数値解法の例について、 Euler法による絶対誤差と、修正Euler法による絶対誤差を、 刻み幅 <span>$h$</span> に対する関数として、一つのグラフの上に表せ。</p><p>結果は、例えば、以下のようになろう。</p><p><img src="../ch09-meuler6-plot.svg" alt/></p><h3 id="練習：-条件が成り立つまで繰り返す：微分方程式の初期値問題-1"><a class="docs-heading-anchor" href="#練習：-条件が成り立つまで繰り返す：微分方程式の初期値問題-1">◀● 練習： 条件が成り立つまで繰り返す：微分方程式の初期値問題</a><a class="docs-heading-anchor-permalink" href="#練習：-条件が成り立つまで繰り返す：微分方程式の初期値問題-1" title="Permalink"></a></h3><p>(少し難しいので、後回しにしてもよい)</p><p>Euler法ないし修正Euler法による微分方程式の数値解法を、 刻み幅 <span>$h$</span> を半分にしながら 20回繰り返せ。 ただし、絶対誤差が <span>$10^{-4}$</span> 以下になったら、そこで終了せよ。</p><h3 id="練習：常微分方程式・素性の悪い問題-1"><a class="docs-heading-anchor" href="#練習：常微分方程式・素性の悪い問題-1">◀● 練習：常微分方程式・素性の悪い問題</a><a class="docs-heading-anchor-permalink" href="#練習：常微分方程式・素性の悪い問題-1" title="Permalink"></a></h3><div>\[\begin{align*}
-\dfrac{dx}{dt} &amp; = x^2, \\
-x(0) &amp; = \dfrac{1}{2}, \\
-&amp; 0 \le t &lt; 2
-\end{align*}\]</div><p>解析解は、</p><div>\[x = \dfrac{1}{2-t}\]</div><p>となり、<span>$t \longrightarrow 0$</span> で無限大に発散する「素性の悪い」方程式である。</p><h2 id="今回のまとめ-1"><a class="docs-heading-anchor" href="#今回のまとめ-1">★ 今回のまとめ</a><a class="docs-heading-anchor-permalink" href="#今回のまとめ-1" title="Permalink"></a></h2><ul><li>ベクトルを引数とする関数</li><li>複数の数を引数とする関数</li><li>splatting演算子</li><li>ベクトル要素への代入</li><li>エラトステネスの篩：素数を算出する</li><li>微分方程式の初期値問題、Euler法、修正Euler法</li></ul></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../ch08/">« 第8回： ▼ 総和・数値積分</a><a class="docs-footer-nextpage" href="../ch10/">第10回：行列・線形代数 »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Wednesday 18 December 2019 13:40">Wednesday 18 December 2019</span>. Using Julia version 1.1.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+(h, e) = (0.05, 4.2568795767175844e-5)</code></pre><p><img src="../ch09-meuler4-plot.svg" alt/></p><h3 id="練習：常微分方程式の数値解の誤差-1"><a class="docs-heading-anchor" href="#練習：常微分方程式の数値解の誤差-1">◀● 練習：常微分方程式の数値解の誤差</a><a class="docs-heading-anchor-permalink" href="#練習：常微分方程式の数値解の誤差-1" title="Permalink"></a></h3><p>上の常微分方程式の数値解法の例について、 Euler法による絶対誤差と、修正Euler法による絶対誤差を、 刻み幅 <span>$h$</span> に対する関数として、一つのグラフの上に表せ。</p><p>結果は、例えば、以下のようになろう。</p><p><img src="../ch09-meuler6-plot.svg" alt/></p><h3 id="練習：-条件が成り立つまで繰り返す：微分方程式の初期値問題-1"><a class="docs-heading-anchor" href="#練習：-条件が成り立つまで繰り返す：微分方程式の初期値問題-1">◀● 練習： 条件が成り立つまで繰り返す：微分方程式の初期値問題</a><a class="docs-heading-anchor-permalink" href="#練習：-条件が成り立つまで繰り返す：微分方程式の初期値問題-1" title="Permalink"></a></h3><p>(少し難しいので、後回しにしてもよい)</p><p>Euler法ないし修正Euler法による微分方程式の数値解法を、 刻み幅 <span>$h$</span> を半分にしながら 20回繰り返せ。 ただし、絶対誤差が <span>$10^{-4}$</span> 以下になったら、そこで終了せよ。</p><h3 id="練習：常微分方程式・素性の悪い問題-1"><a class="docs-heading-anchor" href="#練習：常微分方程式・素性の悪い問題-1">◀● 練習：常微分方程式・素性の悪い問題</a><a class="docs-heading-anchor-permalink" href="#練習：常微分方程式・素性の悪い問題-1" title="Permalink"></a></h3><div>\[\dfrac{dx}{dt} = x^2, \\
+x(0)  = \dfrac{1}{2}, \\
+ 0 \le t &lt; 2\]</div><p>解析解は、</p><div>\[x = \dfrac{1}{2-t}\]</div><p>となり、<span>$t \longrightarrow 0$</span> で無限大に発散する「素性の悪い」方程式である。</p><h2 id="今回のまとめ-1"><a class="docs-heading-anchor" href="#今回のまとめ-1">★ 今回のまとめ</a><a class="docs-heading-anchor-permalink" href="#今回のまとめ-1" title="Permalink"></a></h2><ul><li>ベクトルを引数とする関数</li><li>複数の数を引数とする関数</li><li>splatting演算子</li><li>ベクトル要素への代入</li><li>エラトステネスの篩：素数を算出する</li><li>微分方程式の初期値問題、Euler法、修正Euler法</li></ul></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../ch08/">« 第8回： ▼ 総和・数値積分</a><a class="docs-footer-nextpage" href="../ch10/">第10回：行列・線形代数 »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Wednesday 18 December 2019 15:35">Wednesday 18 December 2019</span>. Using Julia version 1.1.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
