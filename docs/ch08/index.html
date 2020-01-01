@@ -276,12 +276,12 @@ julia&gt; [ x^2 for x in -10:2:10 if rem(x,3) != 2 ]
    0
   16
   36
- 100</code></pre><h2 id="フーリエ級数の和-1"><a class="docs-heading-anchor" href="#フーリエ級数の和-1">フーリエ級数の和</a><a class="docs-heading-anchor-permalink" href="#フーリエ級数の和-1" title="Permalink"></a></h2><h3 id="フーリエ級数の和（繰り返しで加算)-1"><a class="docs-heading-anchor" href="#フーリエ級数の和（繰り返しで加算)-1">▼ フーリエ級数の和（繰り返しで加算)</a><a class="docs-heading-anchor-permalink" href="#フーリエ級数の和（繰り返しで加算)-1" title="Permalink"></a></h3><p>周期波形 <span>$f(t+T) = f(t)$</span> は、 以下のように、三角関数の級数和として表される。 ここで、<span>$a_0, a_1, \cdots$</span>, <span>$b_1, b_2, \cdots$</span> は実数の定数である。 これを、実フーリエ級数和という。</p><div>\[\begin{align*}
-f(t) &amp; = a_0 \\
-&amp; + a_1 \cos \omega{t}  + b_1 \sin \omega{t} \\
-&amp; + a_2 \cos 2\omega{t} + b_2 \sin 2\omega{t} \\
-&amp; + a_3 \cos 3\omega{t} + b_3 \sin 3\omega{t} + \cdots
-\end{align*}\]</div><p>ここで <span>$\omega$</span> は基本周波数である。</p><div>\[\omega=\dfrac{2\pi}{T}\]</div><p>以下の例では、既に知られているフーリエ級数和から、元の関数が近似される様子を観察するのに留める。</p><h3 id="方形波：フーリエ級数の有限和-1"><a class="docs-heading-anchor" href="#方形波：フーリエ級数の有限和-1">▼ 方形波：フーリエ級数の有限和</a><a class="docs-heading-anchor-permalink" href="#方形波：フーリエ級数の有限和-1" title="Permalink"></a></h3><p>方形波は、 <a href="../ch04/#方形波を描く-1">▶ 方形波を描く</a> で紹介した。</p><p>基本周波数 <span>$\omega=1$</span>、数 <span>$-1$</span>と<span>$1$</span>とを往復する方形波を描こう。</p><pre><code class="language-julia">using PyPlot
+ 100</code></pre><h2 id="フーリエ級数の和-1"><a class="docs-heading-anchor" href="#フーリエ級数の和-1">フーリエ級数の和</a><a class="docs-heading-anchor-permalink" href="#フーリエ級数の和-1" title="Permalink"></a></h2><h3 id="フーリエ級数の和（繰り返しで加算)-1"><a class="docs-heading-anchor" href="#フーリエ級数の和（繰り返しで加算)-1">▼ フーリエ級数の和（繰り返しで加算)</a><a class="docs-heading-anchor-permalink" href="#フーリエ級数の和（繰り返しで加算)-1" title="Permalink"></a></h3><p>周期波形 <span>$f(t+T) = f(t)$</span> は、 以下のように、三角関数の級数和として表される。 ここで、<span>$a_0, a_1, \cdots$</span>, <span>$b_1, b_2, \cdots$</span> は実数の定数である。 これを、実フーリエ級数和という。</p>\begin{align*}
+f(t) & = a_0 \\
+& + a_1 \cos \omega{t}  + b_1 \sin \omega{t} \\
+& + a_2 \cos 2\omega{t} + b_2 \sin 2\omega{t} \\
+& + a_3 \cos 3\omega{t} + b_3 \sin 3\omega{t} + \cdots
+\end{align*}<p>ここで <span>$\omega$</span> は基本周波数である。</p><div>\[\omega=\dfrac{2\pi}{T}\]</div><p>以下の例では、既に知られているフーリエ級数和から、元の関数が近似される様子を観察するのに留める。</p><h3 id="方形波：フーリエ級数の有限和-1"><a class="docs-heading-anchor" href="#方形波：フーリエ級数の有限和-1">▼ 方形波：フーリエ級数の有限和</a><a class="docs-heading-anchor-permalink" href="#方形波：フーリエ級数の有限和-1" title="Permalink"></a></h3><p>方形波は、 <a href="../ch04/#方形波を描く-1">▶ 方形波を描く</a> で紹介した。</p><p>基本周波数 <span>$\omega=1$</span>、数 <span>$-1$</span>と<span>$1$</span>とを往復する方形波を描こう。</p><pre><code class="language-julia">using PyPlot
 ts=-3pi:pi/36:3pi
 plt.plot(ts, sign.(sin.(ts)) )
 plt.yticks( [-1,0,1], [ &quot;-1&quot;, &quot;0&quot;, &quot;1&quot;])
@@ -317,7 +317,7 @@ plt.axes().set_aspect(&quot;equal&quot;)
 ts=-3.5pi:pi/6:3.5pi
 plt.plot(ts, triangular.(ts) )
 plt.xlim(-pi*2.5,pi*2.5)
-plt.ylim(-pi*0.1,pi*1.1)</code></pre><p><img src="../ch08_fo_tri1-plot.svg" alt/></p><p>上の三角波のフーリエ級数展開は、以下の通りである。</p><div>\[f(t) = \dfrac{\pi}{2} - \dfrac{4}{\pi}\left\{ \cos t + \dfrac{\cos 3t}{3^2} + \dfrac{\cos 5t}{5^2} + \cdots\right\}\]</div><pre><code class="language-julia">using PyPlot
+plt.ylim(-pi*0.1,pi*1.1)</code></pre><p><img src="../ch08_fo_tri1-plot.svg" alt/></p><p>上の三角波のフーリエ級数展開は、以下の通りである。</p>f(t) = \dfrac{\pi}{2} - \dfrac{4}{\pi}\left\{ \cos t + \dfrac{\cos 3t}{3^2} + \dfrac{\cos 5t}{5^2} + \cdots\right\}<pre><code class="language-julia">using PyPlot
 plt.axes().set_aspect(&quot;equal&quot;)
 ts=-3.5pi:pi/6:3.5pi
 ys=one.(ts)*(pi/2)
@@ -532,14 +532,14 @@ end
 plt.xlabel(&quot;n&quot;)
 plt.ylabel(&quot;relative error (absolute value)&quot;)
 plt.xscale(&quot;log&quot;)
-plt.yscale(&quot;log&quot;)</code></pre><p><img src="../ch08-tra3-plot.svg" alt/></p><h3 id="練習：Riemann和・台形則-1"><a class="docs-heading-anchor" href="#練習：Riemann和・台形則-1">◀ 練習：Riemann和・台形則</a><a class="docs-heading-anchor-permalink" href="#練習：Riemann和・台形則-1" title="Permalink"></a></h3><p>以下の定積分の近似値を、Riemann和と台形則でそれぞれ評価してみよ。 (注記されていない)定積分の理論値は各自計算せよ。</p><div>\[\begin{gather*}
+plt.yscale(&quot;log&quot;)</code></pre><p><img src="../ch08-tra3-plot.svg" alt/></p><h3 id="練習：Riemann和・台形則-1"><a class="docs-heading-anchor" href="#練習：Riemann和・台形則-1">◀ 練習：Riemann和・台形則</a><a class="docs-heading-anchor-permalink" href="#練習：Riemann和・台形則-1" title="Permalink"></a></h3><p>以下の定積分の近似値を、Riemann和と台形則でそれぞれ評価してみよ。 (注記されていない)定積分の理論値は各自計算せよ。</p>\begin{gather*}
 \int^{1}_{0} 3x^2\;dx\;, \\
 \int^{1}_{0} 3 \left(x+1 \right)^2\;dx\;, \\
 \int^{1}_{0} \exp{x}\;dx\;, \\
 \int^{2}_{0} \dfrac{1}{(1+x)^2}\;dx\;=\dfrac{2}{3}, \\
 \int^{\pi}_{0} \sin{x}\;dx\;, \\
 \int^{1}_{-1} \dfrac{2}{1+x^2}\;dx = \pi
-\end{gather*}\]</div><h2 id="繰返し内部からの脱出-1"><a class="docs-heading-anchor" href="#繰返し内部からの脱出-1">■ 繰返し内部からの脱出</a><a class="docs-heading-anchor-permalink" href="#繰返し内部からの脱出-1" title="Permalink"></a></h2><ul><li><a href="https://docs.julialang.org/en/v0.6/manual/control-flow/#man-loops-1">Repeated Evaluation: Loops</a></li></ul><p><code>for</code>文の繰り返し (<code>for</code>ブロック)の内部で、<code>break</code> 文を使うと、現在繰り返し中のループから直ちに抜けることができる。</p><pre><code class="language-julia-repl">julia&gt; for i = 1:1000
+\end{gather*}<h2 id="繰返し内部からの脱出-1"><a class="docs-heading-anchor" href="#繰返し内部からの脱出-1">■ 繰返し内部からの脱出</a><a class="docs-heading-anchor-permalink" href="#繰返し内部からの脱出-1" title="Permalink"></a></h2><ul><li><a href="https://docs.julialang.org/en/v0.6/manual/control-flow/#man-loops-1">Repeated Evaluation: Loops</a></li></ul><p><code>for</code>文の繰り返し (<code>for</code>ブロック)の内部で、<code>break</code> 文を使うと、現在繰り返し中のループから直ちに抜けることができる。</p><pre><code class="language-julia-repl">julia&gt; for i = 1:1000
          println(i)
          if i &gt;= 5
            break
@@ -587,4 +587,4 @@ i=3 j=1</code></pre><p><code>for</code>ブロックの内部で、<code>continue
        end
 3
 6
-9</code></pre><h2 id="練習：-条件が成り立つまで繰り返す：数値積分-1"><a class="docs-heading-anchor" href="#練習：-条件が成り立つまで繰り返す：数値積分-1">◀● 練習： 条件が成り立つまで繰り返す：数値積分</a><a class="docs-heading-anchor-permalink" href="#練習：-条件が成り立つまで繰り返す：数値積分-1" title="Permalink"></a></h2><p>(少し難しいので、後回しにしてもよい)</p><p>分割数 <span>$n$</span>を <span>$2^{20}$</span>まで、2の冪乗で増やしていけ、 ただし、相対誤差が <span>$10^{-4}$</span> 以下になったら、そこで終了せよ。</p><p><a href="#Riemann和（関数-sumを用いる)-1">▼ Riemann和（関数 sumを用いる)</a> 、または、 <a href="#台形則（関数-sumを用いる)-1">▼ 台形則（関数 sumを用いる)</a> の、どちらを用いてもよい。</p><h2 id="今回のまとめ-1"><a class="docs-heading-anchor" href="#今回のまとめ-1">今回のまとめ</a><a class="docs-heading-anchor-permalink" href="#今回のまとめ-1" title="Permalink"></a></h2><ul><li>ベクトルのインデックス</li><li>要素が <code>0</code>または<code>1</code>のベクトルの生成</li><li>ベクトルの総和 <code>sum</code></li><li>級数和</li><li>フーリエ級数の和</li><li>数値積分：Riemann和</li><li>数値積分：台形則</li><li>繰返し内部からの脱出</li></ul></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../ch07/">« 第7回：■ 浮動小数点数</a><a class="docs-footer-nextpage" href="../ch09/">第9回： ■ 配列要素の操作／▶常微分方程式の数値解法 »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Wednesday 1 January 2020 14:22">Wednesday 1 January 2020</span>. Using Julia version 1.1.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+9</code></pre><h2 id="練習：-条件が成り立つまで繰り返す：数値積分-1"><a class="docs-heading-anchor" href="#練習：-条件が成り立つまで繰り返す：数値積分-1">◀● 練習： 条件が成り立つまで繰り返す：数値積分</a><a class="docs-heading-anchor-permalink" href="#練習：-条件が成り立つまで繰り返す：数値積分-1" title="Permalink"></a></h2><p>(少し難しいので、後回しにしてもよい)</p><p>分割数 <span>$n$</span>を <span>$2^{20}$</span>まで、2の冪乗で増やしていけ、 ただし、相対誤差が <span>$10^{-4}$</span> 以下になったら、そこで終了せよ。</p><p><a href="#Riemann和（関数-sumを用いる)-1">▼ Riemann和（関数 sumを用いる)</a> 、または、 <a href="#台形則（関数-sumを用いる)-1">▼ 台形則（関数 sumを用いる)</a> の、どちらを用いてもよい。</p><h2 id="今回のまとめ-1"><a class="docs-heading-anchor" href="#今回のまとめ-1">今回のまとめ</a><a class="docs-heading-anchor-permalink" href="#今回のまとめ-1" title="Permalink"></a></h2><ul><li>ベクトルのインデックス</li><li>要素が <code>0</code>または<code>1</code>のベクトルの生成</li><li>ベクトルの総和 <code>sum</code></li><li>級数和</li><li>フーリエ級数の和</li><li>数値積分：Riemann和</li><li>数値積分：台形則</li><li>繰返し内部からの脱出</li></ul></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../ch07/">« 第7回：■ 浮動小数点数</a><a class="docs-footer-nextpage" href="../ch09/">第9回： ■ 配列要素の操作／▶常微分方程式の数値解法 »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Wednesday 1 January 2020 15:10">Wednesday 1 January 2020</span>. Using Julia version 1.1.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
