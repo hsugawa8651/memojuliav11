@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>第5回：■ 条件式・■ 条件分岐 · Memorandum on Julia Language v1.1</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit">Memorandum on Julia Language v1.1</span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../LICENSE/">MIT License</a></li><li><a class="tocitem" href="../LICENSEja/">MIT License 参考和訳</a></li><li><a class="tocitem" href="../ch00/">はじめに</a></li><li><a class="tocitem" href="../ch01/">第1回：▼ 簡単なグラフを描く</a></li><li><a class="tocitem" href="../ch02/">第2回：▼ 複数のグラフを描く</a></li><li><a class="tocitem" href="../ch03/">第3回：▼ 連続な曲線を描く</a></li><li><a class="tocitem" href="../ch04/">第4回：▼ 不連続な曲線を描く</a></li><li class="is-active"><a class="tocitem" href>第5回：■ 条件式・■ 条件分岐</a><ul class="internal"><li><a class="tocitem" href="#数の大小比較-1"><span>■ 数の大小比較</span></a></li><li><a class="tocitem" href="#論理型-1"><span>■ 論理型</span></a></li><li><a class="tocitem" href="#if文-1"><span>■ if文</span></a></li><li><a class="tocitem" href="#if式-1"><span>■ if式</span></a></li><li><a class="tocitem" href="#3項演算子-1"><span>■ 3項演算子</span></a></li><li><a class="tocitem" href="#論理演算-1"><span>■ 論理演算</span></a></li><li><a class="tocitem" href="#短絡評価-1"><span>■ 短絡評価</span></a></li><li><a class="tocitem" href="#数の大小比較の連続した記述-1"><span>■ 数の大小比較の連続した記述</span></a></li><li><a class="tocitem" href="#総当たりによる不定方程式の解法-1"><span>▼ 総当たりによる不定方程式の解法</span></a></li><li><a class="tocitem" href="#練習：総当たりによる不定方程式の解法-1"><span>▲ 練習：総当たりによる不定方程式の解法</span></a></li><li><a class="tocitem" href="#格子点による平面領域の塗り分け-1"><span>▼ 格子点による平面領域の塗り分け</span></a></li><li><a class="tocitem" href="#練習-1"><span>▲ 練習</span></a></li><li><a class="tocitem" href="#練習-2"><span>▲ 練習</span></a></li><li><a class="tocitem" href="#擬似乱数-1"><span>■ 擬似乱数</span></a></li><li><a class="tocitem" href="#乱数による平面領域の塗り分け-1"><span>▼ 乱数による平面領域の塗り分け</span></a></li><li><a class="tocitem" href="#モンテカルロ法による平面図形の面積の推定-1"><span>▼ モンテカルロ法による平面図形の面積の推定</span></a></li><li><a class="tocitem" href="#練習-3"><span>▲ 練習</span></a></li><li><a class="tocitem" href="#モンテカルロ法による平面図形の面積の推定：落とす点の範囲を変える-1"><span>●▼ モンテカルロ法による平面図形の面積の推定：落とす点の範囲を変える</span></a></li><li><a class="tocitem" href="#関数の定義-(代入文形式)-1"><span>■ 関数の定義 (代入文形式)</span></a></li><li><a class="tocitem" href="#「はさみうち」法による、方程式の求解-1"><span>▼ 「はさみうち」法による、方程式の求解</span></a></li><li><a class="tocitem" href="#練習-4"><span>▲ 練習</span></a></li><li><a class="tocitem" href="#NLsolveパッケージの紹介-1"><span>●▲ NLsolveパッケージの紹介</span></a></li><li><a class="tocitem" href="#今回のまとめ-1"><span>★ 今回のまとめ</span></a></li></ul></li><li><a class="tocitem" href="../ch06/">第6回：■ 整数</a></li><li><a class="tocitem" href="../ch07/">第7回：■ 浮動小数点数</a></li><li><a class="tocitem" href="../ch08/">第8回： ▼ 総和・数値積分</a></li><li><a class="tocitem" href="../ch09/">第9回： ■ 配列要素の操作／▶常微分方程式の数値解法</a></li><li><a class="tocitem" href="../ch10/">第10回：行列・線形代数</a></li><li><a class="tocitem" href="../ch11/">第11回：ファイル入出力</a></li><li><a class="tocitem" href="../ch12/">第12回：関数の定義と呼び出し</a></li><li><a class="tocitem" href="../ch13/">第13回：複素数</a></li><li><a class="tocitem" href="../ch0a/">付録A：2018年度・定期レポートへのコメント（その1）</a></li><li><a class="tocitem" href="../ch0b/">付録B：2018年度・定期レポートへのコメント（その２）</a></li><li><a class="tocitem" href="../porting/">Julia 0.6 から 1.x への移植</a></li><li><a class="tocitem" href="../">Table of contents</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>第5回：■ 条件式・■ 条件分岐</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>第5回：■ 条件式・■ 条件分岐</a></li></ul></nav><div class="docs-right"><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="ch05-1"><a class="docs-heading-anchor" href="#ch05-1">第5回：■ 条件式・■ 条件分岐</a><a class="docs-heading-anchor-permalink" href="#ch05-1" title="Permalink"></a></h1><h2 id="数の大小比較-1"><a class="docs-heading-anchor" href="#数の大小比較-1">■ 数の大小比較</a><a class="docs-heading-anchor-permalink" href="#数の大小比較-1" title="Permalink"></a></h2><p><a href="https://docs.julialang.org/en/v1.1/manual/mathematical-operations/#Numeric-Comparisons-1">Numeric Comparisons (section)</a></p><h3 id="値が等しい・異なる-1"><a class="docs-heading-anchor" href="#値が等しい・異なる-1">値が等しい・異なる</a><a class="docs-heading-anchor-permalink" href="#値が等しい・異なる-1" title="Permalink"></a></h3><ul><li><a href="https://docs.julialang.org/en/v1.1/base/math/#Base.:=="><code>Base.:==</code> — Function</a></li><li><a href="https://docs.julialang.org/en/v1.1/base/math/#Base.:!="><code>Base.:!=</code> — Function</a></li></ul><p>演算子 <code>==</code> は、<code>a == b</code> のように用いて、値が等しいか否か判定する。 演算子 <code>!=</code> は、値が異なるか否か判定する。 成立すれば(真ならば) <code>true</code>が、 成立しなければ(偽ならば) <code>false</code> が結果となる。</p><pre><code class="language-julia-repl">julia&gt; 1 == 1
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>第5回：■ 条件式・■ 条件分岐 · Memorandum on Julia Language v1.1</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit">Memorandum on Julia Language v1.1</span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../LICENSE/">MIT License</a></li><li><a class="tocitem" href="../LICENSEja/">MIT License 参考和訳</a></li><li><a class="tocitem" href="../ch00/">はじめに</a></li><li><a class="tocitem" href="../ch01/">第1回：▼ 簡単なグラフを描く</a></li><li><a class="tocitem" href="../ch02/">第2回：▼ 複数のグラフを描く</a></li><li><a class="tocitem" href="../ch03/">第3回：▼ 連続な曲線を描く</a></li><li><a class="tocitem" href="../ch04/">第4回：▼ 不連続な曲線を描く</a></li><li class="is-active"><a class="tocitem" href>第5回：■ 条件式・■ 条件分岐</a><ul class="internal"><li><a class="tocitem" href="#数の大小比較-1"><span>■ 数の大小比較</span></a></li><li><a class="tocitem" href="#論理型-1"><span>■ 論理型</span></a></li><li><a class="tocitem" href="#if文-1"><span>■ if文</span></a></li><li><a class="tocitem" href="#if式-1"><span>■ if式</span></a></li><li><a class="tocitem" href="#3項演算子-1"><span>■ 3項演算子</span></a></li><li><a class="tocitem" href="#論理演算-1"><span>■ 論理演算</span></a></li><li><a class="tocitem" href="#数の大小比較の連続した記述-1"><span>■ 数の大小比較の連続した記述</span></a></li><li><a class="tocitem" href="#短絡評価-1"><span>■ 短絡評価</span></a></li><li><a class="tocitem" href="#論理型〜整数型の一つとして-1"><span>●▼ 論理型〜整数型の一つとして</span></a></li><li><a class="tocitem" href="#論理式と真理表-1"><span>●▼ 論理式と真理表</span></a></li><li><a class="tocitem" href="#総当たりによる不定方程式の解法-1"><span>▼ 総当たりによる不定方程式の解法</span></a></li><li><a class="tocitem" href="#練習：総当たりによる不定方程式の解法-1"><span>▲ 練習：総当たりによる不定方程式の解法</span></a></li><li><a class="tocitem" href="#格子点による平面領域の塗り分け-1"><span>▼ 格子点による平面領域の塗り分け</span></a></li><li><a class="tocitem" href="#練習-1"><span>▲ 練習</span></a></li><li><a class="tocitem" href="#練習-2"><span>▲ 練習</span></a></li><li><a class="tocitem" href="#擬似乱数-1"><span>■ 擬似乱数</span></a></li><li><a class="tocitem" href="#乱数による平面領域の塗り分け-1"><span>▼ 乱数による平面領域の塗り分け</span></a></li><li><a class="tocitem" href="#モンテカルロ法による平面図形の面積の推定-1"><span>▼ モンテカルロ法による平面図形の面積の推定</span></a></li><li><a class="tocitem" href="#練習-3"><span>▲ 練習</span></a></li><li><a class="tocitem" href="#モンテカルロ法による平面図形の面積の推定：落とす点の範囲を変える-1"><span>●▼ モンテカルロ法による平面図形の面積の推定：落とす点の範囲を変える</span></a></li><li><a class="tocitem" href="#関数の定義-(代入文形式)-1"><span>■ 関数の定義 (代入文形式)</span></a></li><li><a class="tocitem" href="#「はさみうち」法による、方程式の求解-1"><span>▼ 「はさみうち」法による、方程式の求解</span></a></li><li><a class="tocitem" href="#練習-4"><span>▲ 練習</span></a></li><li><a class="tocitem" href="#NLsolveパッケージの紹介-1"><span>●▲ NLsolveパッケージの紹介</span></a></li><li><a class="tocitem" href="#今回のまとめ-1"><span>★ 今回のまとめ</span></a></li></ul></li><li><a class="tocitem" href="../ch06/">第6回：■ 整数</a></li><li><a class="tocitem" href="../ch07/">第7回：■ 浮動小数点数</a></li><li><a class="tocitem" href="../ch08/">第8回： ▼ 総和・数値積分</a></li><li><a class="tocitem" href="../ch09/">第9回： ■ 配列要素の操作／▶常微分方程式の数値解法</a></li><li><a class="tocitem" href="../ch10/">第10回：行列・線形代数</a></li><li><a class="tocitem" href="../ch11/">第11回：ファイル入出力</a></li><li><a class="tocitem" href="../ch12/">第12回：関数の定義と呼び出し</a></li><li><a class="tocitem" href="../ch13/">第13回：複素数</a></li><li><a class="tocitem" href="../ch0a/">付録A：2018年度・定期レポートへのコメント（その1）</a></li><li><a class="tocitem" href="../ch0b/">付録B：2018年度・定期レポートへのコメント（その２）</a></li><li><a class="tocitem" href="../porting/">Julia 0.6 から 1.x への移植</a></li><li><a class="tocitem" href="../">Table of contents</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>第5回：■ 条件式・■ 条件分岐</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>第5回：■ 条件式・■ 条件分岐</a></li></ul></nav><div class="docs-right"><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="ch05-1"><a class="docs-heading-anchor" href="#ch05-1">第5回：■ 条件式・■ 条件分岐</a><a class="docs-heading-anchor-permalink" href="#ch05-1" title="Permalink"></a></h1><h2 id="数の大小比較-1"><a class="docs-heading-anchor" href="#数の大小比較-1">■ 数の大小比較</a><a class="docs-heading-anchor-permalink" href="#数の大小比較-1" title="Permalink"></a></h2><p><a href="https://docs.julialang.org/en/v1.1/manual/mathematical-operations/#Numeric-Comparisons-1">Numeric Comparisons (section)</a></p><h3 id="値が等しい・異なる-1"><a class="docs-heading-anchor" href="#値が等しい・異なる-1">値が等しい・異なる</a><a class="docs-heading-anchor-permalink" href="#値が等しい・異なる-1" title="Permalink"></a></h3><ul><li><a href="https://docs.julialang.org/en/v1.1/base/math/#Base.:=="><code>Base.:==</code> — Function</a></li><li><a href="https://docs.julialang.org/en/v1.1/base/math/#Base.:!="><code>Base.:!=</code> — Function</a></li></ul><p>演算子 <code>==</code> は、<code>a == b</code> のように用いて、値が等しいか否か判定する。 演算子 <code>!=</code> は、値が異なるか否か判定する。 成立すれば(真ならば) <code>true</code> が、 成立しなければ(偽ならば) <code>false</code> が結果となる。</p><pre><code class="language-julia-repl">julia&gt; 1 == 1
 true
 
 julia&gt; 1 == 2
@@ -81,7 +81,7 @@ myabs1 (generic function with 1 method)
 
 julia&gt; @show myabs1(-1)
 myabs1(-1) = 1
-1</code></pre><h2 id="3項演算子-1"><a class="docs-heading-anchor" href="#3項演算子-1">■ 3項演算子</a><a class="docs-heading-anchor-permalink" href="#3項演算子-1" title="Permalink"></a></h2><p><a href="https://docs.julialang.org/en/v0.6/devdocs/ast/#Macros-1">Operators</a></p><p><code>a ? b : c</code></p><p>条件 <code>a</code> が真(true)なら <code>b</code> を、偽なら <code>c</code> を値とする「マクロ」である。</p><pre><code class="language-julia-repl">julia&gt; m= 2 &gt; 1 ? &quot;yes&quot; : &quot;no&quot;
+1</code></pre><h2 id="3項演算子-1"><a class="docs-heading-anchor" href="#3項演算子-1">■ 3項演算子</a><a class="docs-heading-anchor-permalink" href="#3項演算子-1" title="Permalink"></a></h2><p><a href="https://docs.julialang.org/en/v1.1/manual/control-flow/#man-conditional-evaluation-1">Conditional evaluation</a> &quot;ternary operator&quot;</p><p><code>a ? b : c</code></p><p>条件 <code>a</code> が真(true)なら <code>b</code> を、偽なら <code>c</code> を値とする「マクロ」である。</p><pre><code class="language-julia-repl">julia&gt; m= 2 &gt; 1 ? &quot;yes&quot; : &quot;no&quot;
 &quot;yes&quot;
 
 julia&gt; @show m
@@ -101,25 +101,55 @@ true
 julia&gt; true &amp;&amp; false
 false
 
-julia&gt; false &amp;&amp; false
+julia&gt; false &amp;&amp; true
 false
 
 julia&gt; false &amp;&amp; false
-false</code></pre><h3 id="論理和-1"><a class="docs-heading-anchor" href="#論理和-1">論理和</a><a class="docs-heading-anchor-permalink" href="#論理和-1" title="Permalink"></a></h3><ul><li><a href="https://docs.julialang.org/en/v1.1/base/math/#||"><code>||</code> - Keyword</a></li></ul><p>論理和 <code>a || b</code> は、<code>a</code> と <code>b</code> との少なくとも一つが <code>true</code> のとき <code>true</code> となる。言い換えると、<code>a</code> と <code>b</code> のどちらも <code>false</code> のときに <code>false</code>　となる。</p><pre><code class="language-julia-repl">julia&gt; true || true
+false</code></pre><h2 id="数の大小比較の連続した記述-1"><a class="docs-heading-anchor" href="#数の大小比較の連続した記述-1">■ 数の大小比較の連続した記述</a><a class="docs-heading-anchor-permalink" href="#数の大小比較の連続した記述-1" title="Permalink"></a></h2><p>数の比較演算子は、連続して記述できる。</p><pre><code class="language-julia-repl">julia&gt; 1 &lt; 2 &lt; 3
+true
+
+julia&gt; 1 &lt; 2 &amp;&amp; 2 &lt; 3
+true</code></pre><h3 id="論理和-1"><a class="docs-heading-anchor" href="#論理和-1">論理和</a><a class="docs-heading-anchor-permalink" href="#論理和-1" title="Permalink"></a></h3><ul><li><a href="https://docs.julialang.org/en/v1.1/base/math/#||"><code>||</code> - Keyword</a></li></ul><p>論理和 <code>a || b</code> は、<code>a</code> と <code>b</code> との少なくとも一つが <code>true</code> のとき <code>true</code> となる。言い換えると、<code>a</code> と <code>b</code> のどちらも <code>false</code> のときに <code>false</code>　となる。</p><pre><code class="language-julia-repl">julia&gt; true || true
 true
 
 julia&gt; true || false
 true
 
-julia&gt; false || false
-false
-
-julia&gt; false || false
-false</code></pre><h2 id="短絡評価-1"><a class="docs-heading-anchor" href="#短絡評価-1">■ 短絡評価</a><a class="docs-heading-anchor-permalink" href="#短絡評価-1" title="Permalink"></a></h2><p><a href="https://docs.julialang.org/en/v1.1/manual/control-flow/#Short-Circuit-Evaluation-1">Short-Circuit Evaluation (section)</a></p><p>論理積 <code>a &amp;&amp; b</code> を評価する場合、</p><ul><li><code>a</code> が 偽 <code>false</code> なら、<code>b</code> を評価しない。</li><li><code>a</code> が 真 <code>true</code> なら、<code>b</code> も評価する。</li></ul><p>※ <code>a</code> が 偽 <code>false</code> なら、<code>b</code> の値によらず、 論理積 <code>a &amp;&amp; b</code> は偽 <code>false</code> であるから。</p><p>論理和 <code>a || b</code> を評価する場合、</p><ul><li><code>a</code> が 真 <code>true</code> なら、<code>b</code> を評価しない。</li><li><code>a</code> が 偽 <code>false</code> なら、<code>b</code> も評価する。</li></ul><p>※ <code>a</code> が 真 <code>true</code> なら、<code>b</code> の値によらず、 論理和 <code>a || b</code> は 真 <code>true</code> であるから。</p><h2 id="数の大小比較の連続した記述-1"><a class="docs-heading-anchor" href="#数の大小比較の連続した記述-1">■ 数の大小比較の連続した記述</a><a class="docs-heading-anchor-permalink" href="#数の大小比較の連続した記述-1" title="Permalink"></a></h2><p>数の比較演算子は、連続して記述できる。</p><pre><code class="language-julia-repl">julia&gt; 1 &lt; 2 &lt; 3
+julia&gt; false || true
 true
 
-julia&gt; 1 &lt; 2 &amp;&amp; 2 &lt; 3
-true</code></pre><h2 id="総当たりによる不定方程式の解法-1"><a class="docs-heading-anchor" href="#総当たりによる不定方程式の解法-1">▼ 総当たりによる不定方程式の解法</a><a class="docs-heading-anchor-permalink" href="#総当たりによる不定方程式の解法-1" title="Permalink"></a></h2><p>方程式の数よりも、未知数の数が少ない方程式を不定方程式という。 未知数の性質が決まっていれば、未知数の候補を、方程式に代入して、 成り立つ未知数の組合せを求めることができる (総当たり攻撃, brute-force attack)。</p><p>問題　「負ではない三つの整数 <span>$x, y, z$</span> が、次の二つの等式を同時に満たすという。</p><div>\[x + y + z = 24\]</div><div>\[x+2y+4z = 51\]</div><p>三つの数 <span>$x, y, z$</span> の組合せを全て求めよ。」</p><p>ここで、 <span>$x, y, z$</span> は、0から24までの整数である。 <span>$x, y, z$</span> の全ての組み合わせに対して、二つの等式が成り立つ条件を、if文に渡す。</p><pre><code class="language-julia-repl">julia&gt; for z=0:24
+julia&gt; false || false
+false</code></pre><h2 id="短絡評価-1"><a class="docs-heading-anchor" href="#短絡評価-1">■ 短絡評価</a><a class="docs-heading-anchor-permalink" href="#短絡評価-1" title="Permalink"></a></h2><p><a href="https://docs.julialang.org/en/v1.1/manual/control-flow/#Short-Circuit-Evaluation-1">Short-Circuit Evaluation (section)</a></p><p>論理積 <code>a &amp;&amp; b</code>と論理和 <code>a || b</code>の評価において、 第1項 <code>a</code> で結果が決まるなら、第2項 <code>b</code> は評価しない。 これを短絡評価という。具体的には。</p><ul><li>論理積 <code>a &amp;&amp; b</code> において、<code>a</code> が 偽 <code>false</code> なら、<code>b</code> を評価しない。</li></ul><p>( <code>a</code> が 偽 <code>false</code> なら、<code>b</code> の値によらず、論理積 <code>a &amp;&amp; b</code> は偽 <code>false</code> であるから。)</p><ul><li>論理和 <code>a || b</code> において、<code>a</code> が 真 <code>true</code> なら、<code>b</code> を評価しない。</li></ul><p>( <code>a</code> が 真 <code>true</code> なら、<code>b</code> の値によらず、論理和 <code>a || b</code> は 真 <code>true</code> であるから。)</p><h2 id="論理型〜整数型の一つとして-1"><a class="docs-heading-anchor" href="#論理型〜整数型の一つとして-1">●▼ 論理型〜整数型の一つとして</a><a class="docs-heading-anchor-permalink" href="#論理型〜整数型の一つとして-1" title="Permalink"></a></h2><p><code>Bool</code> 型は、2進数1桁の符号なし整数 <code>UInt1</code> である。 整数と論理型の値との演算では<code>false</code> は整数 <code>0</code>、<code>true</code> は整数 <code>1</code> とみなされる。</p><pre><code class="language-julia-repl">julia&gt; 2+true
+3
+
+julia&gt; 2+false
+2</code></pre><p>逆に、整数 <code>0</code> と <code>1</code> を論理型に変換するには関数 <code>Bool</code> を用いる。</p><pre><code class="language-julia-repl">julia&gt; Bool(0)
+false
+
+julia&gt; Bool(1)
+true
+
+julia&gt; Bool.([0,1])  # 整数のベクトル [0,1] を論理型のベクトルに変換する
+2-element BitArray{1}:
+ false
+  true</code></pre><h2 id="論理式と真理表-1"><a class="docs-heading-anchor" href="#論理式と真理表-1">●▼ 論理式と真理表</a><a class="docs-heading-anchor-permalink" href="#論理式と真理表-1" title="Permalink"></a></h2><p>論理式 (logical expression) とは、 論理型の変数、または、それらに論理演算を適用した式をいう。</p><p>真理表（truth table）とは、 論理式に出現する変数（論理変数）の全ての組合せに対して、論理式の値を示した表である。</p><p>上の <a href="#論理和-1">論理和</a>, <a href="#論理積-1">論理積</a> では、論旨式に変数の４通りの組み合わせに対する演算結果を列挙した。</p><p>上で導入した<a href="#論理和-1">論理和</a> <code>a || b</code> および、 論理積(@ref) <code>a &amp;&amp; b</code> に対して、 論理変数 <code>a</code> と <code>b</code> の全ての組合せに対する計算結果を、計算してみよう。</p><pre><code class="language-julia-repl">julia&gt; for a in [false,true]
+         for b in Bool.([0,1])
+           @show a, b, a || b, a &amp;&amp; b
+         end
+       end
+(a, b, a || b, a &amp;&amp; b) = (false, false, false, false)
+(a, b, a || b, a &amp;&amp; b) = (false, true, true, false)
+(a, b, a || b, a &amp;&amp; b) = (true, false, true, false)
+(a, b, a || b, a &amp;&amp; b) = (true, true, true, true)</code></pre><p>今度は、論理式 <code>z=(!a &amp;&amp; b) || (a &amp;&amp; !b)</code> の値を計算してみよう。</p><p>ここで、論理否定 <code>!</code> は、論理和 <code>&amp;&amp;</code> や論理積 <code>||</code> よりも 優先順位が高い演算であるので、<code>!a || b</code> は <code>(!a) &amp;&amp; b</code> と解釈される。<code>!(a || b)</code> とは解釈されない。</p><pre><code class="language-julia-repl">julia&gt; for a in Bool.([0,1]), b in Bool.([0,1])
+         x= !a &amp;&amp; b
+         y=  a &amp;&amp; !b
+         z= x || y
+         @show a, b, x, y, z
+       end
+(a, b, x, y, z) = (false, false, false, false, false)
+(a, b, x, y, z) = (false, true, true, false, true)
+(a, b, x, y, z) = (true, false, false, true, true)
+(a, b, x, y, z) = (true, true, false, false, false)</code></pre><p>論理式 <code>z</code> は、</p><ul><li><code>a</code> と <code>b</code> の値が異なるときに <code>true</code></li><li><code>a</code> と <code>b</code> の値が等しいときに <code>false</code></li></ul><p>の値をとる。 この論理式は、排他的（はいたてき）論理和（exclusive or, 略して exor あるいは XOR）と呼ばれる。</p><h2 id="総当たりによる不定方程式の解法-1"><a class="docs-heading-anchor" href="#総当たりによる不定方程式の解法-1">▼ 総当たりによる不定方程式の解法</a><a class="docs-heading-anchor-permalink" href="#総当たりによる不定方程式の解法-1" title="Permalink"></a></h2><p>方程式の数よりも、未知数の数が少ない方程式を不定方程式という。 未知数の性質が決まっていれば、未知数の候補を、方程式に代入して、 成り立つ未知数の組合せを求めることができる (総当たり攻撃, brute-force attack)。</p><p>問題　「負ではない三つの整数 <span>$x, y, z$</span> が、次の二つの等式を同時に満たすという。</p><div>\[x + y + z = 24\]</div><div>\[x+2y+4z = 51\]</div><p>三つの数 <span>$x, y, z$</span> の組合せを全て求めよ。」</p><p>ここで、 <span>$x, y, z$</span> は、0から24までの整数である。 <span>$x, y, z$</span> の全ての組み合わせに対して、二つの等式が成り立つ条件を、if文に渡す。</p><pre><code class="language-julia-repl">julia&gt; for z=0:24
          for y=0:24
            for x=0:24
              if x+y+z==24 &amp;&amp; x+2*y+4*z==51
@@ -164,13 +194,13 @@ for y=0:0.025:1, x=0:0.025:1
   end
   plot(x,y,&quot;.&quot;, color=c)
 end</code></pre><p><img src="../ch05-qc1s-lattice-plot.svg" alt/></p><h2 id="練習-1"><a class="docs-heading-anchor" href="#練習-1">▲ 練習</a><a class="docs-heading-anchor-permalink" href="#練習-1" title="Permalink"></a></h2><p>格子点の刻み幅を大きく、または、小さくして、 色分けの様子を観察してみよ。</p><p>関数<code>plot</code>のfmtパラメータを <code>.</code> から <code>o</code> (circle)に変えてみよ。 さらに、<code>markersize</code>パラメータを加えて、マーカーの大きさを調整できる。</p><p><code>plot(x,y,&quot;o&quot;, markersize=3)</code></p><div class="admonition is-info"><header class="admonition-header">Note</header><div class="admonition-body"><p>刻み幅を小さくすると、格子点の数は急激に増える (例えば、<span>$x,y$</span>軸方向の刻みの数を2倍にすると、格子点の数は 4倍になる)ので、刻み幅を急激に小さくすべきではない。計算量が増えた場合、数分以内に計算が終わらない可能性もあるが、このような状況を経験するのも重要である。</p></div></div><h2 id="練習-2"><a class="docs-heading-anchor" href="#練習-2">▲ 練習</a><a class="docs-heading-anchor-permalink" href="#練習-2" title="Permalink"></a></h2><p>以下の領域を表す条件を、式で表せ。その領域を、格子点を用いて塗り分けてみよ。</p><ul><li>点 <span>$(0,0)$</span> と点 <span>$(1,0)$</span> を一辺とし、第一象限に描かれた正三角形</li><li>中心 <span>$\left(\dfrac{1}{2},\dfrac{1}{2}\right)$</span> , 半径 <span>$\dfrac{1}{2}$</span> の円</li></ul><h2 id="擬似乱数-1"><a class="docs-heading-anchor" href="#擬似乱数-1">■ 擬似乱数</a><a class="docs-heading-anchor-permalink" href="#擬似乱数-1" title="Permalink"></a></h2><p>計算機で発生する乱数を、擬似乱数 (pseudorandom numbers)という。</p><div class="admonition is-info"><header class="admonition-header">Note</header><div class="admonition-body"><p>本来の意味の「乱数」は、計算する方法がないはずである。 にもかかわらず、ある手順で乱数を発生しているので「擬似乱数」という。</p></div></div><ul><li><a href="https://docs.julialang.org/en/v1.1/stdlib/Random/#Random-Numbers-1">Random Numbers (section)</a></li><li><a href="https://docs.julialang.org/en/v1.1/stdlib/Random/#Base.rand"><code>Base.Random.rand</code> - Function</a></li></ul><p>関数 <code>rand()</code> は、0から1未満の擬似乱数を発生する。</p><pre><code class="language-julia-repl">julia&gt; rand()
-0.18058694133313713
+0.8234102142325619
 
 julia&gt; rand()
-0.6696713227668962
+0.8365513742783373
 
 julia&gt; rand()
-0.22998990239180128</code></pre><p>関数 <code>Random.seed!(m)</code> は、擬似乱数の種をリセットする。 パッケージ <code>Random</code> を <code>using</code> してから用いる。 種 <code>m</code> には、0から<span>$2^{32}-1$</span>までの整数を指定する。 同じ種を指定すると、同じ系列で擬似乱数を発生する。</p><pre><code class="language-julia-repl">julia&gt; using Random
+0.34354279742676175</code></pre><p>関数 <code>Random.seed!(m)</code> は、擬似乱数の種をリセットする。 パッケージ <code>Random</code> を <code>using</code> してから用いる。 種 <code>m</code> には、0から<span>$2^{32}-1$</span>までの整数を指定する。 同じ種を指定すると、同じ系列で擬似乱数を発生する。</p><pre><code class="language-julia-repl">julia&gt; using Random
 
 julia&gt; Random.seed!(1234)
 Random.MersenneTwister(UInt32[0x000004d2], Random.DSFMT.DSFMT_state(Int32[-1393240018, 1073611148, 45497681, 1072875908, 436273599, 1073674613, -2043716458, 1073445557, -254908435, 1072827086  …  -599655111, 1073144102, 367655457, 1072985259, -1278750689, 1018350124, -597141475, 249849711, 382, 0]), [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0  …  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], UInt128[0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000  …  0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000, 0x00000000000000000000000000000000], 1002, 0)
@@ -212,7 +242,10 @@ for i=1:n
     s += 1
   end
 end
-@show s/n, pi/4, (s/n - pi/4)/(pi/4)</code></pre><pre><code class="language-none">(0.7685546875, 0.7853981633974483, -0.021445779583424734)</code></pre><p>4分円の面積は <span>$\dfrac{\pi}{4}$</span>である。 点数 1024個で、相対誤差 <span>$2\%$</span> 程度の、面積推定値が得られた。</p><p>今度は、点の総数に対して、面積の推定値を描いてみる。</p><pre><code class="language-julia">using PyPlot
+a_estimated=s/n
+a_exact=pi/4
+e_rel=(a_estimated - a_exact)/a_exact
+@show a_estimated, a_exact, e_rel</code></pre><pre><code class="language-none">(0.7685546875, 0.7853981633974483, -0.021445779583424734)</code></pre><p>測定値について、</p><ul><li>絶対誤差 (absolute error) とは、推定値と真値（exact value, 正しい値）との差（の絶対値）である。</li><li>相対誤差 (relative error) とは、絶対誤差を真値で除した値（の絶対値）である。</li></ul><p>面積の推定値 (experimental value) は <code>a_estimated = s/n</code> である。 4分円の面積の真値 <code>a_exact</code> は <span>$\dfrac{\pi}{4}$</span> である。 （絶対値をとらない）相対誤差は <code>e_rel=(a_estimated - a_exact)/a_exact</code> と計算できる。</p><p>点数 1024個で、相対誤差 <span>$2\%$</span> 程度の、面積推定値が得られた。</p><p>今度は、面積の推定値 <code>a_estimated</code> を、点の総数 <code>n</code> に対して描く。</p><pre><code class="language-julia">using PyPlot
 for m in 1:16
   n=2^m
   s=0
@@ -223,28 +256,30 @@ for m in 1:16
       s += 1
     end
   end
-  plot(n, s/n, &quot;.&quot;)
-  @show n, s/n
+  a_estimated=s/n
+  plot(n, a_estimated, &quot;.&quot;)
+  @show n, a_estimated
 end
-ylim(0.9*pi/4, 1.1*pi/4)
+a_exact=pi/4
+ylim(0.9*a_exact, 1.1*a_exact)
 xlabel(&quot;n&quot;)
 xscale(&quot;log&quot;)
-axhline(pi/4, color=&quot;k&quot;, lw=0.5)</code></pre><pre><code class="language-none">(n, s / n) = (2, 0.5)
-(n, s / n) = (4, 1.0)
-(n, s / n) = (8, 1.0)
-(n, s / n) = (16, 0.625)
-(n, s / n) = (32, 0.84375)
-(n, s / n) = (64, 0.75)
-(n, s / n) = (128, 0.796875)
-(n, s / n) = (256, 0.78125)
-(n, s / n) = (512, 0.76953125)
-(n, s / n) = (1024, 0.7900390625)
-(n, s / n) = (2048, 0.77734375)
-(n, s / n) = (4096, 0.7783203125)
-(n, s / n) = (8192, 0.7891845703125)
-(n, s / n) = (16384, 0.78314208984375)
-(n, s / n) = (32768, 0.79083251953125)
-(n, s / n) = (65536, 0.7855987548828125)</code></pre><p><img src="../ch05-qc1-plot.svg" alt/></p><p>正しい面積との相対誤差を、点の総数に対して描いてみる。</p><pre><code class="language-julia">using PyPlot
+axhline(a_exact, color=&quot;k&quot;, lw=0.5)</code></pre><pre><code class="language-none">(n, a_estimated) = (2, 0.5)
+(n, a_estimated) = (4, 1.0)
+(n, a_estimated) = (8, 1.0)
+(n, a_estimated) = (16, 0.625)
+(n, a_estimated) = (32, 0.84375)
+(n, a_estimated) = (64, 0.75)
+(n, a_estimated) = (128, 0.796875)
+(n, a_estimated) = (256, 0.78125)
+(n, a_estimated) = (512, 0.76953125)
+(n, a_estimated) = (1024, 0.7900390625)
+(n, a_estimated) = (2048, 0.77734375)
+(n, a_estimated) = (4096, 0.7783203125)
+(n, a_estimated) = (8192, 0.7891845703125)
+(n, a_estimated) = (16384, 0.78314208984375)
+(n, a_estimated) = (32768, 0.79083251953125)
+(n, a_estimated) = (65536, 0.7855987548828125)</code></pre><p><img src="../ch05-qc1-plot.svg" alt/></p><p>今度は、面積の相対誤差（の絶対値） <code>e_rel</code> を、点の総数 <code>n</code> に対して描いてみる。</p><pre><code class="language-julia">using PyPlot
 for m in 1:16
   n=2^m
   s=0
@@ -255,7 +290,10 @@ for m in 1:16
       s += 1
     end
   end
-  plot(n, abs(s/n-pi/4)/(pi/4), &quot;.&quot;)
+  a_estimated=s/n
+  a_exact=pi/4
+  e_rel=abs( (a_estimated-a_exact)/a_exact)
+  plot(n, e_rel, &quot;.&quot;)
 end
 xlabel(&quot;n&quot;)
 ylabel(&quot;relative errors&quot;)
@@ -371,4 +409,4 @@ Results of Nonlinear Solver Algorithm
    * |x - x&#39;| &lt; 0.0e+00: false
    * |f(x)| &lt; 1.0e-08: true
  * Function Calls (f): 6
- * Jacobian Calls (df/dx): 6</code></pre><h2 id="今回のまとめ-1"><a class="docs-heading-anchor" href="#今回のまとめ-1">★ 今回のまとめ</a><a class="docs-heading-anchor-permalink" href="#今回のまとめ-1" title="Permalink"></a></h2><ul><li>数の大小比較</li><li>if文</li><li>if式</li><li>3項演算子</li><li>論理演算</li><li>格子点による平面領域の塗り分け</li><li>擬似乱数</li><li>乱数による平面領域の塗り分け</li><li>モンテカルロ法による平面図形の面積の推定</li><li>ユーザ定義関数 (代入文の形式)</li><li>「はさみうち」法による、方程式の求解</li></ul></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../ch04/">« 第4回：▼ 不連続な曲線を描く</a><a class="docs-footer-nextpage" href="../ch06/">第6回：■ 整数 »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Tuesday 7 January 2020 14:53">Tuesday 7 January 2020</span>. Using Julia version 1.1.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+ * Jacobian Calls (df/dx): 6</code></pre><h2 id="今回のまとめ-1"><a class="docs-heading-anchor" href="#今回のまとめ-1">★ 今回のまとめ</a><a class="docs-heading-anchor-permalink" href="#今回のまとめ-1" title="Permalink"></a></h2><ul><li>数の大小比較</li><li>if文</li><li>if式</li><li>3項演算子</li><li>論理演算</li><li>格子点による平面領域の塗り分け</li><li>擬似乱数</li><li>乱数による平面領域の塗り分け</li><li>モンテカルロ法による平面図形の面積の推定</li><li>ユーザ定義関数 (代入文の形式)</li><li>「はさみうち」法による、方程式の求解</li></ul></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../ch04/">« 第4回：▼ 不連続な曲線を描く</a><a class="docs-footer-nextpage" href="../ch06/">第6回：■ 整数 »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Wednesday 15 January 2020 03:01">Wednesday 15 January 2020</span>. Using Julia version 1.1.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
